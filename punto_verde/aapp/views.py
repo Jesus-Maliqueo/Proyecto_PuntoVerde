@@ -29,10 +29,9 @@ def llenado(request):
    return render(request, 'app/llenado.html')
 
 def mostrar(request):
-    deposit= IngresoMaterial.objects.all()
-    return render(request,'app/ingreso.html',{'deposit':deposit})
+    return render(request,'app/ingreso.html')
 
-def asignacion(request,id):
+""" def asignacion(request,id):
    forma = IngresoMaterial.objects.get(id_material=id)
    datos ={
       'form': IngresarForm(instance=forma)
@@ -43,7 +42,7 @@ def asignacion(request,id):
             asignara.save()
             return redirect('mostrar')
    return render(request, 'app/asignar.html',datos)
-
+ """
 
 
 

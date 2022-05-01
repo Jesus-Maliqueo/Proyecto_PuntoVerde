@@ -1,4 +1,4 @@
-from faulthandler import disable
+""" from faulthandler import disable
 from django import forms
 from django.forms import ModelForm,widgets 
 from .models import IngresoMaterial
@@ -75,3 +75,4 @@ class IngresarForm(ModelForm):
             ),
             
         }
+ """
