@@ -8,7 +8,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.db import connection
-import cx_Oracle
+from .models import Contenedor
+
 # Create your views here.
 
 
@@ -20,7 +21,11 @@ def registro(request):
    return render(request, 'app/registro.html')
 
 def estado(request):
-   return render(request, 'app/estado.html')
+
+   contenedor = Contenedor.objects.all()
+
+   print(contenedor)
+   return render(request, 'app/estado.html', {'contenedor': contenedor  })
 
 def recicla(request):
    return render(request, 'app/recicla.html')

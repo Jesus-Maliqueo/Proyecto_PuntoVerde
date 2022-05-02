@@ -19,21 +19,57 @@
             <a href="#tab3">Pestaña 3</a>
             <div class="tab-content">
               <h2>Titulo 3</h2>
-              <p>Lorem ipsum ...</p>
+          
+
+
+<!-- -----------------------------MOSTRAR CONTAINERS ------------------------------------- -->
+
+<div  class="card-body">  
+  <h4>  Contenedores </h4>
+  <table  class="table" >
+      <thead>
+          <tr>
+              <th>id contenedor  </th>
+              <th> tipo contenedor </th>
+              <th> peso</th>
+              <th> estado contenedor </th>
+              <th> precio </th>
+              <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for Contenedor in contenedor %}
+          <tr>
+              <td> {{ Contenedor.id_contenedor  }}    </td>
+              <td> {{ Contenedor.tipo_contenedor  }} </td>
+              <td> {{ Contenedor.peso  }} </td>
+              <td> {{ Contenedor.estado_contenedor  }} </td>
+              <td> {{ Contenedor.precio  }} </td>
+              <td>Editar / Borrar </td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+  </div>
+  
+
+<!-- ------------------------------------------------------------- -->
+
+
             </div>
           </div>
           <div id="tab2" class="tab">
             <a href="#tab2">Pestaña 2</a>
             <div class="tab-content">
               <h2>Titulo 2</h2>
-              <p>Lorem ipsum ...</p>
+           
             </div>
           </div> 
           <div id="tab1" class="tab">
             <a href="#tab1">Pestaña 1</a>
             <div class="tab-content">
               <h2>Titulo 1</h2>
-              <p>Lorem ipsum ...</p>
+             
             </div> 
           </div> 
         </div>
