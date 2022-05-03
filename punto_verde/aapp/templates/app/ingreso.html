@@ -2,30 +2,26 @@
 
 {% block contenido %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
-    <title>Document</title>
-</head>
-<body>
-    
+
+{% load static %}
+
+
+
+
+<div class="recicla">
+
+
+
     <div class="tabs">
         <div class="tab-container">
           <div id="tab3" class="tab"> 
             <a href="#tab3">Pestaña 3</a>
             <div class="tab-content">
-              <h2>Titulo 3</h2>
-          
-
-
+              <h2>  Contenedores </h2>
 <!-- -----------------------------MOSTRAR CONTAINERS ------------------------------------- -->
 
 <div  class="card-body">  
-  <h4>  Contenedores </h4>
+ 
   <table  class="table" >
       <thead>
           <tr>
@@ -45,7 +41,7 @@
               <td> {{ Contenedor.peso  }} </td>
               <td> {{ Contenedor.estado_contenedor  }} </td>
               <td> {{ Contenedor.precio  }} </td>
-              <td>Editar / Borrar </td>
+              <td> <a name="" id="" class="btn btn-success" href="#"> Editar  </a>  <button type="button" class="btn btn-danger">Eliminar</button> </td>
           </tr>
           {% endfor %}
       </tbody>
@@ -68,14 +64,21 @@
           <div id="tab1" class="tab">
             <a href="#tab1">Pestaña 1</a>
             <div class="tab-content">
+
               <h2>Titulo 1</h2>
+  
+  
+           
+
+
+       
+
              
-            </div> 
+            </div>  
           </div> 
         </div>
       </div>
       
-</body>
-</html>
+</div>
 
 {% endblock %}

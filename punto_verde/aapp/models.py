@@ -5,6 +5,7 @@
 #   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
+from lzma import FILTER_LZMA1
 from django.db import models
 
 
@@ -239,6 +240,11 @@ class IngresoMaterial(models.Model):
     pesos_material = models.IntegerField()
     receptor_rut_receptor = models.ForeignKey('Receptor', models.DO_NOTHING, db_column='receptor_rut_receptor')
     contenedor_id_contenedor = models.ForeignKey(Contenedor, models.DO_NOTHING, db_column='contenedor_id_contenedor')
+
+    def __str__(self):
+     fila1 = "ID :" + str(self.id_material) + "Tipo Producto: :" + self.tipo_producto +"Fecha :" +str(self.fecha) + "Peso Material:" + str(self.pesos_material) 
+     return fila1
+
 
     class Meta:
         managed = False

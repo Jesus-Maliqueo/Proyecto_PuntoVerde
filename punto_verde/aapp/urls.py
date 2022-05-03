@@ -8,6 +8,8 @@ urlpatterns = [
     path('recicla/', recicla, name="recicla"),
     path('llenado/', llenado, name="llenado"),
     path('mostrar/',views.mostrar,name="mostrar"),
-    path('estado/',views.estado, name='estado')
+    path('estado/',views.estado, name='estado'),
+    path('ingreso/',views.ingreso , name='ingreso'),
+
 
 ]

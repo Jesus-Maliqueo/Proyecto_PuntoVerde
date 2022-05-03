@@ -1,0 +1,47 @@
+
+{%extends 'app/base.html'%}
+
+{% block contenido %}
+
+{% load static %}
+
+
+
+
+<div class="recicla">
+
+<div class="Colorqlo"> 
+
+
+<h2>Ingreso Material</h2>
+              
+<div  class="card-body">  
+ 
+  <table  class="table" >
+      <thead>
+          <tr>
+              <th>id contenedor  </th>
+              <th> tipo contenedor </th>
+              <th> peso</th>
+              <th> estado contenedor </th>
+              <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for IngresoMaterial in ingresos %}
+          <tr>
+              <td> {{ IngresoMaterial.id_material }}    </td>
+              <td> {{ IngresoMaterial.tipo_producto  }} </td>
+              <td> {{ IngresoMaterial.fecha  }} </td>
+              <td> {{ IngresoMaterial.pesos_material  }} </td>
+              <td> <a name="" id="" class="btn btn-success" href="/estado"> Agregar  </a>  </td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+  </div>
+
+</div>
+</div>
+  
+{% endblock %}
