@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'punto_verde.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'puntoverde',
+        'NAME': 'puntoverde2',
         'USER': 'root',
         'PASSWORD':'',
         'HOST': 'localhost',

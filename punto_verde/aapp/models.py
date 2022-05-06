@@ -5,7 +5,6 @@
 #   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
-from lzma import FILTER_LZMA1
 from django.db import models
 
 
@@ -100,33 +99,13 @@ class Comprador(models.Model):
         db_table = 'comprador'
 
 
-class Contenedor(models.Model):
-    id_contenedor = models.IntegerField(primary_key=True)
-    tipo_contenedor = models.CharField(max_length=1)
-    peso = models.IntegerField()
-    estado_contenedor = models.CharField(max_length=1)
-    precio = models.IntegerField()
-    contenedor_lleno_id_cont = models.ForeignKey('ContenedorLleno', models.DO_NOTHING, db_column='contenedor_lleno_id_cont', blank=True,null=True)
-    
-
-    def __str__(self):
-     fila = "ID :" + str(self.id_contenedor) + "Tipo Contenedor:" + self.tipo_contenedor +"Peso :" +str(self.peso) + "Estado Contenedor:" + str(self.estado_contenedor) + "Precio:" + str(self.precio) 
-     return fila
-
-
-    class Meta:
-        managed = False
-        db_table = 'contenedor'
-
-
-    
-
-
 class ContenedorLleno(models.Model):
-    id_cont = models.IntegerField(primary_key=True)
+    id_lleno = models.IntegerField(primary_key=True)
     reservado = models.CharField(max_length=1)
     lleno = models.CharField(max_length=1)
-    reserva_id_reserva = models.ForeignKey('Reserva', models.DO_NOTHING, db_column='reserva_id_reserva')
+    reserva_id_reserva = models.ForeignKey('Reserva', models.DO_NOTHING, db_column='reserva_id_reserva', blank=True, null=True)
+    llen_conts_id_llenado = models.OneToOneField('LlenadoContenedores', models.DO_NOTHING, db_column='llen_conts_id_llenado')
+    precios_id_precio = models.ForeignKey('Precios', models.DO_NOTHING, db_column='precios_id_precio')
 
     class Meta:
         managed = False
@@ -134,21 +113,12 @@ class ContenedorLleno(models.Model):
 
 
 class DetaAsignacion(models.Model):
+    contenedor_id_contenedor = models.ForeignKey('LlenadoContenedores', models.DO_NOTHING, db_column='contenedor_id_contenedor')
     receptor_rut_receptor = models.ForeignKey('Receptor', models.DO_NOTHING, db_column='receptor_rut_receptor')
-    contenedor_id_contenedor = models.ForeignKey(Contenedor, models.DO_NOTHING, db_column='contenedor_id_contenedor')
 
     class Meta:
         managed = False
         db_table = 'deta_asignacion'
-
-
-class DetalleConte(models.Model):
-    informe_id_infome = models.ForeignKey('Informe', models.DO_NOTHING, db_column='informe_id_infome')
-    contenedor_id_contenedor = models.ForeignKey(Contenedor, models.DO_NOTHING, db_column='contenedor_id_contenedor')
-
-    class Meta:
-        managed = False
-        db_table = 'detalle_conte'
 
 
 class DjangoAdminLog(models.Model):
@@ -227,6 +197,8 @@ class Informe(models.Model):
     id_infome = models.IntegerField(primary_key=True)
     fecha_informe = models.DateField()
     empleado_rut_empleado = models.ForeignKey(Empleado, models.DO_NOTHING, db_column='empleado_rut_empleado')
+    id_contenedor = models.IntegerField()
+    invent_conts_id_contenedor = models.OneToOneField('InventarioContenedores', models.DO_NOTHING, db_column='invent_conts_id_contenedor')
 
     class Meta:
         managed = False
@@ -236,19 +208,57 @@ class Informe(models.Model):
 class IngresoMaterial(models.Model):
     id_material = models.IntegerField(primary_key=True)
     tipo_producto = models.CharField(max_length=1)
-    fecha = models.DateField()
+    fecha = models.DateTimeField()
     pesos_material = models.IntegerField()
-    receptor_rut_receptor = models.ForeignKey('Receptor', models.DO_NOTHING, db_column='receptor_rut_receptor')
-    contenedor_id_contenedor = models.ForeignKey(Contenedor, models.DO_NOTHING, db_column='contenedor_id_contenedor')
+    llen_conts_id_llenado = models.OneToOneField('LlenadoContenedores', models.DO_NOTHING, db_column='llen_conts_id_llenado', blank=True, null=True)
 
     def __str__(self):
      fila1 = "ID :" + str(self.id_material) + "Tipo Producto: :" + self.tipo_producto +"Fecha :" +str(self.fecha) + "Peso Material:" + str(self.pesos_material) 
      return fila1
 
-
     class Meta:
         managed = False
         db_table = 'ingreso_material'
+
+
+class InventarioContenedores(models.Model):
+    id_contenedor = models.IntegerField(primary_key=True)
+    tipo_contenedor = models.CharField(max_length=1)
+    peso = models.IntegerField()
+    id_llenado = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'inventario_contenedores'
+
+
+class LlenadoContenedores(models.Model):
+    id_llenado = models.IntegerField(primary_key=True)
+    tipo_contenedor = models.CharField(max_length=1)
+    peso = models.IntegerField()
+    estado_contenedor = models.CharField(max_length=10)
+    precio = models.IntegerField()
+    invt_conts_id_contenedor = models.OneToOneField(InventarioContenedores, models.DO_NOTHING, db_column='invt_conts_id_contenedor')
+    ingreso_material_id_material = models.OneToOneField(IngresoMaterial, models.DO_NOTHING, db_column='ingreso_material_id_material', blank=True, null=True)
+
+    def __str__(self):
+     fila = "ID :" + str(self.id_llenado) + "Tipo Contenedor:" + self.tipo_contenedor +"Peso :" +str(self.peso) + "Estado Contenedor:" + str(self.estado_contenedor) + "Precio:" + str(self.precio) 
+     return fila
+
+    class Meta:
+        managed = False
+        db_table = 'llenado_contenedores'
+
+
+class Precios(models.Model):
+    id_precio = models.IntegerField(primary_key=True)
+    tipo_material = models.CharField(max_length=1)
+    descripcion = models.CharField(max_length=20)
+    precio = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'precios'
 
 
 class Receptor(models.Model):
@@ -258,6 +268,7 @@ class Receptor(models.Model):
     primer_apellido = models.CharField(max_length=20)
     segundo_apellido = models.CharField(max_length=20)
     turno = models.DateTimeField()
+    ingreso_material_id_material = models.OneToOneField(IngresoMaterial, models.DO_NOTHING, db_column='ingreso_material_id_material')
 
     class Meta:
         managed = False

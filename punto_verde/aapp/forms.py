@@ -1,15 +1,15 @@
 from django import forms
-from .models import Contenedor,IngresoMaterial
+from .models import LlenadoContenedores,IngresoMaterial
 
 
 
 
 class conteform(forms.ModelForm):
     class Meta:
-        model = Contenedor
+        model = LlenadoContenedores
         fields = '__all__'
 
 class ingreform(forms.ModelForm):
     class Meta:
-        model = Contenedor
+        model = LlenadoContenedores
         fields = '__all__'

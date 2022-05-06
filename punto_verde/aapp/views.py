@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.db import connection
-from .models import Contenedor , IngresoMaterial
+from .models import LlenadoContenedores , IngresoMaterial
 from .forms import ingreform,conteform
 
 # Create your views here.
@@ -22,7 +22,8 @@ def registro(request):
    return render(request, 'app/registro.html')
 
 def estado(request):
-   contenedor = Contenedor.objects.all()
+   # ---Trae informacion de models.py Contenedor
+   contenedor = LlenadoContenedores.objects.all()
  
    return render(request, 'app/estado.html', {'contenedor': contenedor  })
 
@@ -35,13 +36,14 @@ def llenado(request):
 
 
 def ingreso(request):
+   # ---Trae informacion de models.py  IngresoMaterial
     ingresos = IngresoMaterial.objects.all()
     return render(request,'app/prueba.html', {'ingresos':ingresos} )
 
 
-def mostrar(request):
-
-    contenedor = Contenedor.objects.all()
+def mostrar(request): 
+  # ---Trae informacion de models.py  Contenedor
+    contenedor = LlenadoContenedores.objects.all()
     return render(request,'app/ingreso.html',{'contenedor': contenedor })
 
 
