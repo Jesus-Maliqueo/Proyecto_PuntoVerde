@@ -8,6 +8,60 @@
 from django.db import models
 
 
+class AdminInterfaceTheme(models.Model):
+    name = models.CharField(unique=True, max_length=50)
+    active = models.IntegerField()
+    title = models.CharField(max_length=50)
+    title_visible = models.IntegerField()
+    logo = models.CharField(max_length=100)
+    logo_visible = models.IntegerField()
+    css_header_background_color = models.CharField(max_length=10)
+    title_color = models.CharField(max_length=10)
+    css_header_text_color = models.CharField(max_length=10)
+    css_header_link_color = models.CharField(max_length=10)
+    css_header_link_hover_color = models.CharField(max_length=10)
+    css_module_background_color = models.CharField(max_length=10)
+    css_module_text_color = models.CharField(max_length=10)
+    css_module_link_color = models.CharField(max_length=10)
+    css_module_link_hover_color = models.CharField(max_length=10)
+    css_module_rounded_corners = models.IntegerField()
+    css_generic_link_color = models.CharField(max_length=10)
+    css_generic_link_hover_color = models.CharField(max_length=10)
+    css_save_button_background_color = models.CharField(max_length=10)
+    css_save_button_background_hover_color = models.CharField(max_length=10)
+    css_save_button_text_color = models.CharField(max_length=10)
+    css_delete_button_background_color = models.CharField(max_length=10)
+    css_delete_button_background_hover_color = models.CharField(max_length=10)
+    css_delete_button_text_color = models.CharField(max_length=10)
+    list_filter_dropdown = models.IntegerField()
+    related_modal_active = models.IntegerField()
+    related_modal_background_color = models.CharField(max_length=10)
+    related_modal_rounded_corners = models.IntegerField()
+    logo_color = models.CharField(max_length=10)
+    recent_actions_visible = models.IntegerField()
+    favicon = models.CharField(max_length=100)
+    related_modal_background_opacity = models.CharField(max_length=5)
+    env_name = models.CharField(max_length=50)
+    env_visible_in_header = models.IntegerField()
+    env_color = models.CharField(max_length=10)
+    env_visible_in_favicon = models.IntegerField()
+    related_modal_close_button_visible = models.IntegerField()
+    language_chooser_active = models.IntegerField()
+    language_chooser_display = models.CharField(max_length=10)
+    list_filter_sticky = models.IntegerField()
+    form_pagination_sticky = models.IntegerField()
+    form_submit_sticky = models.IntegerField()
+    css_module_background_selected_color = models.CharField(max_length=10)
+    css_module_link_selected_color = models.CharField(max_length=10)
+    logo_max_height = models.PositiveSmallIntegerField()
+    logo_max_width = models.PositiveSmallIntegerField()
+    foldable_apps = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'admin_interface_theme'
+
+
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
 
@@ -78,13 +132,27 @@ class AuthUserUserPermissions(models.Model):
 
 
 class Boleta(models.Model):
-    id_venta = models.OneToOneField('Venta', models.DO_NOTHING, db_column='id_venta', primary_key=True)
+    id_venta = models.OneToOneField('Compra', models.DO_NOTHING, db_column='id_venta', primary_key=True)
     nombre = models.CharField(max_length=100)
     forma_pago = models.CharField(max_length=100)
 
     class Meta:
         managed = False
         db_table = 'boleta'
+
+
+class Compra(models.Model):
+    id_venta = models.IntegerField(primary_key=True)
+    monto = models.IntegerField()
+    forma_pago = models.CharField(max_length=10)
+    fecha_venta = models.DateField()
+    reserva_id_reserva = models.OneToOneField('Reserva', models.DO_NOTHING, db_column='reserva_id_reserva')
+    retiro_id_retiro = models.ForeignKey('Retiro', models.DO_NOTHING, db_column='retiro_id_retiro')
+    emitido_en = models.CharField(max_length=30)
+
+    class Meta:
+        managed = False
+        db_table = 'compra'
 
 
 class Comprador(models.Model):
@@ -182,7 +250,7 @@ class Empleado(models.Model):
 
 
 class Factura(models.Model):
-    id_venta = models.OneToOneField('Venta', models.DO_NOTHING, db_column='id_venta', primary_key=True)
+    id_venta = models.OneToOneField(Compra, models.DO_NOTHING, db_column='id_venta', primary_key=True)
     nombre_empresa = models.CharField(max_length=100)
     giro_industria = models.CharField(max_length=100)
     region = models.CharField(max_length=50)
@@ -213,8 +281,8 @@ class IngresoMaterial(models.Model):
     llen_conts_id_llenado = models.OneToOneField('LlenadoContenedores', models.DO_NOTHING, db_column='llen_conts_id_llenado', blank=True, null=True)
 
     def __str__(self):
-     fila1 = "ID :" + str(self.id_material) + "Tipo Producto: :" + self.tipo_producto +"Fecha :" +str(self.fecha) + "Peso Material:" + str(self.pesos_material) 
-     return fila1
+      fila1 = "ID :" + str(self.id_material) + "Tipo Producto: :" + "Peso Material:" + str(self.pesos_material)  + self.tipo_producto +"Fecha :" +str(self.fecha)
+      return fila1
 
     class Meta:
         managed = False
@@ -226,6 +294,10 @@ class InventarioContenedores(models.Model):
     tipo_contenedor = models.CharField(max_length=1)
     peso = models.IntegerField()
     id_llenado = models.IntegerField()
+
+    def __str__(self):
+      fila = "ID :" + str(self.id_contenedor) +"Tipo Contenedor:" + str(self.tipo_contenedor)   +"Peso :" +str(self.peso) +"Llenado :" +str(self.id_llenado)
+      return fila
 
     class Meta:
         managed = False
@@ -242,8 +314,8 @@ class LlenadoContenedores(models.Model):
     ingreso_material_id_material = models.OneToOneField(IngresoMaterial, models.DO_NOTHING, db_column='ingreso_material_id_material', blank=True, null=True)
 
     def __str__(self):
-     fila = "ID :" + str(self.id_llenado) + "Tipo Contenedor:" + self.tipo_contenedor +"Peso :" +str(self.peso) + "Estado Contenedor:" + str(self.estado_contenedor) + "Precio:" + str(self.precio) 
-     return fila
+       fila = "ID :" + str(self.id_llenado) + "Tipo Contenedor:" + self.tipo_contenedor +"Peso :" +str(self.peso) + "Estado Contenedor:" + str(self.estado_contenedor) + "Precio:" + str(self.precio) 
+       return fila
 
     class Meta:
         managed = False
@@ -279,7 +351,7 @@ class Reserva(models.Model):
     id_reserva = models.IntegerField(primary_key=True)
     fecha = models.DateField()
     fecha_limite = models.DateField()
-    venta_id_venta = models.OneToOneField('Venta', models.DO_NOTHING, db_column='venta_id_venta')
+    venta_id_venta = models.OneToOneField(Compra, models.DO_NOTHING, db_column='venta_id_venta')
     comprador_id_comprador = models.ForeignKey(Comprador, models.DO_NOTHING, db_column='comprador_id_comprador')
 
     class Meta:
@@ -299,17 +371,3 @@ class Retiro(models.Model):
     class Meta:
         managed = False
         db_table = 'retiro'
-
-
-class Venta(models.Model):
-    id_venta = models.IntegerField(primary_key=True)
-    monto = models.IntegerField()
-    forma_pago = models.CharField(max_length=10)
-    fecha_venta = models.DateField()
-    reserva_id_reserva = models.OneToOneField(Reserva, models.DO_NOTHING, db_column='reserva_id_reserva')
-    retiro_id_retiro = models.ForeignKey(Retiro, models.DO_NOTHING, db_column='retiro_id_retiro')
-    emitido_en = models.CharField(max_length=30)
-
-    class Meta:
-        managed = False
-        db_table = 'venta'

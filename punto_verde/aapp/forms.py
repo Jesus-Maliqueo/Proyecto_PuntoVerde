@@ -1,15 +1,10 @@
 from django import forms
-from .models import LlenadoContenedores,IngresoMaterial
+from .models import IngresoMaterial
 
 
+class Conchetumare(forms.ModelForm):
 
-
-class conteform(forms.ModelForm):
     class Meta:
-        model = LlenadoContenedores
-        fields = '__all__'
-
-class ingreform(forms.ModelForm):
-    class Meta:
-        model = LlenadoContenedores
-        fields = '__all__'
+        model = IngresoMaterial
+        fields = "__all__"
+        # fields = ["id_material","tipo_producto","fecha","peso_material"]

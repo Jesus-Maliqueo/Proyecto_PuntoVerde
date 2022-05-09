@@ -27,20 +27,19 @@
           <tr>
               <th>id contenedor  </th>
               <th> tipo contenedor </th>
-              <th> peso</th>
-              <th> estado contenedor </th>
-              <th> precio </th>
+              <th> Fecha </th>
+              <th> Peso Material </th>
+              
               <th>Acciones</th>
           </tr>
       </thead>
       <tbody>
-          {% for Contenedor in contenedor %}
+          {% for IngresoMaterial in ingresos %}
           <tr>
-              <td> {{ Contenedor.id_contenedor  }}    </td>
-              <td> {{ Contenedor.tipo_contenedor  }} </td>
-              <td> {{ Contenedor.peso  }} </td>
-              <td> {{ Contenedor.estado_contenedor  }} </td>
-              <td> {{ Contenedor.precio  }} </td>
+              <td> {{ IngresoMaterial.id_material  }}    </td>
+              <td> {{ IngresoMaterial.tipo_producto  }} </td>
+              <td> {{ IngresoMaterial.fecha  }} </td>
+              <td> {{ IngresoMaterial.pesos_material  }} </td>
               <td> <a name="" id="" class="btn btn-success" href="#"> Editar  </a>  <button type="button" class="btn btn-danger">Eliminar</button> </td>
           </tr>
           {% endfor %}
@@ -67,12 +66,18 @@
 
               <h2>Titulo 1</h2>
   
-  
-           
+ 
+              <form action="">  
+    
+
+   
 
 
-       
-
+                {{ form }}
+            
+            
+                <button type="submit" id="btnEnviar" class="buttong" > okey</button>
+               </form>
              
             </div>  
           </div> 
