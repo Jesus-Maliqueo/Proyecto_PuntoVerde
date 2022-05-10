@@ -338,8 +338,9 @@ padding-left: 10px;
 
 .form-content .form-items {
     /* border: 3px solid rgb(17, 1, 1); */
-    padding: 40px;
-     display: inline-block; 
+    /* padding: 40px; */
+   
+    display: inline-block; 
     width: 100%;
     min-width: 540px;
     -webkit-border-radius: 10px;

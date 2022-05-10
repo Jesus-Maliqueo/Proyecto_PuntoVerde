@@ -12,27 +12,55 @@
     <title>Document</title>
 </head>
 <body class="bodya">
-    <div class="form-body">
-        <div class="form-holder">
-            <div class="form-content">
-                <div class="form-items" >
-                    <h3>Asignacion Contenedor</h3>
-                    <p>escoge un contenedor.</p>
-                    <form method="POST" action="#" id="asignara"  >
-                        {%csrf_token%}
-
-                        <div class="form-group">
-                            {{form.as_table}}
+    <div class="formulario" > 
+        <form class="formu" method="POST" name="llenando" id="llenando" action="#">
+            {% csrf_token %}
+          <h2> Registro</h2>
+            <div class="row">
+                <div class="col-md-6">
+                        <div class="form-group"> 
+                            {{llenando.id_llenado.label}}
+                            {{llenando.id_llenado}} 
+                        </div>  
+                    
+                        <div class="form-group"> 
+                            {{llenando.tipo_contenedor.label}}
+                            {{llenando.tipo_contenedor}} 
+                        </div>    
+                    
+                        <div class="form-group"> 
+                            {{llenando.peso.label}}
+                            {{llenando.peso}} 
                         </div>
-
-                        <div class="form-button mt-3">
-                            <input type="submit" class="btn btn-primary" id="modificar" value="Modificar">
+                    
+                        <div class="form-group"> 
+                            {{llenando.estado_contenedor.label}}
+                            {{llenando.estado_contenedor}} 
+                        </div>  
+                    
+                        <div class="form-group"> 
+                            {{llenando.precio.label}}
+                            {{llenando.precio}} 
+                        </div>                          
+                                                
+                        <div class="form-group"> 
+                            {{llenando.invt_conts_id_contenedor.label}}
+                            {{llenando.invt_conts_id_contenedor}} 
+                        </div>    
+                    
+                        <div class="form-group"> 
+                            {{llenando.ingreso_material_id_material.label}}
+                            {{llenando.ingreso_material_id_material}} 
                         </div>
-                    </form>
-                </div>
+                </div>     
             </div>
-        </div>
-    </div>
+          <input type="submit"  class="botones btn btn-success" value="enviar" > 
+          
+          {{mensaje}}
+      
+      
+        </form>
+      </div>
 
 </body>
 </html>

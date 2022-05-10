@@ -8,7 +8,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.db import connection
-from .models import LlenadoContenedores , IngresoMaterial
 from .forms import Conchetumare
 
 # Create your views here.
@@ -65,5 +64,23 @@ def mostrar(request):
 
     return render(request,'app/ingreso.html',{'contenedor': contenedor }, )
 
+llenando = llenandoForm()
+def asignacion(request):
+   global llenando 
+   data={
+      'form': llenandoForm()
+
+   }
+   if request.method =='POST':
+      llenando = llenandoForm(request.POST, request.FILES)
+      if llenando.is_valid():
+         llenando.save()
+         data["mensaje"] = "se guardo"
+         return redirect('estado')
+      else:
+         data['form'] = llenando
+
+
+   return render(request, 'app/asignar.html',{'llenando':llenando})
 
 

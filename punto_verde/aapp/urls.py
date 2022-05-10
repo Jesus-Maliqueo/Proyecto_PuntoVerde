@@ -1,6 +1,8 @@
+from django.conf import settings
 from django.urls import path
 from . import views
-from.views import  estado, home, llenado, recicla, registro, mostrar
+from.views import  *
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', home, name="home"),
@@ -10,6 +12,10 @@ urlpatterns = [
     path('mostrar/',views.mostrar,name="mostrar"),
     path('estado/',views.estado, name='estado'),
     path('ingreso/',views.ingreso , name='ingreso'),
-
+    path('asignacion',asignacion,name="asignacion"),
 
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
+
