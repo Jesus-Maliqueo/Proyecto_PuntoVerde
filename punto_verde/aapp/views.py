@@ -8,9 +8,48 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.db import connection
-from .forms import Conchetumare
+from .models import LlenadoContenedores , IngresoMaterial
+from .forms import Conchetumare,Conchetumare2,Conchetumare3
 
 # Create your views here.
+
+
+# ---------------------------------------------
+def contreg(request):
+   data={
+      'form': Conchetumare2()
+   }
+
+
+   if request.method =='POST':
+      formulario = Conchetumare2(data=request.POST)
+      if formulario.is_valid():
+         formulario.save()
+         data["mensaje"] = "se guardo"
+      else:
+         data['form'] = formulario
+
+   return render(request, 'app/registrocont.html',data)
+
+# -----------------------Contenedor inventario-------------------------
+
+def contnue(request):
+   data={
+      'form': Conchetumare()
+   }
+
+   if request.method =='POST':
+      formulario = Conchetumare(data=request.POST)
+      if formulario.is_valid():
+         formulario.save()
+         data["mensaje"] = "se guardo"
+
+      else:
+         data['form'] = formulario
+
+   return render(request, 'app/contnue.html',data)
+
+   # -------------------------------------------
 
 
 def home(request):
@@ -18,7 +57,24 @@ def home(request):
 
 
 def registro(request):
-   return render(request, 'app/registro.html')
+
+   data={
+      'form': Conchetumare3()
+   }
+
+   if request.method =='POST':
+      formulario = Conchetumare3(data=request.POST)
+      if formulario.is_valid():
+         formulario.save()
+         data["mensaje"] = "se guardo"
+
+      else:
+         data['form'] = formulario
+
+   return render(request, 'app/registro.html',data)
+
+
+
 
 def estado(request):
    # ---Trae informacion de models.py Contenedor
@@ -26,26 +82,19 @@ def estado(request):
  
    return render(request, 'app/estado.html', {'contenedor': contenedor  })
 
+
+
+
 def recicla(request):
-   data={
-      'form': Conchetumare()
 
-   }
-   if request.method =='POST':
-      formulario = Conchetumare(data=request.POST)
-      if formulario.is_valid():
-         formulario.save()
-         data["mensaje"] = "se guardo"
-      else:
-         data['form'] = formulario
+   return render(request, 'app/recicla.html')
 
 
-   return render(request, 'app/recicla.html',data)
 
 def llenado(request):
 
-
    return render(request, 'app/llenado.html')
+
 
 
 
@@ -56,13 +105,13 @@ def ingreso(request):
     return render(request,'app/prueba.html', {'ingresos':ingresos} )
 
 
+
+
 def mostrar(request): 
   # ---Trae informacion de models.py  Contenedor
     contenedor = LlenadoContenedores.objects.all()
-
- 
-
     return render(request,'app/ingreso.html',{'contenedor': contenedor }, )
+
 
 llenando = llenandoForm()
 def asignacion(request):
@@ -82,5 +131,3 @@ def asignacion(request):
 
 
    return render(request, 'app/asignar.html',{'llenando':llenando})
-
-

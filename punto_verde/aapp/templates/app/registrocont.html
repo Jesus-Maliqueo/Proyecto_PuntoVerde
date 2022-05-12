@@ -1,0 +1,29 @@
+{%extends 'app/base.html'%}
+
+{% block contenido %}
+
+
+
+<div class="formulario" > 
+    <form class="formu" method="POST" name="llenando" id="llenando" action="#">
+
+<h1> Registro Contenedor</h1>
+
+    
+    {% csrf_token %} 
+    {{ form }}
+
+    {{ mensaje }}
+
+
+
+    <br>
+    <button type="submit" id="btnEnviar" class="buttong" > Registrar contenedor </button>
+    
+    
+
+
+  </form>
+</div>
+
+{% endblock %}

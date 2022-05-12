@@ -2,7 +2,6 @@
 body{
   background-color: #fff4eb ;
   
-  
 }
 .titulo{
   text-align: center;
@@ -189,6 +188,9 @@ padding-left: 10px;
     padding-top: 30px;
     padding-bottom: 10px;
 }
+.formu h1{
+ text-align: center;
+}
 
 .control-label{
     padding-left: 15px ;
@@ -338,9 +340,8 @@ padding-left: 10px;
 
 .form-content .form-items {
     /* border: 3px solid rgb(17, 1, 1); */
-    /* padding: 40px; */
-   
-    display: inline-block; 
+    padding: 40px;
+     display: inline-block; 
     width: 100%;
     min-width: 540px;
     -webkit-border-radius: 10px;

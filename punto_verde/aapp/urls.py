@@ -13,9 +13,13 @@ urlpatterns = [
     path('estado/',views.estado, name='estado'),
     path('ingreso/',views.ingreso , name='ingreso'),
     path('asignacion',asignacion,name="asignacion"),
+    path('contreg/',views.contreg , name='contreg'),
+    path('contnue/',views.contnue , name='contnue'),
 
 ]
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+
+
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL,
+#                           document_root=settings.MEDIA_ROOT)
 
