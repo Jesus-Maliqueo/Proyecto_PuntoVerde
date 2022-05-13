@@ -1,3 +1,4 @@
+import re
 from django import forms
 from django.forms.forms import Form
 from django.shortcuts import render,redirect
@@ -12,6 +13,29 @@ from .models import LlenadoContenedores , IngresoMaterial
 from .forms import Conchetumare,Conchetumare2,Conchetumare3
 
 # Create your views here.
+
+
+def home(request):
+   return render(request, 'app/home.html')
+
+
+
+def registro(request):
+
+   data={
+      'form': Conchetumare3()
+   }
+
+   if request.method =='POST':
+      formulario = Conchetumare3(data=request.POST)
+      if formulario.is_valid():
+         formulario.save()
+         data["mensaje"] = "se guardo con exito"
+
+      else:
+         data['form'] = formulario
+
+   return render(request, 'app/registro.html',data)
 
 
 # ---------------------------------------------
@@ -31,11 +55,11 @@ def contreg(request):
 
    return render(request, 'app/registrocont.html',data)
 
-# -----------------------Contenedor inventario-------------------------
+# -----------------------Contenedor inventario---------------------------
 
 def contnue(request):
    data={
-      'form': Conchetumare()
+      'form': Conchetumare(),
    }
 
    if request.method =='POST':
@@ -52,32 +76,11 @@ def contnue(request):
    # -------------------------------------------
 
 
-def home(request):
-   return render(request, 'app/home.html')
-
-
-def registro(request):
-
-   data={
-      'form': Conchetumare3()
-   }
-
-   if request.method =='POST':
-      formulario = Conchetumare3(data=request.POST)
-      if formulario.is_valid():
-         formulario.save()
-         data["mensaje"] = "se guardo"
-
-      else:
-         data['form'] = formulario
-
-   return render(request, 'app/registro.html',data)
-
-
 
 
 def estado(request):
    # ---Trae informacion de models.py Contenedor
+
    contenedor = LlenadoContenedores.objects.all()
  
    return render(request, 'app/estado.html', {'contenedor': contenedor  })
@@ -110,7 +113,23 @@ def ingreso(request):
 def mostrar(request): 
   # ---Trae informacion de models.py  Contenedor
     contenedor = LlenadoContenedores.objects.all()
-    return render(request,'app/ingreso.html',{'contenedor': contenedor }, )
+    ingresos = IngresoMaterial.objects.all()
+    return render(request,'app/ingreso.html',{'contenedor': contenedor, 'ingresos':ingresos} )
+
+
+# -------------------------------Eliminar Boton----------------------------------------
+def eliminar(request, id):
+   contenedor = LlenadoContenedores.objects.get(id_llenado=id)
+   contenedor.delete()
+   return redirect('/mostrar/#tab2')
+
+
+def eliminar2(request, id):
+   contenedor = IngresoMaterial.objects.get(id_material=id)
+   contenedor.delete()
+   return redirect('/mostrar/#tab3')
+
+# --------------------------------------------------------------------------------------
 
 
 llenando = llenandoForm()

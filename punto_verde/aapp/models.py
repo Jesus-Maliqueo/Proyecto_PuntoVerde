@@ -112,9 +112,14 @@ class IngresoMaterial(models.Model):
     pesos_material = models.IntegerField()
     llen_conts_id_llenado = models.OneToOneField('LlenadoContenedores', models.DO_NOTHING, db_column='llen_conts_id_llenado', blank=True, null=True)
 
+    def __str__(self):
+      fila = "  Tipo producto :  " + self.tipo_producto + "ㅤㅤ" +"   Peso : " + str(self.pesos_material)
+      return fila
+
     class Meta:
         managed = False
         db_table = 'ingreso_material'
+        ordering=['id_material']
 
 
 class InventarioContenedores(models.Model):
@@ -123,9 +128,16 @@ class InventarioContenedores(models.Model):
     peso = models.IntegerField()
     id_llenado = models.IntegerField()
 
+    def __str__(self):
+      fila = " ID :  " + str(self.id_contenedor) +"ㅤㅤ" +"   Tipo contenedor :  " + self.tipo_contenedor
+      return fila
+
     class Meta:
+        verbose_name="Inventario Contenedor"
+        verbose_name_plural="Inventario Contenedores"
         managed = False
         db_table = 'inventario_contenedores'
+        ordering=['id_contenedor']
 
 
 class LlenadoContenedores(models.Model):
@@ -137,6 +149,11 @@ class LlenadoContenedores(models.Model):
     invt_conts_id_contenedor = models.OneToOneField(InventarioContenedores, models.DO_NOTHING, db_column='invt_conts_id_contenedor')
     ingreso_material_id_material = models.OneToOneField(IngresoMaterial, models.DO_NOTHING, db_column='ingreso_material_id_material', blank=True, null=True)
 
+
+    def __str__(self):
+      fila = " ID :  " + str(self.id_llenado) +"ㅤㅤ"+"   Tipo contenedor :  " + self.tipo_contenedor + "ㅤㅤ"+ "Peso : " + str(self.peso)
+      return fila
+
     class Meta:
         managed = False
         db_table = 'llenado_contenedores'
@@ -147,6 +164,11 @@ class Precios(models.Model):
     tipo_material = models.CharField(max_length=1)
     descripcion = models.CharField(max_length=20)
     precio = models.IntegerField()
+
+
+    def __str__(self):
+      fila = "Tipo Material : " + self.tipo_material + "ㅤㅤ " + "Precio : " + str(self.precio)
+      return fila
 
     class Meta:
         managed = False

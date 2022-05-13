@@ -36,7 +36,8 @@
             <td> {{ Contenedor.peso  }} </td>
             <td> {{ Contenedor.estado_contenedor  }} </td>
             <td> {{ Contenedor.precio  }} </td>
-            <td> <a name="" id="" class="btn btn-success" href="#"> Reservar  </a>  <button type="button" class="btn btn-danger">Eliminar</button> </td>
+            <td> <a name="" id="" class="btn btn-success" href="#"> Reservar  </a>  <a class="btn btn-danger" href="{% url 'eliminar' Contenedor.id_llenado %}" role="button"> Eliminar </a> 
+            </td>
         </tr>
         {% endfor %}
 

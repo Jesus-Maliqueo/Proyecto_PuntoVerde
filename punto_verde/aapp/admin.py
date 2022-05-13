@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import InventarioContenedores,LlenadoContenedores,Boleta,Comprador,ContenedorLleno,DetaAsignacion,Empleado,Factura,Informe,IngresoMaterial,Receptor,Reserva,Retiro,Compra
+from .models import InventarioContenedores,LlenadoContenedores,Boleta,Comprador,ContenedorLleno,DetaAsignacion,Empleado,Factura,Informe,IngresoMaterial, Precios,Receptor,Reserva,Retiro,Compra
 # Register your models here.
 
 class ingreso(admin.ModelAdmin):
@@ -17,6 +17,12 @@ class ncontenedor(admin.ModelAdmin):
     list_editable =["tipo_contenedor","peso"]
     list_filter = ["tipo_contenedor"]
 
+class precio(admin.ModelAdmin):
+    list_display = ["id_precio","tipo_material","descripcion","precio"]
+    list_filter = ["tipo_material"]
+
+
+admin.site.register(Precios,precio)
 admin.site.register(Boleta)
 admin.site.register(Comprador)
 admin.site.register(LlenadoContenedores,lcontenedor)

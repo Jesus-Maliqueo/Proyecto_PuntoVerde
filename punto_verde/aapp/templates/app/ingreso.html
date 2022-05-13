@@ -15,9 +15,9 @@
     <div class="tabs">
         <div class="tab-container">
           <div id="tab3" class="tab"> 
-            <a href="#tab3">Pestaña 3</a>
+            <a href="#tab3"> Materiales </a>
             <div class="tab-content">
-              <h2>  Contenedores </h2>
+              <h2>  Ingresos Material </h2>
 <!-- -----------------------------MOSTRAR CONTAINERS ------------------------------------- -->
 
 <div  class="card-body">  
@@ -40,7 +40,9 @@
               <td> {{ IngresoMaterial.tipo_producto  }} </td>
               <td> {{ IngresoMaterial.fecha  }} </td>
               <td> {{ IngresoMaterial.pesos_material  }} </td>
-              <td> <a name="" id="" class="btn btn-success" href="#"> Editar  </a>  <button type="button" class="btn btn-danger">Eliminar</button> </td>
+              
+              <td> <a name="" id="" class="btn btn-success" href="#"> Reservar  </a>  <a class="btn btn-danger" href="{% url 'eliminar' IngresoMaterial.id_material %}" role="button"> Eliminar </a> 
+              </tr>
           </tr>
           {% endfor %}
       </tbody>
@@ -54,23 +56,60 @@
             </div>
           </div>
           <div id="tab2" class="tab">
-            <a href="#tab2">Pestaña 2</a>
+            <a href="#tab2"> Contenedores</a>
             <div class="tab-content">
-              <h2>Titulo 2</h2>
+              <h2> Contenedores</h2>
            
+
+
+              <div  class="card-body">  
+                <h4>   </h4>
+                <table  class="table" >
+                
+                    <thead>
+                        <tr>
+                        
+                            <th>id contenedor  </th>
+                            <th> tipo contenedor </th>
+                            <th> peso</th>
+                            <th> estado contenedor </th>
+                            <th> precio </th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                
+                        {% for Contenedor in contenedor %}
+                        <tr>
+                            <td> {{ Contenedor.id_contenedor  }}    </td>
+                            <td> {{ Contenedor.tipo_contenedor  }} </td>
+                            <td> {{ Contenedor.peso  }} </td>
+                            <td> {{ Contenedor.estado_contenedor  }} </td>
+                            <td> {{ Contenedor.precio  }} </td>
+                            <td> <a name="" id="" class="btn btn-success" href="#"> Reservar  </a>  <a class="btn btn-danger" href="{% url 'eliminar' Contenedor.id_llenado %}" role="button"> Eliminar </a> 
+                        </tr>
+                        {% endfor %}
+                
+                
+                    </tbody>
+                
+                
+                </table>
+                
+                </div>
+
+
+
             </div>
           </div> 
           <div id="tab1" class="tab">
-            <a href="#tab1">Pestaña 1</a>
+            <a href="#tab1"> Nose que wea va aqui</a>
             <div class="tab-content">
 
               <h2>Titulo 1</h2>
   
  
               <form action="">  
-    
-
-   
 
 
                 {{ form }}
