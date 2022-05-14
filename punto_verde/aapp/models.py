@@ -13,9 +13,14 @@ class Boleta(models.Model):
     nombre = models.CharField(max_length=100)
     forma_pago = models.CharField(max_length=100)
 
+    def __str__(self):
+      fila = " ID  :  " + str(self.id_venta) + "ㅤㅤ" +"   Nombre : " + self.nombre+ "ㅤㅤ" +"   Forma de pago : " + self.forma_pago
+      return fila
+
     class Meta:
         managed = False
         db_table = 'boleta'
+        ordering=['id_venta', "nombre"]
 
 
 class Compra(models.Model):
@@ -27,9 +32,14 @@ class Compra(models.Model):
     retiro_id_retiro = models.ForeignKey('Retiro', models.DO_NOTHING, db_column='retiro_id_retiro')
     emitido_en = models.CharField(max_length=30)
 
+    def __str__(self):
+      fila = " ID  :  " +  str(self.id_venta) + "ㅤㅤ" +"   Monto : " + str(self.monto) + "ㅤㅤ" +"   Forma de pago : " + self.forma_pago + "ㅤㅤ" + "   Fecha de venta : " + str(self.fecha_venta) + "ㅤㅤ" + "   Emitido : " + str(self.emitido_en) 
+      return fila
+
     class Meta:
         managed = False
         db_table = 'compra'
+        ordering=['id_venta']
 
 
 class Comprador(models.Model):
@@ -39,9 +49,14 @@ class Comprador(models.Model):
     telefono = models.IntegerField()
     correo = models.CharField(max_length=100)
 
+    def __str__(self):
+      fila = " ID  :  " +  str(self.id_comprador) + "ㅤㅤ" +"   Nombre : " + self.nombre + "ㅤㅤ" +"   Direccion  : " + self.direccion + "ㅤㅤ" +"Telefono : " + str(self.telefono) + "ㅤㅤ" +"  E-mail : " + self.correo
+      return fila
+
     class Meta:
         managed = False
         db_table = 'comprador'
+        ordering=['id_comprador',"nombre"]
 
 
 class ContenedorLleno(models.Model):
@@ -52,9 +67,14 @@ class ContenedorLleno(models.Model):
     llen_conts_id_llenado = models.OneToOneField('LlenadoContenedores', models.DO_NOTHING, db_column='llen_conts_id_llenado')
     precios_id_precio = models.ForeignKey('Precios', models.DO_NOTHING, db_column='precios_id_precio')
 
+    def __str__(self):
+      fila = " ID  :  " +  str(self.id_lleno) + "ㅤㅤ" +"   Reservado  : " + str(self.reservado)+ "ㅤㅤ" +"   Lleno : " + str(self.lleno) 
+      return fila
+
     class Meta:
         managed = False
         db_table = 'contenedor_lleno'
+        ordering =["reservado","lleno"]
 
 
 class DetaAsignacion(models.Model):
@@ -76,9 +96,14 @@ class Empleado(models.Model):
     telefono = models.IntegerField()
     ocupacion = models.CharField(max_length=50)
 
+    def __str__(self):
+      fila = " Rut  :  " +  str(self.rut_empleado) + "ㅤㅤ" +"   Nombre  : " + self.primer_nombre+ "ㅤㅤ" +"   Apellido Paterno: " + self.primer_apellido +  "ㅤㅤ" +"   Apellido Materno : " + self.segundo_apellido 
+      return fila
+
     class Meta:
         managed = False
         db_table = 'empleado'
+        ordering = ["primer_nombre","ocupacion"]
 
 
 class Factura(models.Model):
@@ -88,9 +113,14 @@ class Factura(models.Model):
     region = models.CharField(max_length=50)
     comuna = models.CharField(max_length=50)
 
+    def __str__(self):
+      fila = " ID  :  " +  str(self.id_venta) + "ㅤㅤ" +"   Nombre Empresa  : " + self.nombre_empresa+ "ㅤㅤ" +"   Giro industria: " + self.giro_industria +  "ㅤㅤ" +"   Region : " + self.region 
+      return fila
+
     class Meta:
         managed = False
         db_table = 'factura'
+        ordering = ["region","comuna"]
 
 
 class Informe(models.Model):
@@ -100,9 +130,14 @@ class Informe(models.Model):
     id_contenedor = models.IntegerField()
     invent_conts_id_contenedor = models.OneToOneField('InventarioContenedores', models.DO_NOTHING, db_column='invent_conts_id_contenedor')
 
+    def __str__(self):
+      fila = " ID  :  " +  str(self.id_infome) + "ㅤㅤ" +"Fecha  : " + str(self.fecha_informe)
+      return fila
+
     class Meta:
         managed = False
         db_table = 'informe'
+        ordering= ["fecha_informe"]
 
 
 class IngresoMaterial(models.Model):
@@ -113,7 +148,7 @@ class IngresoMaterial(models.Model):
     llen_conts_id_llenado = models.OneToOneField('LlenadoContenedores', models.DO_NOTHING, db_column='llen_conts_id_llenado', blank=True, null=True)
 
     def __str__(self):
-      fila = "  Tipo producto :  " + self.tipo_producto + "ㅤㅤ" +"   Peso : " + str(self.pesos_material)
+      fila = "  Tipo producto :  " + self.tipo_producto + "ㅤㅤ" +"   Peso : " + str(self.pesos_material) 
       return fila
 
     class Meta:
@@ -157,6 +192,7 @@ class LlenadoContenedores(models.Model):
     class Meta:
         managed = False
         db_table = 'llenado_contenedores'
+        ordering = ["tipo_contenedor"]
 
 
 class Precios(models.Model):
@@ -173,6 +209,7 @@ class Precios(models.Model):
     class Meta:
         managed = False
         db_table = 'precios'
+        ordering = ["tipo_material"]
 
 
 class Receptor(models.Model):
@@ -184,9 +221,14 @@ class Receptor(models.Model):
     turno = models.DateTimeField()
     ingreso_material_id_material = models.OneToOneField(IngresoMaterial, models.DO_NOTHING, db_column='ingreso_material_id_material')
 
+    def __str__(self):
+      fila = "Rut : " + str(self.rut_receptor) + "ㅤㅤ " + "Nombre : " + self.primer_nombre +"   Apellido Paterno: " + self.primer_apellido +  "ㅤㅤ" +"   Apellido Materno : " + self.segundo_apellido +"ㅤㅤ " + "Turno : " + str(self.turno)
+      return fila
+
     class Meta:
         managed = False
         db_table = 'receptor'
+        ordering = ["primer_apellido","turno"]
 
 
 class Reserva(models.Model):
@@ -196,9 +238,14 @@ class Reserva(models.Model):
     venta_id_venta = models.OneToOneField(Compra, models.DO_NOTHING, db_column='venta_id_venta')
     comprador_id_comprador = models.ForeignKey(Comprador, models.DO_NOTHING, db_column='comprador_id_comprador')
 
+    def __str__(self):
+      fila = "ID reserva : " + self.id_reserva + "ㅤㅤ " + "fecha : " + str(self.fecha) 
+      return fila
+
     class Meta:
         managed = False
         db_table = 'reserva'
+        ordering= ["fecha"]
 
 
 class Retiro(models.Model):
@@ -210,6 +257,11 @@ class Retiro(models.Model):
     fecha_retiro = models.DateField()
     contacto = models.IntegerField()
 
+    def __str__(self):
+      fila = "Rut : " + str(self.id_retiro) + "ㅤㅤ " + "Nombre : " + self.primer_nombre +"   Apellido Paterno: " + self.primer_apellido +  "ㅤㅤ" +"   Apellido Materno : " + self.segundo_apellido +"ㅤㅤ " + "Fecha retiro : " + str(self.fecha_retiro) + "ㅤㅤ" + "Contacto : " + self.contacto
+      return fila
+
     class Meta:
         managed = False
         db_table = 'retiro'
+        ordering =["primer_apellido"]
