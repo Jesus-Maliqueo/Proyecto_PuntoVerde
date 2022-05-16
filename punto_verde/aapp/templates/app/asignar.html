@@ -12,7 +12,7 @@
     <title>Document</title>
 </head>
 <body class="bodya">
-    <div class="formulario" > 
+    <!-- <div class="formulario" > 
         <form class="formu" method="POST" name="llenando" id="llenando" action="#">
             {% csrf_token %} 
           <h2> Registro</h2>
@@ -60,7 +60,45 @@
       
       
         </form>
-      </div>
+      </div> -->
+
+      <div  class="card-body">  
+        <h4>  Contenedores </h4>
+        <table  class="table" >
+        
+            <thead>
+                <tr>
+                
+                    <th>id contenedor  </th>
+                    <th> tipo contenedor </th>
+                    <th> peso</th>
+                    <th> estado contenedor </th>
+                    <th> precio </th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+        
+                {% for Cont in contenedor %}
+                <tr>
+                    <td> {{ Cont.id_llenado  }}    </td>
+                    <td> {{ Cont.tipo_contenedor  }} </td>
+                    <td> {{ Cont.peso  }} </td>
+                    <td> {{ Cont.estado_contenedor  }} </td>
+                    <td> {{ Cont.precio  }} </td>
+                    <td> <a name="" id="" class="btn btn-success" href="{% url 'asigParteDos' Cont.id_llenado pesoM Cont.peso%}"> Reservar  </a>  <button type="button" class="btn btn-danger">Eliminar</button> </td>
+                    
+                </tr>
+                {% endfor %}
+        
+        
+            </tbody>
+        
+        
+        </table>
+        
+    </div>
+
 
 </body>
 </html>

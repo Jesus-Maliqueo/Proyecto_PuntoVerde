@@ -12,13 +12,13 @@ urlpatterns = [
     path('mostrar/',views.mostrar, name='moestrar'),
     path('estado/',views.estado, name='estado'),
     path('ingreso/',views.ingreso , name='ingreso'),
-    path('asignacion',asignacion,name="asignacion"),
     path('contreg/',views.contreg , name='contreg'),
     path('contnue',views.contnue , name='contnue'),
     path('eliminar/<id>',views.eliminar , name='eliminar'),
     path('eliminar2/<id>',views.eliminar2 , name='eliminar2'),
     path('eliminar3/<id>',views.eliminar3 , name='eliminar3'),
-    
+    path('asigParteUno/<id>/<int:peso>',asigParteUno,name="asigParteUno"),
+    path('asigParteDos/<id>/<int:pesom>/<int:pesoc>',asigParteDos, name="asigParteDos"),
 
 ]
 

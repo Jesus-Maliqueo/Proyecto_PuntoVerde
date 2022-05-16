@@ -47,7 +47,8 @@
               <td> {{ IngresoMaterial.fecha  }} </td>
               <td> {{ IngresoMaterial.pesos_material  }} </td>
               
-              <td> <a name="" id="" class="btn btn-success" href="#"> Reservar  </a>  <a class="btn btn-danger" href="{% url 'eliminar2' IngresoMaterial.id_material %}" role="button"> Eliminar </a> 
+              <td> <a name="" id="" class="btn btn-success" href="{% url 'asigParteUno' IngresoMaterial.id_material IngresoMaterial.pesos_material %}"> Reservar  </a>
+                <a class="btn btn-danger" href="{% url 'eliminar2' IngresoMaterial.id_material %}" role="button"> Eliminar </a> 
               </tr>
           </tr>
           {% endfor %}

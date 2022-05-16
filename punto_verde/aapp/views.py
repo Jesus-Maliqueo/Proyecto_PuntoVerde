@@ -122,7 +122,7 @@ def mostrar(request):
 def eliminar(request, id):
    contenedor = LlenadoContenedores.objects.get(id_llenado=id)
    contenedor.delete()
-   return redirect('/mostrar/#tab2')
+   return redirect('/mostrar#tab2/')
 
 
 def eliminar2(request, id):
@@ -138,7 +138,7 @@ def eliminar3(request, id):
 # --------------------------------------------------------------------------------------
 
 
-llenando = llenandoForm()
+""" llenando = llenandoForm()
 def asignacion(request):
    global llenando 
    data={
@@ -156,3 +156,23 @@ def asignacion(request):
 
 
    return render(request, 'app/asignar.html',{'llenando':llenando})
+ """
+#---------------asignando-------------
+def asigParteUno(request,id,peso):
+   material= IngresoMaterial.objects.get(id_material=id)
+   contenedor = LlenadoContenedores.objects.all()
+   print(LlenadoContenedores.peso)
+   peso_material = peso
+   aumento = peso_material
+   return render(request,'app/asignar.html',{'contenedor':contenedor,'pesoM' : peso_material})
+
+
+aumento = 0
+def asigParteDos(request,id, pesom,pesoc):
+   global aumento
+   print(pesom)
+   print(pesoc)
+   aumento = pesom + pesoc
+   contenedor = LlenadoContenedores.objects.filter(id_llenado=id).update(peso=aumento)
+   return redirect('/mostrar/#tab2')
+#--------------------------------------------
