@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.db import connection
-from .models import LlenadoContenedores , IngresoMaterial
+from .models import LlenadoContenedores , IngresoMaterial,InventarioContenedores
 from .forms import Conchetumare,Conchetumare2,Conchetumare3
 
 # Create your views here.
@@ -104,7 +104,7 @@ def llenado(request):
 def ingreso(request):
    # ---Trae informacion de models.py  IngresoMaterial
     ingresos = IngresoMaterial.objects.all()
-    print(ingresos)
+    print( IngresoMaterial.id_material("1"))
     return render(request,'app/prueba.html', {'ingresos':ingresos} )
 
 
@@ -114,7 +114,8 @@ def mostrar(request):
   # ---Trae informacion de models.py  Contenedor
     contenedor = LlenadoContenedores.objects.all()
     ingresos = IngresoMaterial.objects.all()
-    return render(request,'app/ingreso.html',{'contenedor': contenedor, 'ingresos':ingresos} )
+    cont= InventarioContenedores.objects.all()
+    return render(request,'app/ingreso.html',{'contenedor': contenedor, 'ingresos':ingresos, 'cont':cont} )
 
 
 # -------------------------------Eliminar Boton----------------------------------------
@@ -128,6 +129,11 @@ def eliminar2(request, id):
    contenedor = IngresoMaterial.objects.get(id_material=id)
    contenedor.delete()
    return redirect('/mostrar/#tab3')
+
+def eliminar3(request, id):
+   contenedor = InventarioContenedores.objects.get(id_contenedor=id)
+   contenedor.delete()
+   return redirect('/mostrar/#tab1')
 
 # --------------------------------------------------------------------------------------
 

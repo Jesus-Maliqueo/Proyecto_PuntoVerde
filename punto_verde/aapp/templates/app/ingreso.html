@@ -12,6 +12,12 @@
 
 
 
+ 
+
+
+
+
+
     <div class="tabs">
         <div class="tab-container">
           <div id="tab3" class="tab"> 
@@ -25,8 +31,8 @@
   <table  class="table" >
       <thead>
           <tr>
-              <th>id contenedor  </th>
-              <th> tipo contenedor </th>
+              <th> ID Contenedor  </th>
+              <th> Tipo Contenedor </th>
               <th> Fecha </th>
               <th> Peso Material </th>
               
@@ -41,7 +47,7 @@
               <td> {{ IngresoMaterial.fecha  }} </td>
               <td> {{ IngresoMaterial.pesos_material  }} </td>
               
-              <td> <a name="" id="" class="btn btn-success" href="#"> Reservar  </a>  <a class="btn btn-danger" href="{% url 'eliminar' IngresoMaterial.id_material %}" role="button"> Eliminar </a> 
+              <td> <a name="" id="" class="btn btn-success" href="#"> Reservar  </a>  <a class="btn btn-danger" href="{% url 'eliminar2' IngresoMaterial.id_material %}" role="button"> Eliminar </a> 
               </tr>
           </tr>
           {% endfor %}
@@ -68,12 +74,11 @@
                 
                     <thead>
                         <tr>
-                        
-                            <th>id contenedor  </th>
-                            <th> tipo contenedor </th>
-                            <th> peso</th>
-                            <th> estado contenedor </th>
-                            <th> precio </th>
+                            <th>ID Contenedor  </th>
+                            <th> Tipo Contenedor </th>
+                            <th> Peso</th>
+                            <th> Estado Contenedor </th>
+                            <th> Precio </th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -81,7 +86,7 @@
                 
                         {% for Contenedor in contenedor %}
                         <tr>
-                            <td> {{ Contenedor.id_contenedor  }}    </td>
+                            <td> {{ Contenedor.id_llenado  }}    </td>
                             <td> {{ Contenedor.tipo_contenedor  }} </td>
                             <td> {{ Contenedor.peso  }} </td>
                             <td> {{ Contenedor.estado_contenedor  }} </td>
@@ -103,23 +108,64 @@
             </div>
           </div> 
           <div id="tab1" class="tab">
-            <a href="#tab1"> Nose que wea va aqui</a>
+            <a href="#tab1">Invt. Contenedores </a>
             <div class="tab-content">
 
-              <h2>Titulo 1</h2>
+              <h2> Inventario Contenedor</h2>
   
  
-              <form action="">  
-
-
-                {{ form }}
-            
-            
-                <button type="submit" id="btnEnviar" class="buttong" > okey</button>
-               </form>
+              <div  class="card-body">  
+                <table  class="table" >
+                
+                    <thead>
+                        <tr>
+                        
+                            <th> ID Contenedor  </th>
+                            <th> Tipo Contenedor </th>
+                            <th> Peso</th>
+                            <th> Acciones </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                
+                        {% for InventarioContenedores in cont %}
+                        <tr>
+                            <td> {{ InventarioContenedores.id_contenedor  }}    </td>
+                            <td> {{ InventarioContenedores.tipo_contenedor  }} </td>
+                            <td> {{ InventarioContenedores.peso  }} </td>
+                            
+                            
+                            <td> <a name="" id="" class="btn btn-success" href="#"> Reservar  </a>  <a class="btn btn-danger" href="{% url 'eliminar3' InventarioContenedores.id_contenedor %}" role="button"> Eliminar </a> 
+                        </tr>
+                        {% endfor %}
+                
+                
+                    </tbody>
+                
+                
+                </table>
+                
+                </div>
              
             </div>  
           </div> 
+
+
+              
+  <div id="tab4" class="tab">
+    <a href="#tab4"> Algo falta aqui</a>
+    <div class="tab-content">
+
+      <h2> algo </h2>
+
+
+      
+
+    </div>  
+  </div> 
+
+
+
         </div>
       </div>
       

@@ -17,6 +17,7 @@ urlpatterns = [
     path('contnue',views.contnue , name='contnue'),
     path('eliminar/<id>',views.eliminar , name='eliminar'),
     path('eliminar2/<id>',views.eliminar2 , name='eliminar2'),
+    path('eliminar3/<id>',views.eliminar3 , name='eliminar3'),
     
 
 ]
