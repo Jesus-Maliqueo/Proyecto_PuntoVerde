@@ -4,27 +4,59 @@
 
 
 
+
+
+
 <div class="formulario" > 
-    <form class="formu" method="POST" name="llenando" id="llenando" action="#">
+  <form class="formu" action="contnue" method="POST"> {% csrf_token %}
 
-    <h2> Registro Material</h2>
+    <h2> Registro</h2>
 
-    
-    {% csrf_token %} 
-    {{ form }}
+    <div class="form-group"> 
+        <label for="apellido" class="control-label">ID Material</label>
+        <input type="text" class="form-control" id="street1_id" name="ID" placeholder="Ingrese ID Material">
+    </div>  
 
-    {{ mensaje }}
+    <div class="form-group"> 
+        <label for="apellido" class="control-label">Peso Material ingresado</label>
+        <input type="number" class="form-control" id="street1_id" name="peso" placeholder="Ingrese Peso Material">
+    </div>  
+<br>
+
+    <div class="form-group">
+    <div class="styled-select">
+        <label for="numero" class="control-label"> Tipo Material :  </label> 
+        
+        <select type="text"  name="material">
+           <option>C</option>
+           <option>E</option>
+           
+
+
+        </select>
+     </div>
+    </div>
 
 
 
 
-    <br>
-    <button type="submit" id="btnEnviar" class="buttong" >Registrar material </button>
+
+    <input type="submit"  class="botones btn btn-success" value="Enviar" > 
     
     
 
 
   </form>
-</div>
+</div> 
+
+
+
+
+
+
+
+
+
+
 
 {% endblock %}

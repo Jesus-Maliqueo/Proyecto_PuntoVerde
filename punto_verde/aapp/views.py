@@ -1,4 +1,7 @@
+from datetime import date
+import datetime
 import re
+from MySQLdb import Date
 from django import forms
 from django.forms.forms import Form
 from django.shortcuts import render,redirect
@@ -34,8 +37,6 @@ def registro(request ,*callback_args, **callback_kwargs):
       regis.save()
 
 
-
-
    return render(request,'app/registro.html')
 
 
@@ -60,20 +61,17 @@ def contreg(request):
 # -----------------------Contenedor inventario---------------------------
 
 def contnue(request):
-   data={
-      'form': Conchetumare(),
-   }
+ 
+   if request.method == 'POST':
+      id_material = request.POST["ID"]
+      fecha = date.today()
+      pesos_material = request.POST['peso']
+      tipo_producto = request.POST['material']
+      regis= IngresoMaterial.objects.create(id_material=id_material,fecha=fecha,pesos_material=pesos_material,tipo_producto=tipo_producto)
+      regis.save()
 
-   if request.method =='POST':
-      formulario = Conchetumare(data=request.POST)
-      if formulario.is_valid():
-         formulario.save()
-         data["mensaje"] = "se guardo"
 
-      else:
-         data['form'] = formulario
-
-   return render(request, 'app/contnue.html',data)
+   return render(request, 'app/contnue.html')
 
    # -------------------------------------------
 
@@ -106,7 +104,7 @@ def llenado(request):
 def ingreso(request):
    # ---Trae informacion de models.py  IngresoMaterial
     ingresos = IngresoMaterial.objects.all()
-    print( IngresoMaterial.id_material("1"))
+    
     return render(request,'app/prueba.html', {'ingresos':ingresos} )
 
 
@@ -114,10 +112,11 @@ def ingreso(request):
 
 def mostrar(request): 
   # ---Trae informacion de models.py  Contenedor
+    conta= InventarioContenedores.objects.all()
     contenedor = LlenadoContenedores.objects.all()
     ingresos = IngresoMaterial.objects.all()
-    cont= InventarioContenedores.objects.all()
-    return render(request,'app/ingreso.html',{'contenedor': contenedor, 'ingresos':ingresos, 'cont':cont} )
+    
+    return render(request,'app/ingreso.html',{'contenedor': contenedor, 'ingresos':ingresos, 'conta':conta} )
 
 
 # -------------------------------Eliminar Boton----------------------------------------
