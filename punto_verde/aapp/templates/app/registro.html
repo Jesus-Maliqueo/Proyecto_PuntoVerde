@@ -5,13 +5,13 @@
 
 
 <div class="formulario" > 
-  <form class="formu" action="/registro/" method="POST"> {% csrf_token %}
+  <form class="formu" action="registro" method="POST"> {% csrf_token %}
 
     <h2> Registro</h2>
 
     <div class="form-group"> 
         <label for="apellido" class="control-label">Ingrese Rut</label>
-        <input type="text" class="form-control" id="street1_id" name="aaaa" placeholder="Ingrese su apellido">
+        <input type="text" class="form-control" id="street1_id" name="rut" placeholder="Ingrese su apellido">
     </div>  
 
     <div class="form-group"> 
@@ -41,14 +41,14 @@
 
     <div class="form-group"> 
         <label for="numero" class="control-label">Numero</label>
-        <input type="text" class="form-control" id="city_id" name="telefono" placeholder="Ingrese su numero">
+        <input type="number" class="form-control" id="city_id" name="telefono" placeholder="Ingrese su numero">
     </div>     
 
     <div class="form-group">
     <div class="styled-select">
         <label for="numero" class="control-label">Seleccione ocupacion :  </label> 
         
-        <select name="ocupacion">
+        <select type="text"  name="ocupacion">
            <option>Admin</option>
            <option>Supervisor</option>
            <option>Empleado</option>
@@ -60,7 +60,7 @@
 
 
 
-    <input type="submit"  class="botones btn btn-success" value="enviar" > 
+    <input type="submit"  class="botones btn btn-success" value="Enviar" > 
     
     
 
@@ -71,27 +71,6 @@
 
 
 
-<div class="formulario"  > 
-    <form class="formu" method="POST" name="llenando" id="llenando" action="#">
-  
-  <h1> Registro Empleado</h1>
-  
-      
-      {% csrf_token %} 
-      {{ form }}
-  
-      {{ mensaje }}
-  
-  
-  
-  <br>
-      <button type="submit" id="btnEnviar" class="buttong" > Registrar usuario </button>
-      
-      
-  
-  
-    </form>
-  </div>
 
 
 

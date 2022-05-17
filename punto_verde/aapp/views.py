@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.db import connection
-from .models import LlenadoContenedores , IngresoMaterial,InventarioContenedores
+from .models import LlenadoContenedores , IngresoMaterial,InventarioContenedores,Empleado
 from .forms import Conchetumare,Conchetumare2,Conchetumare3
 
 # Create your views here.
@@ -20,25 +20,27 @@ def home(request):
 
 
 
-def registro(request):
+def registro(request ,*callback_args, **callback_kwargs):
+   if request.method == 'POST':
+      rut_empleado = request.POST["rut"]
+      primer_nombre = request.POST['primer_nombre']
+      segundo_nombre = request.POST['segundo_nombre']
+      primer_apellido = request.POST['primer_apellido']
+      segundo_apellido = request.POST['segundo_apellido']
+      direccion = request.POST['direccion']
+      telefono = request.POST['telefono']
+      ocupacion = request.POST['ocupacion']
+      regis= Empleado.objects.create(rut_empleado=rut_empleado,primer_nombre=primer_nombre,segundo_nombre=segundo_nombre,primer_apellido=primer_apellido,segundo_apellido=segundo_apellido,direccion=direccion,telefono=telefono,ocupacion=ocupacion)
+      regis.save()
 
-   data={
-      'form': Conchetumare3()
-   }
 
-   if request.method =='POST':
-      formulario = Conchetumare3(data=request.POST)
-      if formulario.is_valid():
-         formulario.save()
-         data["mensaje"] = "se guardo con exito"
 
-      else:
-         data['form'] = formulario
 
-   return render(request, 'app/registro.html',data)
+   return render(request,'app/registro.html')
 
 
 # ---------------------------------------------
+
 def contreg(request):
    data={
       'form': Conchetumare2()
@@ -138,25 +140,11 @@ def eliminar3(request, id):
 # --------------------------------------------------------------------------------------
 
 
-""" llenando = llenandoForm()
-def asignacion(request):
-   global llenando 
-   data={
-      'form': llenandoForm()
-
-   }
-   if request.method =='POST':
-      llenando = llenandoForm(request.POST, request.FILES)
-      if llenando.is_valid():
-         llenando.save()
-         data["mensaje"] = "se guardo"
-         return redirect('estado')
-      else:
-         data['form'] = llenando
 
 
-   return render(request, 'app/asignar.html',{'llenando':llenando})
- """
+
+
+
 #---------------asignando-------------
 def asigParteUno(request,id,peso):
    material= IngresoMaterial.objects.get(id_material=id)
