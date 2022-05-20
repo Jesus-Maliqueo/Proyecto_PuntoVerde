@@ -23,7 +23,7 @@ def home(request):
 
 
 
-def registro(request ,*callback_args, **callback_kwargs):
+def registro(request):
    if request.method == 'POST':
       rut_empleado = request.POST["rut"]
       primer_nombre = request.POST['primer_nombre']
@@ -39,24 +39,8 @@ def registro(request ,*callback_args, **callback_kwargs):
 
    return render(request,'app/registro.html')
 
-
 # ---------------------------------------------
 
-def contreg(request):
-   data={
-      'form': Conchetumare2()
-   }
-
-
-   if request.method =='POST':
-      formulario = Conchetumare2(data=request.POST)
-      if formulario.is_valid():
-         formulario.save()
-         data["mensaje"] = "se guardo"
-      else:
-         data['form'] = formulario
-
-   return render(request, 'app/registrocont.html',data)
 
 # -----------------------Contenedor inventario---------------------------
 
@@ -64,17 +48,28 @@ def contnue(request):
  
    if request.method == 'POST':
       id_material = request.POST["ID"]
-      fecha = date.today()
+   
       pesos_material = request.POST['peso']
       tipo_producto = request.POST['material']
-      regis= IngresoMaterial.objects.create(id_material=id_material,fecha=fecha,pesos_material=pesos_material,tipo_producto=tipo_producto)
+      regis= IngresoMaterial.objects.create(id_material=id_material,pesos_material=pesos_material,tipo_producto=tipo_producto)
       regis.save()
 
 
    return render(request, 'app/contnue.html')
 
    # -------------------------------------------
+def registerInv(request):
+ 
+   if request.method == 'POST':
+      id_contenedo = request.POST["id_contenedor"]
+      tipo_contenedor = request.POST['tipo_contenedor']
+      pesos = request.POST['peso']
+      id_llenado = request.POST['id_llenado']
+      regis= InventarioContenedores.objects.create(id_contenedor=id_contenedo,tipo_contenedor=tipo_contenedor,peso=pesos,id_llenado=id_llenado)
+      regis.save()
 
+
+   return render(request, 'app/registrocont.html')
 
 
 
@@ -94,9 +89,6 @@ def recicla(request):
 
 
 
-def llenado(request):
-
-   return render(request, 'app/llenado.html')
 
 
 
@@ -139,8 +131,15 @@ def eliminar3(request, id):
 # --------------------------------------------------------------------------------------
 
 
-
-
+#--------------creacion contenedores llenando-----------------------
+def llenado(request,idi,tipo,pes):
+   inv=InventarioContenedores.objects.get(id_contenedor=idi)
+   fk=InventarioContenedores.id_contenedor
+   incremento=int(idi)+1
+   llenar=LlenadoContenedores.objects.create(id_llenado=incremento,tipo_contenedor=tipo,peso=0,estado_contenedor='llenando',precio=pes,invt_conts_id_contenedor=inv)
+   
+   return redirect('/mostrar/#tab2')
+#---------------------------------------------------
 
 
 
@@ -162,4 +161,20 @@ def asigParteDos(request,id, pesom,pesoc):
    aumento = pesom + pesoc
    contenedor = LlenadoContenedores.objects.filter(id_llenado=id).update(peso=aumento)
    return redirect('/mostrar/#tab2')
+
+
+
+""" aumento = 0
+def asigParteDos(request,id, pesom,pesoc,fk):
+   global aumento
+   print(pesom)
+   print(pesoc)
+   aumento = pesom + pesoc
+   contenedor = LlenadoContenedores.objects.filter(id_llenado=id)
+   if LlenadoContenedores.invt_conts_id_contenedor == InventarioContenedores.id_contenedor:
+      if LlenadoContenedores.peso <= InventarioContenedores.peso:
+         contenedor = LlenadoContenedores.objects.filter(id_llenado=id).update(peso=aumento)
+         aumento+=1
+      else: """
+         
 #--------------------------------------------

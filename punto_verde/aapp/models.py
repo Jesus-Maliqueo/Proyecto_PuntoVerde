@@ -143,7 +143,7 @@ class Informe(models.Model):
 class IngresoMaterial(models.Model):
     id_material = models.IntegerField(primary_key=True)
     tipo_producto = models.CharField(max_length=1)
-    fecha = models.DateTimeField()
+    fecha = models.DateTimeField(auto_now_add=True)
     pesos_material = models.IntegerField()
     llen_conts_id_llenado = models.OneToOneField('LlenadoContenedores', models.DO_NOTHING, db_column='llen_conts_id_llenado', blank=True, null=True)
 
@@ -182,7 +182,7 @@ class LlenadoContenedores(models.Model):
     estado_contenedor = models.CharField(max_length=10)
     precio = models.IntegerField()
     invt_conts_id_contenedor = models.OneToOneField(InventarioContenedores, models.DO_NOTHING, db_column='invt_conts_id_contenedor')
-    ingreso_material_id_material = models.OneToOneField(IngresoMaterial, models.DO_NOTHING, db_column='ingreso_material_id_material', blank=True, null=True)
+    ingreso_material_id_material = models.OneToOneField(IngresoMaterial, on_delete=models.CASCADE ,db_column='ingreso_material_id_material', blank=True, null=True)
 
 
     def __str__(self):

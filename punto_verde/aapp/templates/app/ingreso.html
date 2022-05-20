@@ -47,7 +47,7 @@
               <td> {{ IngresoMaterial.fecha  }} </td>
               <td> {{ IngresoMaterial.pesos_material  }} </td>
               
-              <td> <a name="" id="" class="btn btn-success" href="{% url 'asigParteUno' IngresoMaterial.id_material IngresoMaterial.pesos_material %}"> Reservar  </a>
+              <td> <a name="" id="" class="btn btn-success" href="{% url 'asigParteUno' IngresoMaterial.id_material IngresoMaterial.pesos_material %}"> asignar  </a>
                 <a class="btn btn-danger" href="{% url 'eliminar2' IngresoMaterial.id_material %}" role="button"> Eliminar </a> 
               </tr>
           </tr>
@@ -78,8 +78,8 @@
                             <th>ID Contenedor  </th>
                             <th> Tipo Contenedor </th>
                             <th> Peso</th>
+                            <th>Peso_maximo</th>
                             <th> Estado Contenedor </th>
-                            <th> Precio </th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -90,8 +90,8 @@
                             <td> {{ Contenedor.id_llenado  }}    </td>
                             <td> {{ Contenedor.tipo_contenedor  }} </td>
                             <td> {{ Contenedor.peso  }} </td>
+                            <td> {{Contenedor.precio}}</td>
                             <td> {{ Contenedor.estado_contenedor  }} </td>
-                            <td> {{ Contenedor.precio  }} </td>
                             <td> <a name="" id="" class="btn btn-success" href="#"> Reservar  </a>  <a class="btn btn-danger" href="{% url 'eliminar' Contenedor.id_llenado %}" role="button"> Eliminar </a> 
                         </tr>
                         {% endfor %}
@@ -136,7 +136,7 @@
                             <td> {{ InventarioContenedores.peso  }} </td>
                             
                             
-                            <td> <a name="" id="" class="btn btn-success" href="#"> Reservar  </a>  <a class="btn btn-danger" href="{% url 'eliminar3' InventarioContenedores.id_contenedor %}" role="button"> Eliminar </a> 
+                            <td> <a name="" id="" class="btn btn-success" href="{% url 'llenado' InventarioContenedores.id_contenedor InventarioContenedores.tipo_contenedor InventarioContenedores.peso %}"> trasladar  </a>  <a class="btn btn-danger" href="{% url 'eliminar3' InventarioContenedores.id_contenedor %}" role="button"> Eliminar </a> 
                         </tr>
                         {% endfor %}
                 
