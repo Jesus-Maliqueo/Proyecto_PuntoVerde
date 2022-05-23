@@ -317,9 +317,9 @@ class Informe(models.Model):
 class IngresoMaterial(models.Model):
     id_material = models.IntegerField(primary_key=True)
     tipo_producto = models.CharField(max_length=1)
-    fecha = models.DateTimeField()
+    fecha = models.DateTimeField(auto_now_add=True)
     pesos_material = models.IntegerField()
-    llen_conts_id_llenado = models.OneToOneField('LlenadoContenedores', models.DO_NOTHING, db_column='llen_conts_id_llenado', blank=True, null=True)
+    llen_conts_id_llenado = models.OneToOneField('LlenadoContenedores', on_delete=models.CASCADE, db_column='llen_conts_id_llenado', blank=True, null=True)
 
     def __str__(self):
        fila = "  Tipo producto :  " + self.tipo_producto + "ㅤㅤ" +"   Peso : " + str(self.pesos_material) 
