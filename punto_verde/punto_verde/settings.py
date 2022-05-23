@@ -85,9 +85,7 @@ DATABASES = {
         'NAME': 'puntoverde2',
         'USER': 'root',
         'PASSWORD':'',
-        'HOST': 'localhost',
-        'PORT': '3307'
-        ,
+        
 
 
     }
@@ -118,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Santiago'
 
 USE_I18N = True
 

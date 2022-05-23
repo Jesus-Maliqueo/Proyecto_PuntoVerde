@@ -115,7 +115,7 @@ def mostrar(request):
 def eliminar(request, id):
    contenedor = LlenadoContenedores.objects.get(id_llenado=id)
    contenedor.delete()
-   return redirect('/mostrar#tab2/')
+   return redirect('/mostrar/#tab2')
 
 
 def eliminar2(request, id):

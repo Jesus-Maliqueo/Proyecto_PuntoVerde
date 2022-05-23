@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import InventarioContenedores,LlenadoContenedores,Boleta,Comprador,ContenedorLleno,DetaAsignacion,Empleado,Factura,Informe,IngresoMaterial, Precios,Receptor,Reserva,Retiro,Compra
+from .models import Horarios, InventarioContenedores,LlenadoContenedores,Boleta,Comprador,ContenedorLleno,Empleado,Factura,Informe,IngresoMaterial, Precios,Reserva,Retiro,Compra,Horarios
 # Register your models here.
 
 class ingreso(admin.ModelAdmin):
@@ -49,9 +49,6 @@ class info(admin.ModelAdmin):
     list_display = ["id_infome","fecha_informe"]
     list_filter = ["fecha_informe"]
 
-class rece(admin.ModelAdmin):
-    list_display = ["rut_receptor","primer_nombre","segundo_nombre","primer_apellido","segundo_apellido","turno"]
-    list_filter = ["primer_apellido","turno"]
 
 class reser(admin.ModelAdmin):
     list_display = ["id_reserva","fecha","fecha_limite"]
@@ -61,7 +58,11 @@ class ret(admin.ModelAdmin):
     list_display = ["id_retiro","primer_nombre","segundo_nombre","primer_apellido","segundo_apellido","fecha_retiro","contacto"]
     list_filter = ["primer_apellido","fecha_retiro"]
 
+class hor(admin.ModelAdmin):
+    list_display = ["id_horario","hora_inicio","hora_termino"]
+    list_filter = ["hora_inicio","hora_termino"]
 
+admin.site.register(Horarios,hor)
 admin.site.register(Precios,precio)
 admin.site.register(Boleta,bole)
 admin.site.register(Comprador,compr)
@@ -72,7 +73,6 @@ admin.site.register(Empleado,emple)
 admin.site.register(Factura,fac)
 admin.site.register(Informe,info)
 admin.site.register(IngresoMaterial,ingreso)
-admin.site.register(Receptor,rece)
 admin.site.register(Reserva,reser)
 admin.site.register(Retiro,ret)
 admin.site.register(Compra,comp) 

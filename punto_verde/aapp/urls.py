@@ -15,10 +15,10 @@ urlpatterns = [
     path('eliminar/<id>',views.eliminar , name='eliminar'),
     path('eliminar2/<id>',views.eliminar2 , name='eliminar2'),
     path('eliminar3/<id>',views.eliminar3 , name='eliminar3'),
-    path('asigParteUno/<id>/<int:peso>',asigParteUno,name="asigParteUno"),
-    path('asigParteDos/<id>/<int:pesom>/<int:pesoc>',asigParteDos, name="asigParteDos"),
+    path('asigParteUno<id>/<int:peso>',asigParteUno,name="asigParteUno"),
+    path('asigParteDos<id>/<int:pesom>/<int:pesoc>',asigParteDos, name="asigParteDos"),
     path('registerInv',registerInv,name="registerInv"),
-    path('llenado/<idi>/<tipo>/<pes>',llenado,name="llenado"),
+    path('llenado<idi>/<tipo>/<pes>',llenado,name="llenado"),
 
 ]
 
