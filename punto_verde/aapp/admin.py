@@ -34,7 +34,7 @@ class compr(admin.ModelAdmin):
     list_filter = ["nombre"]
 
 class contll(admin.ModelAdmin):
-    list_display = ["id_lleno","reservado","lleno"]
+    list_display = ["id_lleno","reservado","lleno","precios_id_precio"]
     list_filter = ["id_lleno","reservado"]
 
 class emple(admin.ModelAdmin):

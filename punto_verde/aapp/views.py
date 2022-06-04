@@ -107,8 +107,9 @@ def mostrar(request):
     conta= InventarioContenedores.objects.all()
     contenedor = LlenadoContenedores.objects.all()
     ingresos = IngresoMaterial.objects.all()
+    contll = ContenedorLleno.objects.all()
     
-    return render(request,'app/ingreso.html',{'contenedor': contenedor, 'ingresos':ingresos, 'conta':conta} )
+    return render(request,'app/ingreso.html',{'contenedor': contenedor, 'ingresos':ingresos, 'conta':conta, 'contll':contll} )
 
 
 # -------------------------------Eliminar Boton----------------------------------------
@@ -132,6 +133,7 @@ def eliminar3(request, id):
 
 
 #--------------creacion contenedores llenando-----------------------
+
 def llenado(request,idi,tipo,pes):
    inv=InventarioContenedores.objects.get(id_contenedor=idi)
    fk=InventarioContenedores.id_contenedor
@@ -139,7 +141,45 @@ def llenado(request,idi,tipo,pes):
    llenar=LlenadoContenedores.objects.create(id_llenado=incremento,tipo_contenedor=tipo,peso=0,estado_contenedor='llenando',precio=pes,invt_conts_id_contenedor=inv)
    
    return redirect('/mostrar/#tab2')
+
 #---------------------------------------------------
+
+
+
+
+# ------------------Traslado de cont.lleno a venta y vista de CONTENDOR LLENO
+
+def lleno(request,ida,tipo):
+
+
+   a = Precios.objects.filter(tipo_material=tipo)
+
+   print(a)
+   lalo = LlenadoContenedores.objects.get(id_llenado=ida)
+
+   if tipo == 'c' or tipo == 'C':
+      fk1= Precios.objects.get(id_precio=1)
+      suma = int(ida)+1
+      print(suma)
+      llenor = ContenedorLleno.objects.create(id_lleno=suma,reservado="C",lleno="C",llen_conts_id_llenado=lalo,precios_id_precio=fk1)
+
+
+#   ---------- Precio Envace 
+   else:
+      incrementa =+1
+      fk2= Precios.objects.get(id_precio=2)
+      suma = int(ida)+1
+      print(suma)
+      llenor = ContenedorLleno.objects.create(id_lleno=suma,reservado="E",lleno="E",llen_conts_id_llenado=lalo,precios_id_precio=fk2)
+
+
+
+
+
+
+   return redirect('/mostrar/#tab4')
+
+
 
 
 
@@ -153,6 +193,7 @@ def asigParteUno(request,id,peso):
    return render(request,'app/asignar.html',{'contenedor':contenedor,'pesoM' : peso_material})
 
 
+
 aumento = 0
 def asigParteDos(request,id, pesom,pesoc):
    global aumento
@@ -163,18 +204,4 @@ def asigParteDos(request,id, pesom,pesoc):
    return redirect('/mostrar/#tab2')
 
 
-
-""" aumento = 0
-def asigParteDos(request,id, pesom,pesoc,fk):
-   global aumento
-   print(pesom)
-   print(pesoc)
-   aumento = pesom + pesoc
-   contenedor = LlenadoContenedores.objects.filter(id_llenado=id)
-   if LlenadoContenedores.invt_conts_id_contenedor == InventarioContenedores.id_contenedor:
-      if LlenadoContenedores.peso <= InventarioContenedores.peso:
-         contenedor = LlenadoContenedores.objects.filter(id_llenado=id).update(peso=aumento)
-         aumento+=1
-      else: """
-         
 #--------------------------------------------

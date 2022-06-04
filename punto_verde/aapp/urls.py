@@ -19,6 +19,7 @@ urlpatterns = [
     path('asigParteDos<id>/<int:pesom>/<int:pesoc>',asigParteDos, name="asigParteDos"),
     path('registerInv',registerInv,name="registerInv"),
     path('llenado<idi>/<tipo>/<pes>',llenado,name="llenado"),
+    path('lleno<ida>/<tipo>' ,lleno,name="lleno"),
 
 ]
 

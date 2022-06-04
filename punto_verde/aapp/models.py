@@ -187,8 +187,8 @@ class ContenedorLleno(models.Model):
     reservado = models.CharField(max_length=1)
     lleno = models.CharField(max_length=1)
     reserva_id_reserva = models.ForeignKey('Reserva', models.DO_NOTHING, db_column='reserva_id_reserva', blank=True, null=True)
-    llen_conts_id_llenado = models.OneToOneField('LlenadoContenedores', models.DO_NOTHING, db_column='llen_conts_id_llenado')
-    precios_id_precio = models.ForeignKey('Precios', models.DO_NOTHING, db_column='precios_id_precio')
+    llen_conts_id_llenado = models.OneToOneField('LlenadoContenedores', models.DO_NOTHING, db_column='llen_conts_id_llenado',blank=True, null=True)
+    precios_id_precio = models.ForeignKey('Precios', models.DO_NOTHING, db_column='precios_id_precio',blank=True, null=True)
 
     def __str__(self):
       fila = " ID  :  " +  str(self.id_lleno) + "ㅤㅤ" +"   Reservado  : " + str(self.reservado)+ "ㅤㅤ" +"   Lleno : " + str(self.lleno) 

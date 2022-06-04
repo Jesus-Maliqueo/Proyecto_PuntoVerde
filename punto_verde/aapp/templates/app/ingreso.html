@@ -92,7 +92,7 @@
                             <td> {{ Contenedor.peso  }} </td>
                             <td> {{Contenedor.precio}}</td>
                             <td> {{ Contenedor.estado_contenedor  }} </td>
-                            <td> <a name="" id="" class="btn btn-success" href="#"> Reservar  </a>  <a class="btn btn-danger" href="{% url 'eliminar' Contenedor.id_llenado %}" role="button"> Eliminar </a> 
+                            <td> <a name="" id="" class="btn btn-success" href="{% url 'lleno' Contenedor.id_llenado Contenedor.tipo_contenedor   %}"> Mover a Reservar  </a>  <a class="btn btn-danger" href="{% url 'eliminar' Contenedor.id_llenado %}" role="button"> Eliminar </a> 
                         </tr>
                         {% endfor %}
                 
@@ -112,7 +112,7 @@
             <a href="#tab1">Invt. Contenedores </a>
             <div class="tab-content">
 
-              <h2> Inventario Contenedor</h2>
+              <h2> Inventario</h2>
   
  
               <div  class="card-body">  
@@ -154,11 +154,44 @@
 
               
   <div id="tab4" class="tab">
-    <a href="#tab4"> Algo falta aqui</a>
+    <a href="#tab4">Reservacion </a>
     <div class="tab-content">
 
-      <h2> algo </h2>
+      <h2> Contenedores disponibles para venta </h2>
 
+
+      <div  class="card-body">  
+        <table  class="table" >
+        
+            <thead>
+                <tr>
+                
+                    <th> ID Contenedor  </th>
+                    <th> Contendor Reservado </th>
+                    <th> Lleno </th>
+                    <th> Acciones </th>
+                </tr>
+            </thead>
+            <tbody>
+        
+                {% for ContenedorLleno in contll %}
+                <tr>
+                    <td> {{ ContenedorLleno.id_lleno  }}    </td>
+                    <td> {{ ContenedorLleno.reservado  }} </td>
+                    <td> {{ ContenedorLleno.lleno  }} </td>
+                    
+
+                    <td> <a name="" id="" class="btn btn-success" href=""> trasladar  </a>    <a class="btn btn-danger" href="" role="button"> Eliminar </a> 
+                </tr>
+                {% endfor %}
+        
+        
+            </tbody>
+        
+        
+        </table>
+        
+        </div>
 
       
 
