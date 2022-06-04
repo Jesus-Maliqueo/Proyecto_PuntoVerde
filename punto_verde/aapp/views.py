@@ -42,13 +42,12 @@ def registro(request):
 # ---------------------------------------------
 
 
-# -----------------------Contenedor inventario---------------------------
+# -----------------------Ingreso Material---------------------------
 
 def contnue(request):
  
    if request.method == 'POST':
       id_material = request.POST["ID"]
-   
       pesos_material = request.POST['peso']
       tipo_producto = request.POST['material']
       regis= IngresoMaterial.objects.create(id_material=id_material,pesos_material=pesos_material,tipo_producto=tipo_producto)
@@ -57,7 +56,7 @@ def contnue(request):
 
    return render(request, 'app/contnue.html')
 
-   # -------------------------------------------
+# -----------------------Contenedor inventario---------------------------
 def registerInv(request):
  
    if request.method == 'POST':
@@ -71,6 +70,24 @@ def registerInv(request):
 
    return render(request, 'app/registrocont.html')
 
+
+# -----------------------Registro comprador ---------------------------
+
+def comprador(request):
+ 
+   if request.method == 'POST':
+      id_comprador = request.POST["id_comprador"]
+      nombre = request.POST['nombre']
+      direccion = request.POST['direccion']
+      telefono = request.POST['telefono']
+      correo = request.POST['correo']
+      regis= Comprador.objects.create(id_comprador=id_comprador,nombre=nombre,direccion=direccion,telefono=telefono,correo=correo)
+      regis.save()
+
+   return render(request, 'app/comprador.html')
+
+
+# -------------------------------------------------------------------
 
 
 def estado(request):

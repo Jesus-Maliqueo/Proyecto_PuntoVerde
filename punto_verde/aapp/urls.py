@@ -20,6 +20,7 @@ urlpatterns = [
     path('registerInv',registerInv,name="registerInv"),
     path('llenado<idi>/<tipo>/<pes>',llenado,name="llenado"),
     path('lleno<ida>/<tipo>' ,lleno,name="lleno"),
+    path('comprador',views.comprador, name='comprador'),
 
 ]
 

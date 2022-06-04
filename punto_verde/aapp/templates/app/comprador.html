@@ -1,0 +1,53 @@
+{%extends 'app/base.html'%}
+
+{% block contenido %}
+
+
+
+<div class="formulario" > 
+  <form class="formu" action="/comprador" method="POST"> {% csrf_token %}
+
+    <h2> Registro</h2>
+
+    <div class="form-group"> 
+        <label for="apellido" class="control-label">Ingrese ID</label>
+        <input type="text" class="form-control" id="street1_id" name="id_comprador" placeholder="Ingrese ID">
+    </div>  
+
+    <div class="form-group"> 
+        <label for="nombre" class="control-label">Ingrese su nombre</label>
+        <input type="text" class="form-control" id="full_name_id" name="nombre" placeholder="Ingrese su nombre">
+    </div>    
+
+    <div class="form-group"> 
+        <label for="apellido" class="control-label">Ingrese direccion</label>
+        <input type="text" class="form-control" id="street1_id" name="direccion" placeholder="Digite su direcion">
+    </div>  
+
+    <div class="form-group"> 
+        <label for="apellido" class="control-label">Ingrese numero de telefono</label>
+        <input type="text" class="form-control" id="street1_id" name="telefono" placeholder="Digite su numero de contacto">
+    </div>  
+
+    <div class="form-group"> 
+        <label for="apellido" class="control-label">Ingrese su correo</label>
+        <input type="text" class="form-control" id="street1_id" name="correo" placeholder="Digite su e-mail">
+    </div>                          
+
+
+    <input type="submit"  class="botones btn btn-success" value="Enviar" > 
+    
+    
+
+
+  </form>
+</div> 
+
+
+
+
+
+
+
+
+{% endblock %}
