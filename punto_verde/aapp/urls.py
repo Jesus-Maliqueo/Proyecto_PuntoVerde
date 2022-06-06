@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.urls import path
+from django.urls import path, include
 from . import views
 from.views import  *
 from django.conf.urls.static import static
@@ -21,6 +21,7 @@ urlpatterns = [
     path('llenado<idi>/<tipo>/<pes>',llenado,name="llenado"),
     path('lleno<ida>/<tipo>' ,lleno,name="lleno"),
     path('comprador',views.comprador, name='comprador'),
+    path ('accounts/',include('django.contrib.auth.urls')),
 
 ]
 
