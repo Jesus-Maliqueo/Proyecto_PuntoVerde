@@ -161,6 +161,12 @@ padding-left: 10px;
   margin-bottom: 20px;
 }
 
+.logina{
+  align-items:flex-start;
+  margin-left: 30%; 
+  color: rgb(5, 75, 5);
+}
+
 
 /* ----------------------------------------------------- */
 

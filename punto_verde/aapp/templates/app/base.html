@@ -51,6 +51,18 @@
             <li class="nav-item">
               <a class="nav-link " href="/comprador"> from Comprador</a>
             </li>
+
+             {% if user.is_authenticated %}
+             <li class="d-flex ">
+               <a class="btn btn-primary logina" href="{% url 'logout' %}"> Cerrar sesion :C </a>
+             </li>
+
+             {% else %}
+             <li class="d-flex ">
+               <a class="btn btn-primary logina" href="{% url 'login' %}"> Inicia sesion :D</a>
+             </li>
+
+             {% endif %}
           </ul>
         </div>
       </nav>
