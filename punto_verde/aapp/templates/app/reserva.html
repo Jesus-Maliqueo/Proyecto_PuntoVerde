@@ -1,0 +1,65 @@
+{%extends 'app/base.html'%}
+
+{% block contenido %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Formulario de contacto</title>
+
+    <link rel="stylesheet" href="/aapp/static/app/css/estilos.css">
+    <link rel="stylesheet" href="/aapp/static/app/css/font-awesome.css">
+
+    <script src="../../static/app/js/jquery-3.2.1.js"></script>
+    <script src="../../static/app/js/script.js"></script>
+    {% load static %}
+</head>
+<body>
+
+    <section class="form_wrap" style="height: 700px;">
+
+        <section class="cantact_info">
+            <section class="info_title">
+                <span class="fa fa-user-circle"></span>
+                <h2>INFORMACION<br>DE RESERVA</h2>
+            </section>
+            <section class="info_items">
+                <p><span class="fa fa-envelope"></span> info.contact@gmail.com</p>
+                <p><span class="fa fa-mobile"></span> +1(585) 902-8665</p>
+            </section>
+        </section>
+
+        <form action="#" class="form_contact" method="POST">
+            <h2>DATOS</h2>
+            <div class="user_info">
+                <label for="names">id_reserva </label>
+                <input type="text" id="names" value="{{reserva.id_reserva}}" readonly>
+
+                <label for="phone">Telefono / Celular</label>
+                <input type="text" id="phone" readonly>
+
+                <label for="email">Correo electronico *</label>
+                <input type="text" id="email" readonly >
+
+                <label for="contenedor">Contenedor</label>
+                <input type="text" id="contenedor" value="{{reserva.contenedor_lleno_id_lleno}}" readonly >
+
+                <h2>RANGO DE RESERVA</h2>
+                <label for="contenedor">fecha inicio</label>
+                <input type="text" id="contenedor" value="{{reserva.fecha}}" readonly> 
+
+                <label for="contenedor">fecha experacion</label>
+                <input type="text" id="contenedor" value="{{reserva.fecha_limite}}" readonly>
+
+                <!-- <input type="button" value="Enviar Mensaje" id="btnSend"> -->
+            </div>
+        </form>
+
+    </section>
+
+</body>
+</html>
+{% endblock %}

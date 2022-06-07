@@ -5,16 +5,63 @@
 
 
 
-
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <title>Document</title>
+</head>
 <div class="recicla">
+
+    <div class="Colorqlo"> 
     
-<h1> LLENADO DE CONTENEDOr</h1>
+    
+    <h2>Contenedores llenos</h2>
+                  
+    
+    <div  class="card-body">  
+     
+        <table  class="table" >
+            <thead>
+                <tr>
+                    <th>id contenedor  </th>
+                    <th> reservado </th>
+                    <th> precio unitario</th>
+                    <th> reservado por:</th>
+                    <th> contenedor</th>
+                    <th> precio_total</th>
+                    
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ll in llenos %}
+                <tr>
+                    <td> {{ ll.id_lleno  }}    </td>
+                    <td> {{ ll.reservado  }} </td>
+                    <td> {{ ll.precios_id_precio.precio}}</td>
+                    <td> {{ ll.reserva_id_reserva  }} </td>
+                    <td> {{ ll.llen_conts_id_llenado}}</td>
+                    <td> {{ ll.precio_total  }} </td>
+                    <td><a name="" id="" class="btn btn-success" href="{% url 'reservar' ll.id_lleno %}">reservar </a></td>
+                    
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        
+    </div>
+    </div>
+<body>
 
-
-
-
-</div>
-<!-- el wm que trabaja y llena contenedor -->
+</body>
+</html>
 
 {% endblock %}

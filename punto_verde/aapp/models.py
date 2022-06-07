@@ -185,19 +185,19 @@ class Comprador(models.Model):
 class ContenedorLleno(models.Model):
     id_lleno = models.IntegerField(primary_key=True)
     reservado = models.CharField(max_length=1)
-    lleno = models.CharField(max_length=1)
-    reserva_id_reserva = models.ForeignKey('Reserva', models.DO_NOTHING, db_column='reserva_id_reserva', blank=True, null=True)
-    llen_conts_id_llenado = models.OneToOneField('LlenadoContenedores', models.DO_NOTHING, db_column='llen_conts_id_llenado',blank=True, null=True)
-    precios_id_precio = models.ForeignKey('Precios', models.DO_NOTHING, db_column='precios_id_precio',blank=True, null=True)
+    precio_total = models.IntegerField()
+    reserva_id_reserva = models.ForeignKey('Reserva', on_delete=models.CASCADE, db_column='reserva_id_reserva', blank=True, null=True)
+    llen_conts_id_llenado = models.OneToOneField('LlenadoContenedores', on_delete=models.CASCADE, db_column='llen_conts_id_llenado')
+    precios_id_precio = models.ForeignKey('Precios', on_delete=models.CASCADE, db_column='precios_id_precio')
 
     def __str__(self):
-      fila = " ID  :  " +  str(self.id_lleno) + "ㅤㅤ" +"   Reservado  : " + str(self.reservado)+ "ㅤㅤ" +"   Lleno : " + str(self.lleno) 
+      fila = " ID  :  " +  str(self.id_lleno) + "ㅤㅤ" +"   Reservado  : " + str(self.reservado)+ "ㅤㅤ" +"   precio_total: " + str(self.precio_total) 
       return fila
 
     class Meta:
         managed = False
         db_table = 'contenedor_lleno'
-        ordering =["reservado","lleno"]
+        ordering =["reservado","precio_total"]
 
 
 class DjangoAdminLog(models.Model):
@@ -391,12 +391,11 @@ class Reserva(models.Model):
     id_reserva = models.IntegerField(primary_key=True)
     fecha = models.DateField()
     fecha_limite = models.DateField()
-    venta_id_venta = models.OneToOneField(Compra, models.DO_NOTHING, db_column='venta_id_venta')
-    comprador_id_comprador = models.ForeignKey(Comprador, models.DO_NOTHING, db_column='comprador_id_comprador')
+    venta_id_venta = models.OneToOneField(Compra,on_delete=models.CASCADE, db_column='venta_id_venta',blank=True, null=True)
+    comprador_id_comprador = models.ForeignKey(Comprador, on_delete=models.CASCADE, db_column='comprador_id_comprador',blank=True, null=True)
+    contenedor_lleno_id_lleno = models.ForeignKey(ContenedorLleno, on_delete=models.CASCADE, db_column='contenedor_lleno_id_lleno', blank=True, null=True)
 
-    def __str__(self):
-     fila = "ID reserva : " + self.id_reserva + "ㅤㅤ " + "fecha : " + str(self.fecha) 
-     return fila
+    
 
     class Meta:
         managed = False

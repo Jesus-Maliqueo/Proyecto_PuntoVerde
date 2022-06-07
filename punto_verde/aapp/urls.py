@@ -19,9 +19,11 @@ urlpatterns = [
     path('asigParteDos<id>/<int:pesom>/<int:pesoc>',asigParteDos, name="asigParteDos"),
     path('registerInv',registerInv,name="registerInv"),
     path('llenado<idi>/<tipo>/<pes>',llenado,name="llenado"),
-    path('lleno<ida>/<tipo>' ,lleno,name="lleno"),
+    path('lleno/<ida>/<tipo>/<peso>' ,lleno,name="lleno"),
     path('comprador',views.comprador, name='comprador'),
+    path('lleno1/',lleno1,name="lleno1"),
     path ('accounts/',include('django.contrib.auth.urls')),
+    path('reservar/<id>',reservar,name="reservar"),
 
 ]
 

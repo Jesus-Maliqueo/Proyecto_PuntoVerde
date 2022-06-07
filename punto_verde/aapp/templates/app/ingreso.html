@@ -92,7 +92,7 @@
                             <td> {{ Contenedor.peso  }} </td>
                             <td> {{Contenedor.precio}}</td>
                             <td> {{ Contenedor.estado_contenedor  }} </td>
-                            <td> <a name="" id="" class="btn btn-success" href="{% url 'lleno' Contenedor.id_llenado Contenedor.tipo_contenedor   %}"> Mover a Reservar  </a>  <a class="btn btn-danger" href="{% url 'eliminar' Contenedor.id_llenado %}" role="button"> Eliminar </a> 
+                            <td> <a name="" id="" class="btn btn-success" href="{% url 'lleno' Contenedor.id_llenado Contenedor.tipo_contenedor Contenedor.peso %}"> Mover a Reservar  </a>  <a class="btn btn-danger" href="{% url 'eliminar' Contenedor.id_llenado %}" role="button"> Eliminar </a> 
                         </tr>
                         {% endfor %}
                 
@@ -174,16 +174,20 @@
             </thead>
             <tbody>
         
-                {% for ContenedorLleno in contll %}
+                {% for ll in llenos %}
                 <tr>
-                    <td> {{ ContenedorLleno.id_lleno  }}    </td>
-                    <td> {{ ContenedorLleno.reservado  }} </td>
-                    <td> {{ ContenedorLleno.lleno  }} </td>
+                    <td> {{ ll.id_lleno  }}    </td>
+                    <td> {{ ll.reservado  }} </td>
+                    <td> {{ ll.precios_id_precio.precio}}</td>
+                    <td> {{ ll.reserva_id_reserva  }} </td>
+                    <td> {{ ll.llen_conts_id_llenado}}</td>
+                    <td> {{ ll.precio_total  }} </td>
+                    <td><a name="" id="" class="btn btn-success" href="">checkout </a></td>
                     
-
-                    <td> <a name="" id="" class="btn btn-success" href=""> trasladar  </a>    <a class="btn btn-danger" href="" role="button"> Eliminar </a> 
+                    
                 </tr>
                 {% endfor %}
+        
         
         
             </tbody>

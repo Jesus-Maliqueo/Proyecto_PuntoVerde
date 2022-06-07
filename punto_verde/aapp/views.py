@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date , timedelta
 import datetime
 import re
 from MySQLdb import Date
@@ -17,7 +17,7 @@ from .forms import Conchetumare,Conchetumare2,Conchetumare3
 
 # Create your views here.
 
-
+@login_required
 def home(request):
    return render(request, 'app/home.html')
 
@@ -34,9 +34,15 @@ def registro(request):
       telefono = request.POST['telefono']
       ocupacion = request.POST['ocupacion']
       regis= Empleado.objects.create(rut_empleado=rut_empleado,primer_nombre=primer_nombre,segundo_nombre=segundo_nombre,primer_apellido=primer_apellido,segundo_apellido=segundo_apellido,direccion=direccion,telefono=telefono,ocupacion=ocupacion)
-      regis.save()
-
-
+      user = authenticate(request, username=primer_nombre, password=segundo_nombre)
+      if user is not None:
+        login(request, user)
+        # Redirigir a una página de éxito.
+        redirect(recicla)
+      else:
+        # Devuelve un mensaje de error de 'inicio de sesión no válido'.
+      
+        ...
    return render(request,'app/registro.html')
 
 # ---------------------------------------------
@@ -84,6 +90,13 @@ def comprador(request):
       regis= Comprador.objects.create(id_comprador=id_comprador,nombre=nombre,direccion=direccion,telefono=telefono,correo=correo)
       regis.save()
 
+      user = User.objects.create_user(id_comprador, correo)
+      user.last_name = nombre  
+      user.is_staff=False
+      user.set_password(direccion)  
+      user.save()
+
+
    return render(request, 'app/comprador.html')
 
 
@@ -99,7 +112,7 @@ def estado(request):
 
 
 
-
+@login_required
 def recicla(request):
 
    return render(request, 'app/recicla.html')
@@ -124,9 +137,9 @@ def mostrar(request):
     conta= InventarioContenedores.objects.all()
     contenedor = LlenadoContenedores.objects.all()
     ingresos = IngresoMaterial.objects.all()
-    contll = ContenedorLleno.objects.all()
-    
-    return render(request,'app/ingreso.html',{'contenedor': contenedor, 'ingresos':ingresos, 'conta':conta, 'contll':contll} )
+    llenos=ContenedorLleno.objects.all()
+
+    return render(request,'app/ingreso.html',{'contenedor': contenedor, 'ingresos':ingresos, 'conta':conta,'llenos':llenos} )
 
 
 # -------------------------------Eliminar Boton----------------------------------------
@@ -166,7 +179,11 @@ def llenado(request,idi,tipo,pes):
 
 # ------------------Traslado de cont.lleno a venta y vista de CONTENDOR LLENO
 
-def lleno(request,ida,tipo):
+def lleno1(request):
+   llenos=ContenedorLleno.objects.all()
+   return render(request,'app/llenado.html',{'llenos':llenos})
+
+def lleno(request,ida,tipo,peso):
 
 
    a = Precios.objects.filter(tipo_material=tipo)
@@ -175,26 +192,35 @@ def lleno(request,ida,tipo):
    lalo = LlenadoContenedores.objects.get(id_llenado=ida)
 
    if tipo == 'c' or tipo == 'C':
-      fk1= Precios.objects.get(id_precio=1)
+
+      fk= Precios.objects.get(id_precio=1)
+      print(fk)
       suma = int(ida)+1
-      print(suma)
-      llenor = ContenedorLleno.objects.create(id_lleno=suma,reservado="C",lleno="C",llen_conts_id_llenado=lalo,precios_id_precio=fk1)
+      p=fk.precio
+      print(p)
+      print(peso)
+      total=p*int(peso)
+
+      llenor = ContenedorLleno.objects.create(id_lleno=suma,reservado='N',precio_total=total,llen_conts_id_llenado=lalo,precios_id_precio=fk)
 
 
 #   ---------- Precio Envace 
    else:
-      incrementa =+1
-      fk2= Precios.objects.get(id_precio=2)
+      fk= Precios.objects.get(id_precio=2)
       suma = int(ida)+1
-      print(suma)
-      llenor = ContenedorLleno.objects.create(id_lleno=suma,reservado="E",lleno="E",llen_conts_id_llenado=lalo,precios_id_precio=fk2)
 
+      p=fk.precio
+      print(p)
+      print(peso)
+      total=p*int(peso)
+      llenor = ContenedorLleno.objects.create(id_lleno=suma,reservado='N',precio_total=total,llen_conts_id_llenado=lalo,precios_id_precio=fk)
 
 
 
 
 
    return redirect('/mostrar/#tab4')
+
 
 
 
@@ -222,3 +248,21 @@ def asigParteDos(request,id, pesom,pesoc):
 
 
 #--------------------------------------------
+
+def reservar(request,id):
+   fk=ContenedorLleno.objects.get(id_lleno=id)
+   cont=int(id)+1
+   fechahoy=date.today()
+   limite=fechahoy+ timedelta(30)
+   print(fechahoy)
+   print(limite)
+   resev=Reserva.objects.create(id_reserva=cont,fecha=fechahoy,fecha_limite=limite,contenedor_lleno_id_lleno=fk)
+   aso=ContenedorLleno.objects.filter(id_lleno=id).update(reservado='S',reserva_id_reserva=resev)
+   ver=Reserva.objects.get(id_reserva=cont)
+   datos ={
+      'reserva':ver
+   }
+
+
+   return render(request,'app/reserva.html',datos)
+

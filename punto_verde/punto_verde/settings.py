@@ -63,7 +63,7 @@ ROOT_URLCONF = 'punto_verde.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['./templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -88,7 +88,8 @@ DATABASES = {
         'NAME': 'puntoverde2',
         'USER': 'root',
         'PASSWORD':'',
-        
+        'HOST': '127.0.0.1',
+        'PORT': '3307',
 
 
     }

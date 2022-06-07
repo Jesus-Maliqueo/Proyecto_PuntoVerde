@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Horarios, InventarioContenedores,LlenadoContenedores,Boleta,Comprador,ContenedorLleno,Empleado,Factura,Informe,IngresoMaterial, Precios,Reserva,Retiro,Compra,Horarios
+from .models import *
 # Register your models here.
 
 class ingreso(admin.ModelAdmin):
@@ -34,7 +34,7 @@ class compr(admin.ModelAdmin):
     list_filter = ["nombre"]
 
 class contll(admin.ModelAdmin):
-    list_display = ["id_lleno","reservado","lleno","precios_id_precio"]
+    list_display = ["id_lleno","reservado","precio_total"]
     list_filter = ["id_lleno","reservado"]
 
 class emple(admin.ModelAdmin):
@@ -76,4 +76,3 @@ admin.site.register(IngresoMaterial,ingreso)
 admin.site.register(Reserva,reser)
 admin.site.register(Retiro,ret)
 admin.site.register(Compra,comp) 
-
