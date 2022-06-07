@@ -162,11 +162,16 @@ padding-left: 10px;
 }
 
 .logina{
-  align-items:flex-start;
-  margin-left: 30%; 
-  color: rgb(5, 75, 5);
+  color: rgb(255, 255, 255);
 }
 
+.logino{
+  color: rgb(255, 255, 255);
+}
+
+.name{
+ 
+}
 
 /* ----------------------------------------------------- */
 

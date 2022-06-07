@@ -31,50 +31,85 @@
               <a class="nav-link" href=" http://127.0.0.1:8000/">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/registro/">Registro</a>
+              <a class="nav-link " href="/recicla/">Como reciclar</a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link " href="/lleno1/">Contendores Llenos</a>
+            </li>
+
+            <!-- -------------Registro empleado  -->
+            {% if user.is_authenticated and perms.aapp.add_empleado %}
+            <li class="nav-item">
+              <a class="nav-link" href="/registro/">Registro Empleado</a>
+            </li>
+            {% else %}
+
+            {% endif %}
+
+            <!-- --------Estado contenedor -->
+            {% if user.is_authenticated and perms.aapp.view_llenadocontenedores %}
+
             <li class="nav-item">
               <a class="nav-link " href="/estado/">Estado container</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link " href="/recicla/">como reciclar</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " href="/lleno1/">llenar contenedor</a>
-            </li>
+            {% else %}
+
+            {% endif %}
+             <!------------------ LI INGRESO -->
+
+            {% if user.is_authenticated and perms.aapp.view_llenadocontenedores or perms.aapp.view_ingresomaterial or perms.aapp.view_inventariocontendores %}
             <li class="nav-item">
               <a class="nav-link " href="/mostrar/#tab1">ingreso material</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link " href="/ingreso/">ingreso</a>
-            </li>
-            {% if user.is_authenticated %}
+            {% else %}
+
+            {% endif %}
+          
+            <!-- -------------------------- LI COMPRADOR -->
+
+            {% if user.is_authenticated and perms.aapp.view_comprador %}
               <li class="nav-item" >
-                <a class="nav-link " href="/comprador" > Comprador</a>
+                <a class="nav-link " href="/comprador" >Registrar Comprador</a>
               </li>
             {% else %}
-              <li class="nav-item" style="visibility: hidden;">
-                <a class="nav-link " href="/comprador"  style="visibility: hidden;"> Comprador</a>
-              </li>
+
             {% endif %}
 
+            <!------------------ REGISTRO CONTENEDOR -->
+            {% if user.is_authenticated and perms.aapp.add_inventariocontenedores %}
+            <li class="nav-item">
+              <a class="nav-link " href="/registerInv">Registro Contenedor</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a href="/registerInv" style="visibility: hidden;">Registro Contenedor</a>
+            </li>
+            {% endif %}
+
+
+
+            <!-- verifica login -->
             {% if user.is_authenticated %}
              
               
               <li class="nav-item">
-               <a class="btn btn-primary logina" href="{% url 'logout' %}"> Cerrar sesion :C </a>
+               <a class="btn btn-danger logino " href="{% url 'logout' %}"> Cerrar sesion :C </a>
               </li>
 
               <li class="nav-item" >
-                User: {{ user.get_username }}
+                <!-- toma nombre de usuario -->
+                <a class="nav-link name " href="/">  {{ user.get_username }}</a>
+                
               </li>
 
             {% else %}
               <li class="nav-item">
-               <a class="btn btn-primary logina" href="{% url 'login' %?next={{request.path}} }"> Inicia sesion :D</a>
+               <a class="btn btn-success logina" href="{% url 'login' %?next={{request.path}} }"> Inicia sesion :D</a>
               </li>
 
             {% endif %}
+            <!-- ---------- FIN LI ------------- -->
           </ul>
         </div>
       </nav>
@@ -85,7 +120,7 @@
 
     
 
-<div>a</div>
+
 
 
 
@@ -109,14 +144,34 @@
 <footer>
   <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
   <ul class="list-inline">
+
       <li class="list-inline-item"><a href="#inicio">Inicio</a></li>
-      <li class="list-inline-item"><a href="/registro/">registro</a></li>
-      <li class="list-inline-item"><a href="/recicla/">como reciclar</a></li>
+<!-- REGISTRO EMPELADO -->
+      {% if user.is_authenticated and perms.aapp.add_empleado %}
+      <li class="list-inline-item"><a href="/registro/">Registro</a></li>
+      {% else %}
+      {% endif %}
+      <li class="list-inline-item"><a href="/recicla/">Como Reciclar</a></li>
+      <!-- REGISTRO CONTENDOR -->
+      {% if user.is_authenticated and perms.aapp.add_inventariocontenedores %}
       <li class="list-inline-item"><a href="/registerInv">Registro Contenedor</a></li>
-      <li class="list-inline-item"><a href="/estado/">estado container</a></li>
-      <li class="list-inline-item"><a href="/llenado/">llenar container</a></li>
-      <li class="list-inline-item"><a href="/contnue">Ingresar material</a></li>
+      {% else %}
+      {% endif %}
+      <!-- ESTADO CONTENEDOR -->
+      {% if user.is_authenticated and perms.aapp.view_llenadocontenedores %}
+      <li class="list-inline-item"><a href="/estado/">Estado container</a></li>
+      {% else %}
+      {% endif %}
+      <!-- REGISTRAR MATERIAL -->
+      {% if user.is_authenticated and perms.aapp.add_ingresomaterial  %}
+      <li class="list-inline-item"><a href="/contnue">Registrar material</a></li>
+      {% else %}
+      {% endif %}
+      <!-- REGISTRAR COMPRADOR -->
+      {% if user.is_authenticated and perms.aapp.view_comprador %}
       <li class="list-inline-item"><a href="/contnue">Registro comprador</a></li>
+      {% else %}
+      {% endif %}
   </ul>
   <p class="copyright">Punto Verde</p>
 </footer>

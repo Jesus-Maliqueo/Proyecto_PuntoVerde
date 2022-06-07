@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.db import connection
 from .models import LlenadoContenedores , IngresoMaterial,InventarioContenedores,Empleado
-from .forms import Conchetumare,Conchetumare2,Conchetumare3
+
 
 # Create your views here.
 
@@ -180,7 +180,9 @@ def llenado(request,idi,tipo,pes):
 # ------------------Traslado de cont.lleno a venta y vista de CONTENDOR LLENO
 
 def lleno1(request):
+
    llenos=ContenedorLleno.objects.all()
+
    return render(request,'app/llenado.html',{'llenos':llenos})
 
 def lleno(request,ida,tipo,peso):
@@ -265,4 +267,3 @@ def reservar(request,id):
 
 
    return render(request,'app/reserva.html',datos)
-

@@ -4,29 +4,10 @@ from django import forms
 from .models import *
 
 
-class Conchetumare(forms.ModelForm):
-
-    class Meta:
-        model = IngresoMaterial
-        fields = "__all__"
-        # fields = ["id_material","tipo_producto","fecha","peso_material"]
 
 
 
-class Conchetumare2(forms.ModelForm):
 
-    class Meta:
-        model = InventarioContenedores
-        fields = "__all__"
-
-class Conchetumare3(forms.ModelForm):
-
-    class Meta:
-        model = Empleado
-        fields = "__all__"
-
-
-    
 class ingreform(forms.ModelForm):
     class Meta:
         model = IngresoMaterial
