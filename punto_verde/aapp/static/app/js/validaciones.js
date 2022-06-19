@@ -5,7 +5,7 @@ const inputs = document.querySelectorAll('#formu input'); //Selecciona los input
 const expresiones = {
 	usuario: /^[a-zA-Z\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
 	nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-	password: /^.{4,12}$/, // 4 a 12 digitos.
+	password: /^.{4,12}$/, // 4 a 12 caracteres.
 	correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
 	telefono: /^\d{7,14}$/, // 7 a 14 numeros.
     rut: /^.{9,12}$/, // 9 a 12 caracteres.
@@ -13,6 +13,19 @@ const expresiones = {
     tipocont: /^[a-zA-Z]{1}$/,
     peso: /^\d{2,7}$/
 }
+
+
+const campos = {
+    rut: false,
+    nombre:false,
+    direccion :false,
+    telefono:false,
+    tipocont:false,
+    peso:false,
+    pass:false,
+    email:false,
+}
+
 
 const validarFormu = (e) =>{
     switch (e.target.name){ //Le dice que seleccione el nombre del html input
@@ -43,12 +56,28 @@ const validarFormu = (e) =>{
         case "peso" : 
             validarcampo(expresiones.peso, e.target, 'g_peso')
             break; 
+        case "contraseña" : 
+            validarcampo(expresiones.password, e.target, 'g_contr')
+            break; 
+        case "email" : 
+            validarcampo(expresiones.correo, e.target, 'g_coreo')
+            break; 
 
     }
 }
 
 
-
+const validarcampo = (expresion, input, campo) => {
+    if(expresion.test(input.value)){
+        document.getElementById(`${campo}`).classList.remove('form-group-incorrecto'); // elimina nombre de clase
+        document.getElementById(`${campo}`).classList.add('form-group-correcto'); // agrega nombre de clase
+        campos[campo] = true;
+    } else {
+        document.getElementById(`${campo}`).classList.add('form-group-incorrecto');
+        document.getElementById(`${campo}`).classList.remove('form-group-correcto');
+        campos[campo] = false;
+    }
+}
 
 
 
@@ -59,16 +88,10 @@ inputs.forEach((input)=> {
 });
 
  formu.addEventListener('submit',(e) => {
-     e.preventDefault();
+     
+     
+     if(campos.rut && campos.nombre && campos.direccion && campos.telefono && campos.tipocont && campos.peso && campos.pass && campos.email ){
+        formu.reset();
+     }
  })
 
-
- const validarcampo = (expresion, input, campo) => {
-    if(expresion.test(input.value)){
-        document.getElementById(`${campo}`).classList.remove('form-group-incorrecto'); // elimina nombre de clase
-        document.getElementById(`${campo}`).classList.add('form-group-correcto'); // agrega nombre de clase
-    } else {
-        document.getElementById(`${campo}`).classList.add('form-group-incorrecto');
-        document.getElementById(`${campo}`).classList.remove('form-group-correcto');
-    }
-}

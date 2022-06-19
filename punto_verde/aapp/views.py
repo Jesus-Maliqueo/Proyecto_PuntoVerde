@@ -44,22 +44,31 @@ def registro(request):
          user.last_name = empleado.primer_nombre  
          user.is_staff=True
          user.set_password(empleado.password)
-         user.groups.add('2')
+         user.groups.add('5')
+         # permisos jesus - admin 2
+         # permisos mati -  admin 5
          user.save()
       elif empleado.ocupacion == "Empleado":
          user = User.objects.create_user(empleado.rut_empleado, empleado.email)
          user.last_name = empleado.primer_nombre  
          user.is_staff=False
          user.set_password(empleado.password)
-         user.groups.add('1')
+         user.groups.add('6')
+         # permisos jesus  emplado 1
+         # permisos mati  empleado 6 
          user.save()
       else:
          user = User.objects.create_user(empleado.rut_empleado, empleado.email)
          user.last_name = empleado.primer_nombre  
          user.is_staff=False
          user.set_password(direccion)
-         user.groups.add('4')
+         user.groups.add('7')
+         # permisos jesus receptor 4 
+         # permisos mati receptor 7
+
          user.save()
+   else:
+      ...
       
    return render(request,'app/registro.html')
 
@@ -113,7 +122,9 @@ def comprador(request):
       user.last_name = com.nombre  
       user.is_staff=False
       user.set_password(com.password)
-      user.groups.add('1')
+      user.groups.add('4')
+      # permisos jesus 1
+      # permisos mati 4
       user.save()
 
 
