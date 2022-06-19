@@ -168,6 +168,9 @@ class Compra(models.Model):
 class Comprador(models.Model):
     id_comprador = models.CharField(primary_key=True, max_length=20)
     nombre = models.CharField(max_length=100)
+    #--nuevo#
+    password = models.CharField(max_length=128)
+    #----------"#"
     direccion = models.CharField(max_length=50)
     telefono = models.IntegerField()
     correo = models.CharField(max_length=100)
@@ -251,6 +254,10 @@ class Empleado(models.Model):
     segundo_nombre = models.CharField(max_length=20)
     primer_apellido = models.CharField(max_length=20)
     segundo_apellido = models.CharField(max_length=20)
+    #*nuevos datos#
+    password = models.CharField(max_length=128)
+    email = models.CharField(max_length=254)
+    #-----------#
     direccion = models.CharField(max_length=20)
     telefono = models.IntegerField()
     ocupacion = models.CharField(max_length=50)

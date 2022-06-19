@@ -10,14 +10,14 @@ from .forms import *
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.db import connection
 from .models import LlenadoContenedores , IngresoMaterial,InventarioContenedores,Empleado
-
+from django.core.mail import send_mail  
 
 # Create your views here.
 
-@login_required
+
 def home(request):
    return render(request, 'app/home.html')
 
@@ -25,25 +25,42 @@ def home(request):
 
 def registro(request):
    if request.method == 'POST':
-      rut_empleado = request.POST["rut"]
+      rut = request.POST["rut"]
       primer_nombre = request.POST['primer_nombre']
       segundo_nombre = request.POST['segundo_nombre']
       primer_apellido = request.POST['primer_apellido']
       segundo_apellido = request.POST['segundo_apellido']
+      contraseña = request.POST['contraseña']
+      email = request.POST['email']
       direccion = request.POST['direccion']
       telefono = request.POST['telefono']
       ocupacion = request.POST['ocupacion']
-      regis= Empleado.objects.create(rut_empleado=rut_empleado,primer_nombre=primer_nombre,segundo_nombre=segundo_nombre,primer_apellido=primer_apellido,segundo_apellido=segundo_apellido,direccion=direccion,telefono=telefono,ocupacion=ocupacion)
+      regis= Empleado.objects.create(rut_empleado=rut,primer_nombre=primer_nombre,segundo_nombre=segundo_nombre,primer_apellido=primer_apellido,segundo_apellido=segundo_apellido,password=contraseña,email=email,direccion=direccion,telefono=telefono,ocupacion=ocupacion)
       user = authenticate(request, username=primer_nombre, password=segundo_nombre)
-      if user is not None:
-        login(request, user)
-        # Redirigir a una página de éxito.
-        redirect(recicla)
+      empleado= Empleado.objects.get(rut_empleado=rut)
+
+      if empleado.ocupacion == "Admin":
+         user = User.objects.create_user(empleado.rut_empleado, empleado.email)
+         user.last_name = empleado.primer_nombre  
+         user.is_staff=True
+         user.set_password(empleado.password)
+         user.groups.add('2')
+         user.save()
+      elif empleado.ocupacion == "Empleado":
+         user = User.objects.create_user(empleado.rut_empleado, empleado.email)
+         user.last_name = empleado.primer_nombre  
+         user.is_staff=False
+         user.set_password(empleado.password)
+         user.groups.add('1')
+         user.save()
       else:
-        # Devuelve un mensaje de error de 'inicio de sesión no válido'.
-       ...
-   else:
-        ...
+         user = User.objects.create_user(empleado.rut_empleado, empleado.email)
+         user.last_name = empleado.primer_nombre  
+         user.is_staff=False
+         user.set_password(direccion)
+         user.groups.add('4')
+         user.save()
+      
    return render(request,'app/registro.html')
 
 # ---------------------------------------------
@@ -83,18 +100,20 @@ def registerInv(request):
 def comprador(request):
  
    if request.method == 'POST':
-      id_comprador = request.POST["id_comprador"]
+      id = request.POST["id_comprador"]
       nombre = request.POST['nombre']
+      contraseña = request.POST['contraseña']
       direccion = request.POST['direccion']
       telefono = request.POST['telefono']
       correo = request.POST['correo']
-      regis= Comprador.objects.create(id_comprador=id_comprador,nombre=nombre,direccion=direccion,telefono=telefono,correo=correo)
+      regis= Comprador.objects.create(id_comprador=id,nombre=nombre,password=contraseña,direccion=direccion,telefono=telefono,correo=correo)
       regis.save()
-
-      user = User.objects.create_user(id_comprador, correo)
-      user.last_name = nombre  
+      com=Comprador.objects.get(id_comprador=id)
+      user = User.objects.create_user(com.id_comprador, com.correo)
+      user.last_name = com.nombre  
       user.is_staff=False
-      user.set_password(direccion)  
+      user.set_password(com.password)
+      user.groups.add('1')
       user.save()
 
 
@@ -113,7 +132,7 @@ def estado(request):
 
 
 
-@login_required
+
 def recicla(request):
 
    return render(request, 'app/recicla.html')
@@ -132,7 +151,7 @@ def ingreso(request):
 
 
 
-
+@login_required
 def mostrar(request): 
   # ---Trae informacion de models.py  Contenedor
     conta= InventarioContenedores.objects.all()
@@ -179,13 +198,13 @@ def llenado(request,idi,tipo,pes):
 
 
 # ------------------Traslado de cont.lleno a venta y vista de CONTENDOR LLENO
-
+@login_required
 def lleno1(request):
 
    llenos=ContenedorLleno.objects.all()
 
    return render(request,'app/llenado.html',{'llenos':llenos})
-
+@login_required
 def lleno(request,ida,tipo,peso):
 
 
