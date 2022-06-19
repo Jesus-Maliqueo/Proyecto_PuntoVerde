@@ -70,10 +70,12 @@
             <!-- -------------------------- LI COMPRADOR -->
 
             {% if user.is_authenticated and perms.aapp.view_comprador %}
-              
-            {% else %}
             <li class="nav-item" >
               <a class="nav-link " href="/comprador" >Registrar Comprador</a>
+            </li> 
+            {% else %}
+            <li class="nav-item" >
+              <a class="nav-link " href="/comprador" style="visibility: hidden;" >Registrar Comprador</a>
             </li>
             {% endif %}
 
@@ -87,8 +89,16 @@
               <a href="/registerInv" style="visibility: hidden;">Registro Contenedor</a>
             </li>
             {% endif %}
-
-
+             <!------------------ REGISTRO Retiro -->
+             {% if user.is_authenticated and perms.aapp.add_inventariocontenedores %}
+             <li class="nav-item">
+               <a class="nav-link " href="/retiro/"> Registro Retiro</a>
+             </li>
+             {% else %}
+             <li class="nav-item">
+               <a href="/retiro/" style="visibility: hidden;"> Registro Retiro</a>
+             </li>
+             {% endif %}
 
             <!-- verifica login -->
             {% if user.is_authenticated %}

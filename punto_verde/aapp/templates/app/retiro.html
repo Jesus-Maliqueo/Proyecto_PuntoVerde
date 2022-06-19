@@ -1,0 +1,68 @@
+{%extends 'app/base.html'%}
+
+{% block contenido %}
+
+
+
+<div class="formulario" > 
+  <form class="formu" id="formu" action="/retiro/" method="POST"> {% csrf_token %}
+
+    <h2> Registro Retiro</h2>
+
+    <div class="form-group" id="g_id"> 
+        <label for="apellido" class="control-label">ID Retiro</label>
+        <input type="text" class="form-control" id="1" name="id_retiro" placeholder="Ingrese ID Retiro">
+
+    </div>  
+
+    <div class="form-group" id="g_pnomb"> 
+        <label for="nombre" class="control-label">Primer nombre</label>
+        <input type="text" class="form-control" id="2" name="primer_nombre" placeholder="Ingrese su nombre">
+
+    </div>    
+
+    <div class="form-group" id="g_snomb"> 
+        <label for="apellido" class="control-label">Segundo nombre</label>
+        <input type="text" class="form-control" id="3" name="segundo_nombre" placeholder="Ingrese su apellido">
+  
+    </div>  
+
+    <div class="form-group" id="g_papell"> 
+        <label for="apellido" class="control-label">Apellido paterno</label>
+        <input type="text" class="form-control" id="4" name="primer_apellido" placeholder="Ingrese su apellido">
+    </div>
+
+    <div class="form-group" id="g_sapell"> 
+        <label for="apellido" class="control-label">Apellido materno</label>
+        <input type="text" class="form-control" id="5" name="segundo_apellido" placeholder="Ingrese su apellido">
+    </div>   
+
+    <div class="form-group" id="g_date"> 
+        <label for="apellido" class="control-label">Fecha retiro</label>
+        <input type="date" class="form-control" id="6" name="fecha_retiro">
+    </div>
+
+    <div class="form-group" id="g_contac"> 
+        <label for="apellido" class="control-label">Contacto</label>
+        <input type="text" class="form-control" id="7" name="contacto" placeholder="Ingrese su Contacto">
+    </div>
+    
+
+
+
+
+    <input type="submit"  class="botones btn btn-success" value="Enviar" > 
+
+
+  </form>
+
+</div> 
+
+
+
+
+
+
+
+
+{% endblock %}

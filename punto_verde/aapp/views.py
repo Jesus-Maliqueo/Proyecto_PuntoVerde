@@ -131,6 +131,20 @@ def comprador(request):
    return render(request, 'app/comprador.html')
 
 
+# --------------------------REGISTRO RETIRO-----------------------------------------
+def retiro(request):
+   if request.method == 'POST':
+      id_retiro = request.POST["id_retiro"]
+      primer_nombre = request.POST['primer_nombre']
+      segundo_nombre = request.POST['segundo_nombre']
+      primer_apellido = request.POST['primer_apellido']
+      segundo_apellido = request.POST['segundo_apellido']
+      fecha_retiro = request.POST['fecha_retiro']
+      contacto = request.POST['contacto']
+      regis= Retiro.objects.create(id_retiro=id_retiro,primer_nombre=primer_nombre,segundo_nombre=segundo_nombre,primer_apellido=primer_apellido,segundo_apellido=segundo_apellido,fecha_retiro=fecha_retiro,contacto=contacto)
+
+
+   return render(request, 'app/retiro.html')
 # -------------------------------------------------------------------
 
 @login_required
