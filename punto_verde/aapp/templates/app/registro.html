@@ -5,43 +5,51 @@
 
 
 <div class="formulario" > 
-  <form class="formu" action="/registro/" method="POST"> {% csrf_token %}
+  <form class="formu" id="formu" action="/registro/" method="POST"> {% csrf_token %}
 
     <h2> Registro</h2>
 
-    <div class="form-group"> 
+    <div class="form-group" id="g_rut"> 
         <label for="apellido" class="control-label">Ingrese Rut</label>
-        <input type="text" class="form-control" id="street1_id" name="rut" placeholder="Ingrese su apellido">
+
+        <input type="text" class="form-control" id="street1_id" name="rut" placeholder="Ingrese su Rut">
+
     </div>  
 
-    <div class="form-group"> 
+    <div class="form-group" id="g_pnomb"> 
         <label for="nombre" class="control-label">Primer nombre</label>
         <input type="text" class="form-control" id="full_name_id" name="primer_nombre" placeholder="Ingrese su nombre">
+
     </div>    
 
-    <div class="form-group"> 
+    <div class="form-group" id="g_snomb"> 
         <label for="apellido" class="control-label">Segundo nombre</label>
         <input type="text" class="form-control" id="street1_id" name="segundo_nombre" placeholder="Ingrese su apellido">
+  
     </div>  
 
-    <div class="form-group"> 
+    <div class="form-group" id="g_papell"> 
         <label for="apellido" class="control-label">Apellido paterno</label>
         <input type="text" class="form-control" id="street1_id" name="primer_apellido" placeholder="Ingrese su apellido">
+ 
     </div>  
 
-    <div class="form-group"> 
+    <div class="form-group" id="g_sapell"> 
         <label for="apellido" class="control-label">Apellido materno</label>
         <input type="text" class="form-control" id="street1_id" name="segundo_apellido" placeholder="Ingrese su apellido">
+
     </div>                          
                             
-    <div class="form-group"> 
+    <div class="form-group" id="g_dire"> 
         <label for="email" class="control-label">Direccion</label>
         <input type="text" class="form-control" id="street2_id" name="direccion" placeholder="Ingrese su email">
+   
     </div>    
 
-    <div class="form-group"> 
+    <div class="form-group" id="g_num"> 
         <label for="numero" class="control-label">Numero</label>
         <input type="number" class="form-control" id="city_id" name="telefono" placeholder="Ingrese su numero">
+    
     </div>     
 
     <div class="form-group">

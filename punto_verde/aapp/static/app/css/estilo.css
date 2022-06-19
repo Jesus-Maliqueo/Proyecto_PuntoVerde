@@ -716,3 +716,36 @@ padding: 8px;
 height: 300px;
 width: 100%;
 }
+
+
+/* ------------------------- Formularios Valdiacion ---------------- */
+.formulario__validacion-estado{
+  opacity: 0;
+}
+.form-group{
+  position: relative;
+}
+.formulario__validacion-estado{
+  position: absolute;
+  top: 50%;
+  left: unset;
+  right: 12px;
+  transform: translateX(-50%);
+}
+
+
+.form-group-correcto .formulario__validacion-estado {
+  color: #2acc80;
+  opacity: 1;
+}
+.form-group-incorrecto .control-label{
+  color: rgb(173, 0, 0);
+}
+.form-group-incorrecto .formulario__validacion-estado {
+  color: rgb(173, 0, 0);
+  opacity: 1;
+}
+
+.form-group-incorrecto .form-control{
+  border: 2.8px solid rgba(255, 0, 0, 0.575);
+}

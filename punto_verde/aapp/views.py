@@ -41,7 +41,8 @@ def registro(request):
         redirect(recicla)
       else:
         # Devuelve un mensaje de error de 'inicio de sesión no válido'.
-      
+       ...
+   else:
         ...
    return render(request,'app/registro.html')
 
@@ -102,7 +103,7 @@ def comprador(request):
 
 # -------------------------------------------------------------------
 
-
+@login_required
 def estado(request):
    # ---Trae informacion de models.py Contenedor
 
