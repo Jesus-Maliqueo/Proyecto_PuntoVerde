@@ -189,6 +189,9 @@ class ContenedorLleno(models.Model):
     id_lleno = models.IntegerField(primary_key=True)
     reservado = models.CharField(max_length=1)
     precio_total = models.IntegerField()
+    #--nuevo#
+    estado = models.CharField(max_length=1)  
+    #-------------#
     reserva_id_reserva = models.ForeignKey('Reserva', on_delete=models.CASCADE, db_column='reserva_id_reserva', blank=True, null=True)
     llen_conts_id_llenado = models.OneToOneField('LlenadoContenedores', on_delete=models.CASCADE, db_column='llen_conts_id_llenado')
     precios_id_precio = models.ForeignKey('Precios', on_delete=models.CASCADE, db_column='precios_id_precio')
@@ -326,6 +329,9 @@ class IngresoMaterial(models.Model):
     tipo_producto = models.CharField(max_length=1)
     fecha = models.DateTimeField(auto_now_add=True)
     pesos_material = models.IntegerField()
+    #--nuevo#
+    estado = models.CharField(max_length=1)
+    #--------------#
     llen_conts_id_llenado = models.OneToOneField('LlenadoContenedores', on_delete=models.CASCADE, db_column='llen_conts_id_llenado', blank=True, null=True)
 
     def __str__(self):

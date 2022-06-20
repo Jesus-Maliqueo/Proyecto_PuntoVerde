@@ -248,7 +248,7 @@ def lleno(request,ida,tipo,peso):
       print(peso)
       total=p*int(peso)
 
-      llenor = ContenedorLleno.objects.create(id_lleno=suma,reservado='N',precio_total=total,llen_conts_id_llenado=lalo,precios_id_precio=fk)
+      llenor = ContenedorLleno.objects.create(id_lleno=suma,reservado='N',precio_total=total,estado='N',llen_conts_id_llenado=lalo,precios_id_precio=fk)
 
 
 #   ---------- Precio Envace 
@@ -260,7 +260,7 @@ def lleno(request,ida,tipo,peso):
       print(p)
       print(peso)
       total=p*int(peso)
-      llenor = ContenedorLleno.objects.create(id_lleno=suma,reservado='N',precio_total=total,llen_conts_id_llenado=lalo,precios_id_precio=fk)
+      llenor = ContenedorLleno.objects.create(id_lleno=suma,reservado='N',precio_total=total,estado='N',llen_conts_id_llenado=lalo,precios_id_precio=fk)
 
 
 
@@ -280,6 +280,7 @@ def asigParteUno(request,id,peso):
    print(LlenadoContenedores.peso)
    peso_material = peso
    aumento = peso_material
+   estadoingreso = IngresoMaterial.objects.filter(id_material=id).update(estado='U')
    return render(request,'app/asignar.html',{'contenedor':contenedor,'pesoM' : peso_material})
 
 
