@@ -1,3 +1,4 @@
+from ast import Return
 from datetime import date , timedelta
 import datetime
 import re
@@ -44,7 +45,7 @@ def registro(request):
          user.last_name = empleado.primer_nombre  
          user.is_staff=True
          user.set_password(empleado.password)
-         user.groups.add('5')
+         user.groups.add('2')
          # permisos jesus - admin 2
          # permisos mati -  admin 5
          user.save()
@@ -53,8 +54,8 @@ def registro(request):
          user.last_name = empleado.primer_nombre  
          user.is_staff=False
          user.set_password(empleado.password)
-         user.groups.add('6')
-         # permisos jesus  emplado 1
+         user.groups.add('3')
+         # permisos jesus  emplado 3
          # permisos mati  empleado 6 
          user.save()
       else:
@@ -62,14 +63,16 @@ def registro(request):
          user.last_name = empleado.primer_nombre  
          user.is_staff=False
          user.set_password(direccion)
-         user.groups.add('7')
+         user.groups.add('4')
          # permisos jesus receptor 4 
          # permisos mati receptor 7
 
          user.save()
+      return redirect(emple)
    else:
       ...
-      
+   
+   
    return render(request,'app/registro.html')
 
 # ---------------------------------------------
@@ -122,7 +125,7 @@ def comprador(request):
       user.last_name = com.nombre  
       user.is_staff=False
       user.set_password(com.password)
-      user.groups.add('4')
+      user.groups.add('1')
       # permisos jesus 1
       # permisos mati 4
       user.save()
@@ -313,3 +316,38 @@ def reservar(request,id):
 
 
    return render(request,'app/reserva.html',datos)
+
+#--------horarios-----------------------------
+def horpart1(request,id):
+   dato=Empleado.objects.get(rut_empleado=id)
+   datos={
+      'empleado':dato
+   }
+   
+   return render(request, 'app/horarios.html',datos)
+
+def horpart2(request,id):
+   empl=Empleado.objects.get(rut_empleado=id)
+   if request.method == 'POST':
+      id = request.POST["horario"]
+      inicio = request.POST['inicio']
+      termino = request.POST['termino']
+      
+      crear=Horarios.objects.create(id_horario=id,hora_inicio=inicio ,hora_termino=termino,empleado_rut_empleado=empl)
+      return redirect(emple)
+   else:
+      ...
+   return render(request, 'app/horarios.html')
+
+#--------horarios-----------------------------
+def emple(request):
+   lista=Empleado.objects.all()
+   return render(request,'app/empleados.html',{'lista':lista})
+
+def eliEmple(request,id):
+   us=Empleado.objects.get(rut_empleado=id)
+   usuario=User.objects.filter(username=id)
+   us.delete()
+   usuario.delete()
+
+   return redirect(emple)

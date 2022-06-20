@@ -1,0 +1,53 @@
+{%extends 'app/base.html'%}
+
+{% block contenido %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Empleados</h2>
+              
+<div class="recicla">
+    <div  class="card-body">  
+    
+        <table  class="table" >
+            <thead>
+                <tr>
+                    <th>id_comprador  </th>
+                    <th> primer_nombre </th>
+                    <th> primer_apellido </th>
+                    <th> email </th>
+                    <th> ocupacion </th>
+                    
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for empleado in lista %}
+                <tr>
+                    <td> {{ empleado.rut_empleado  }}    </td>
+                    <td> {{ empleado.primer_nombre  }}   </td>
+                    <td> {{ empleado.primer_apellido }} </td>
+                    <td> {{ empleado.email  }} </td>
+                    <td> {{ empleado.ocupacion}}</td>
+                    <td> <a name="" id="" class="btn btn-success" href="{% url 'horpart1' empleado.rut_empleado %}"> asignar horario  </a>  <a class="btn btn-danger" href="{% url 'eliEmple' empleado.rut_empleado %}" role="button">eliminar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        
+    </div>
+    </div>
+</div>
+</body>
+</html>
+
+{% endblock %}

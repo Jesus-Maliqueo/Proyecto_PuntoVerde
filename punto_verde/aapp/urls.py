@@ -1,3 +1,4 @@
+from unicodedata import name
 from django.conf import settings
 from django.urls import path, include
 from . import views
@@ -25,6 +26,10 @@ urlpatterns = [
     path('lleno1/',lleno1,name="lleno1"),
     path ('accounts/',include('django.contrib.auth.urls')),
     path('reservar/<id>',reservar,name="reservar"),
+    path('emple/', emple,name="emple"),
+    path('eliEmple/<id>',eliEmple,name="eliEmple"),
+    path('horpart1/<id>',horpart1, name="horpart1"),
+    path('horpart2/<id>',horpart2, name="horpart2"),
 
 ]
 
