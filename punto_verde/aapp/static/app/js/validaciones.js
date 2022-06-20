@@ -88,8 +88,7 @@ inputs.forEach((input)=> {
 });
 
  formu.addEventListener('submit',(e) => {
-     
-     
+    
      if(campos.rut && campos.nombre && campos.direccion && campos.telefono && campos.tipocont && campos.peso && campos.pass && campos.email ){
         formu.reset();
      }

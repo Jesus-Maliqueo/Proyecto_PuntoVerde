@@ -5,13 +5,13 @@
 
 
 <div class="formulario" > 
-  <form class="formu" id="formu" action="/retiro/" method="POST"> {% csrf_token %}
+  <form class="formu" id="formu" action="/retiro/{{reserva.id_reserva}}" method="POST"> {% csrf_token %}
 
     <h2> Registro Retiro</h2>
 
     <div class="form-group" id="g_id"> 
         <label for="apellido" class="control-label">ID Retiro</label>
-        <input type="text" class="form-control" id="1" name="id_retiro" placeholder="Ingrese ID Retiro">
+        <input type="number" class="form-control" id="1" name="id_retiro" placeholder="Ingrese ID Retiro">
 
     </div>  
 
@@ -44,14 +44,14 @@
 
     <div class="form-group" id="g_contac"> 
         <label for="apellido" class="control-label">Contacto</label>
-        <input type="text" class="form-control" id="7" name="contacto" placeholder="Ingrese su Contacto">
+        <input type="number" class="form-control" id="7" name="contacto" placeholder="Ingrese su Contacto">
     </div>
     
 
 
 
 
-    <input type="submit"  class="botones btn btn-success" value="Enviar" > 
+    <a class="btn btn-success" type="" href="{% url 'compra' vera.id_reserva %}" value="" id="btnSend"> Registrar  info retiro </a><br>
 
 
   </form>

@@ -1,0 +1,68 @@
+{%extends 'app/base.html'%}
+
+{% block contenido %}
+
+
+
+<div class="formulario" > 
+  <form class="formu" id="formu" action="/compra/{{vera.id_reserva}} " method="POST"> {% csrf_token %}
+
+    <h2> Registro</h2>
+
+    <div class="form-group" id="g_id"> 
+        <label for="apellido" class="control-label">Ingrese ID</label>
+        <input type="text" class="form-control" id="1" name="id_venta" placeholder="Ingrese ID Venta">
+
+    </div>  
+
+    <div class="form-group" id="g_pnomb"> 
+        <label for="nombre" class="control-label">Monto</label>
+        <input type="text" class="form-control" id="2" name="monto" placeholder="Ingrese su nombre">
+    </div>    
+
+    <div class="form-group" id="g_pnomb"> 
+        <label for="nombre" class="control-label">Fecha Venta</label>
+        <input type="date" class="form-control" id="2" name="fecha_venta" placeholder="now">
+    </div>    
+
+
+    <div class="form-group">
+    <div class="styled-select">
+        <label for="numero" class="control-label">Seleccione Metodo de pago :  </label> 
+        
+        <select type="text"  name="forma_pago">
+           <option>Visa </option>
+           <option>Debito</option>
+           
+        </select>
+     </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="styled-select">
+            <label for="numero" class="control-label">Seleccione Boleta o factura :  </label> 
+            
+            <select type="text"  name="emitido_en">
+               <option> Boleta  </option>
+               <option> Factura </option>
+               
+            </select>
+         </div>
+        </div>
+
+
+    <input type="submit"  class="botones btn btn-success" value="Pago ficticio" > 
+
+
+  </form>
+
+</div> 
+
+
+
+
+
+
+
+
+{% endblock %}

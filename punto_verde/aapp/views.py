@@ -15,6 +15,7 @@ from django.contrib.auth.models import User, Group
 from django.db import connection
 from .models import LlenadoContenedores , IngresoMaterial,InventarioContenedores,Empleado
 from django.core.mail import send_mail  
+from django.db.models import Count
 
 # Create your views here.
 
@@ -134,8 +135,32 @@ def comprador(request):
    return render(request, 'app/comprador.html')
 
 
+  
+#--------------------------------Formulario RESERVA---------------
+
+def reservar(request,id):
+      count= ContenedorLleno.objects.all().count()
+      count= int(count)+1
+
+      fk=ContenedorLleno.objects.get(id_lleno=id)
+      cont=int(id)
+      fechahoy=date.today()
+      limite=fechahoy+ timedelta(30)
+      print(fechahoy)
+      print(limite)
+      resev=Reserva.objects.create(id_reserva=count,fecha=fechahoy,fecha_limite=limite,contenedor_lleno_id_lleno=fk)
+      aso=ContenedorLleno.objects.filter(id_lleno=id).update(reservado='S',reserva_id_reserva=resev)
+      ver=Reserva.objects.get(id_reserva=count)
+      datos ={
+       'reserva':ver
+      }
+      return render(request,'app/reserva.html',datos)
+
 # --------------------------REGISTRO RETIRO-----------------------------------------
-def retiro(request):
+
+def retiro(request,id):
+   ver=Reserva.objects.get(id_reserva=id)
+
    if request.method == 'POST':
       id_retiro = request.POST["id_retiro"]
       primer_nombre = request.POST['primer_nombre']
@@ -146,9 +171,33 @@ def retiro(request):
       contacto = request.POST['contacto']
       regis= Retiro.objects.create(id_retiro=id_retiro,primer_nombre=primer_nombre,segundo_nombre=segundo_nombre,primer_apellido=primer_apellido,segundo_apellido=segundo_apellido,fecha_retiro=fecha_retiro,contacto=contacto)
 
+      return redirect(compra)
 
-   return render(request, 'app/retiro.html')
+
+   return render(request, 'app/retiro.html',{'vera':ver})
+ 
+
+# ------------------------------ Registro Compra -------------------------------------
+def compra(request,id):
+   ver=Reserva.objects.get(id_reserva=id)
+
+   if request.method == 'POST':
+      id_venta = request.POST["id_venta"]
+      monto = request.POST['monto']
+      forma_pago = request.POST['forma_pago']
+      fecha_venta = request.POST['fecha_venta']
+      emitido_en = request.POST['emitido_en']
+      regis= Compra.objects.create(id_venta=id_venta,monto=monto,forma_pago=forma_pago,fecha_venta=fecha_venta,emitido_en=emitido_en,reserva_id_reserva=ver)
+
+
+   return render(request, 'app/compra.html')
+
+
+
 # -------------------------------------------------------------------
+
+
+
 
 @login_required
 def estado(request):
@@ -297,25 +346,6 @@ def asigParteDos(request,id, pesom,pesoc):
    contenedor = LlenadoContenedores.objects.filter(id_llenado=id).update(peso=aumento)
    return redirect('/mostrar/#tab2')
 
-
-#--------------------------------------------
-
-def reservar(request,id):
-   fk=ContenedorLleno.objects.get(id_lleno=id)
-   cont=int(id)+1
-   fechahoy=date.today()
-   limite=fechahoy+ timedelta(30)
-   print(fechahoy)
-   print(limite)
-   resev=Reserva.objects.create(id_reserva=cont,fecha=fechahoy,fecha_limite=limite,contenedor_lleno_id_lleno=fk)
-   aso=ContenedorLleno.objects.filter(id_lleno=id).update(reservado='S',reserva_id_reserva=resev)
-   ver=Reserva.objects.get(id_reserva=cont)
-   datos ={
-      'reserva':ver
-   }
-
-
-   return render(request,'app/reserva.html',datos)
 
 #--------horarios-----------------------------
 def horpart1(request,id):

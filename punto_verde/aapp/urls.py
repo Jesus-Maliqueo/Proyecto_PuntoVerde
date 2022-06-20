@@ -9,7 +9,7 @@ urlpatterns = [
     path('', home, name="home"),
     path('registro/',registro, name="registro"),
     path('recicla/', recicla, name="recicla"),
-    path('retiro/',retiro, name="retiro"),
+    path('retiro/<id>',retiro, name="retiro"),
     path('mostrar/',views.mostrar, name='mostrar'),
     path('estado/',views.estado, name='estado'),
     path('ingreso/',views.ingreso , name='ingreso'),
@@ -30,6 +30,7 @@ urlpatterns = [
     path('eliEmple/<id>',eliEmple,name="eliEmple"),
     path('horpart1/<id>',horpart1, name="horpart1"),
     path('horpart2/<id>',horpart2, name="horpart2"),
+    path('compra/<id>',compra, name="compra"),
 
 ]
 

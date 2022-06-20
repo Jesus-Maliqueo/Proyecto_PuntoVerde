@@ -733,7 +733,6 @@ width: 100%;
   transform: translateX(-50%);
 }
 
-
 .form-group-correcto .formulario__validacion-estado {
   color: #2acc80;
   opacity: 1;
@@ -748,4 +747,8 @@ width: 100%;
 
 .form-group-incorrecto .form-control{
   border: 2.8px solid rgba(255, 0, 0, 0.575);
+}
+
+.compraa a{
+  visibility: hidden;
 }

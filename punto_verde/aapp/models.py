@@ -5,6 +5,7 @@
 #   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
+from datetime import date
 from django.db import models
 
 
@@ -426,7 +427,7 @@ class Retiro(models.Model):
     contacto = models.IntegerField()
 
     def __str__(self):
-      fila = "Rut : " + str(self.id_retiro) + "ㅤㅤ " + "Nombre : " + self.primer_nombre +"   Apellido Paterno: " + self.primer_apellido +  "ㅤㅤ" +"   Apellido Materno : " + self.segundo_apellido +"ㅤㅤ " + "Fecha retiro : " + str(self.fecha_retiro) + "ㅤㅤ" + "Contacto : " + self.contacto
+      fila = "Rut : " + str(self.id_retiro) + "ㅤㅤ " + "Nombre : " + self.primer_nombre +"   Apellido Paterno: " + self.primer_apellido +  "ㅤㅤ" +"   Apellido Materno : " + self.segundo_apellido +"ㅤㅤ " + "Fecha retiro : " + str(self.fecha_retiro) + "ㅤㅤ" + "Contacto : " + str(self.contacto)
       return fila
 
     class Meta:
