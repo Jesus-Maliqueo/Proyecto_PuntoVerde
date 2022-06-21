@@ -38,10 +38,10 @@
                     <label for="names">comprador</label>
                     <input type="text" id="names" value="{{ user.get_username }}" readonly>
 
-                    <label for="phone">Telefono / Celular</label>{{ user.get_email }}
-                    <input type="text" id="phone" value="{{ user.email }}" readonly>
+                    <label for="phone">Telefono / Celular</label>
+                    <input type="text" id="phone" value="{{ usuario.telefono }}" readonly>
 
-                    <label for="email">Correo electronico *</label>{{ user.get_email }}
+                    <label for="email">Correo electronico *</label>
                     <input type="text" id="email" value="{{ user.email }}" readonly >
 
                     <label for="contenedor">Contenedor</label>
@@ -54,10 +54,7 @@
                     <label for="contenedor">fecha experacion</label>
                     <input type="text" id="contenedor" value="{{reserva.fecha_limite}}" readonly>
 
-                <label for="contenedor">fecha experacion</label>
-                <input type="text" id="contenedor" value="{{reserva.fecha_limite}}" readonly>
-
-                 <a class="btn btn-success" type="" href="{% url 'retiro' reserva.id_reserva %}" value="" id="btnSend"> Registrar  info retiro </a>
+                <a class="btn btn-success" type="" href="{% url 'retiro' reserva.id_reserva %}" value="" id="btnSend"> Registrar  info retiro </a>
             </div>
         </form>
 

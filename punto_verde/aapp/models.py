@@ -177,7 +177,7 @@ class Comprador(models.Model):
     correo = models.CharField(max_length=100)
 
     def __str__(self):
-      fila = " ID  :  " +  str(self.id_comprador) + "ㅤㅤ" +"   Nombre : " + self.nombre + "ㅤㅤ" +"   Direccion  : " + self.direccion + "ㅤㅤ" +"Telefono : " + str(self.telefono) + "ㅤㅤ" +"  E-mail : " + self.correo
+      fila ="   Nombre : " + self.nombre 
       return fila
 
     class Meta:

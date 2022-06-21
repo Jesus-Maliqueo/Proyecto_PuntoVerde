@@ -138,21 +138,22 @@ def comprador(request):
   
 #--------------------------------Formulario RESERVA---------------
 
-def reservar(request,id):
+def reservar(request,id,us):
       count= ContenedorLleno.objects.all().count()
-      count= int(count)+1
-
+      count= int(count)+3
+      usuario=Comprador.objects.get(id_comprador=us)
       fk=ContenedorLleno.objects.get(id_lleno=id)
       cont=int(id)
       fechahoy=date.today()
       limite=fechahoy+ timedelta(30)
       print(fechahoy)
       print(limite)
-      resev=Reserva.objects.create(id_reserva=count,fecha=fechahoy,fecha_limite=limite,contenedor_lleno_id_lleno=fk)
+      resev=Reserva.objects.create(id_reserva=count,fecha=fechahoy,fecha_limite=limite,contenedor_lleno_id_lleno=fk,comprador_id_comprador=usuario)
       aso=ContenedorLleno.objects.filter(id_lleno=id).update(reservado='S',reserva_id_reserva=resev)
       ver=Reserva.objects.get(id_reserva=count)
       datos ={
-       'reserva':ver
+       'reserva':ver,
+       'usuario':usuario
       }
       return render(request,'app/reserva.html',datos)
 
@@ -160,35 +161,35 @@ def reservar(request,id):
 
 def retiro(request,id):
    ver=Reserva.objects.get(id_reserva=id)
-
+   fk=ver.id_reserva
    if request.method == 'POST':
-      id_retiro = request.POST["id_retiro"]
+      id_r = request.POST["id_retiro"]
       primer_nombre = request.POST['primer_nombre']
       segundo_nombre = request.POST['segundo_nombre']
       primer_apellido = request.POST['primer_apellido']
       segundo_apellido = request.POST['segundo_apellido']
       fecha_retiro = request.POST['fecha_retiro']
       contacto = request.POST['contacto']
-      regis= Retiro.objects.create(id_retiro=id_retiro,primer_nombre=primer_nombre,segundo_nombre=segundo_nombre,primer_apellido=primer_apellido,segundo_apellido=segundo_apellido,fecha_retiro=fecha_retiro,contacto=contacto)
-
+      regis= Retiro.objects.create(id_retiro=id_r,primer_nombre=primer_nombre,segundo_nombre=segundo_nombre,primer_apellido=primer_apellido,segundo_apellido=segundo_apellido,fecha_retiro=fecha_retiro,contacto=contacto)
+      
       return redirect(compra)
-
-
-   return render(request, 'app/retiro.html',{'vera':ver})
+   else:
+      ...
+   return render(request, 'app/retiro.html',{'fk':fk,'id_r':id_r})
  
 
 # ------------------------------ Registro Compra -------------------------------------
-def compra(request,id):
+def compra(request,id,fk):
    ver=Reserva.objects.get(id_reserva=id)
-
+   re=Retiro.objects.get(id_retiro=fk)
    if request.method == 'POST':
       id_venta = request.POST["id_venta"]
       monto = request.POST['monto']
       forma_pago = request.POST['forma_pago']
       fecha_venta = request.POST['fecha_venta']
       emitido_en = request.POST['emitido_en']
-      regis= Compra.objects.create(id_venta=id_venta,monto=monto,forma_pago=forma_pago,fecha_venta=fecha_venta,emitido_en=emitido_en,reserva_id_reserva=ver)
-
+      regis= Compra.objects.create(id_venta=id_venta,monto=monto,forma_pago=forma_pago,fecha_venta=fecha_venta,emitido_en=emitido_en,reserva_id_reserva=ver,retiro_id_retiro=re)
+      return redirect(lleno1)
 
    return render(request, 'app/compra.html')
 
@@ -281,6 +282,7 @@ def lleno1(request):
    llenos=ContenedorLleno.objects.all()
 
    return render(request,'app/llenado.html',{'llenos':llenos})
+
 @login_required
 def lleno(request,ida,tipo,peso):
 

@@ -25,12 +25,12 @@ urlpatterns = [
     path('comprador',views.comprador, name='comprador'),
     path('lleno1/',lleno1,name="lleno1"),
     path ('accounts/',include('django.contrib.auth.urls')),
-    path('reservar/<id>',reservar,name="reservar"),
+    path('reservar/<id>/<us>',reservar,name="reservar"),
     path('emple/', emple,name="emple"),
     path('eliEmple/<id>',eliEmple,name="eliEmple"),
     path('horpart1/<id>',horpart1, name="horpart1"),
     path('horpart2/<id>',horpart2, name="horpart2"),
-    path('compra/<id>',compra, name="compra"),
+    path('compra/<id>/<fk>',compra, name="compra"),
 
 ]
 

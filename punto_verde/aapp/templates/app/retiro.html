@@ -5,7 +5,7 @@
 
 
 <div class="formulario" > 
-  <form class="formu" id="formu" action="/retiro/{{reserva.id_reserva}}" method="POST"> {% csrf_token %}
+  <form class="formu" id="formu" action="/compra/{{fk}}/{{id_r}}" method="POST"> {% csrf_token %}
 
     <h2> Registro Retiro</h2>
 
@@ -49,9 +49,9 @@
     
 
 
+    <input type="submit"  class="botones btn btn-success" value="Registrar  info retiro" >
 
-
-    <a class="btn btn-success" type="" href="{% url 'compra' vera.id_reserva %}" value="" id="btnSend"> Registrar  info retiro </a><br>
+    <!-- <a class="btn btn-success" type="" href="{% url 'compra' fk re %}" value="" id="btnSend"> Registrar  info retiro </a><br -->>
 
 
   </form>
