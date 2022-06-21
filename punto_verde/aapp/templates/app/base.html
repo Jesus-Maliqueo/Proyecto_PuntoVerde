@@ -34,10 +34,13 @@
             <li class="nav-item">
               <a class="nav-link " href="/recicla/">Como reciclar</a>
             </li>
-
-            <li class="nav-item">
-              <a class="nav-link " href="/lleno1/">Contendores Llenos</a>
-            </li>
+            {% if user.is_authenticated and perms.aapp.view_contenedorlleno %}
+              <li class="nav-item">
+                <a class="nav-link " href="/lleno1/">Contendores Llenos</a>
+              </li>
+            {% else %}
+              
+            {% endif %}
 
             <!-- -------------Registro empleado  -->
             {% if user.is_authenticated and perms.aapp.add_empleado %}
@@ -45,7 +48,7 @@
               <a class="nav-link" href="/registro/">Registro Empleado</a>
             </li>
             {% else %}
-            
+              
             {% endif %}
 
             <!-- --------Estado contenedor -->
@@ -67,17 +70,6 @@
 
             {% endif %}
           
-            <!-- -------------------------- LI COMPRADOR -->
-
-            {% if user.is_authenticated and perms.aapp.view_comprador %}
-            <li class="nav-item" >
-              <a class="nav-link " href="/comprador" >Registrar Comprador</a>
-            </li> 
-            {% else %}
-            <li class="nav-item" >
-              <a class="nav-link " href="/comprador" style="visibility: hidden;" >Registrar Comprador</a>
-            </li>
-            {% endif %}
 
             <!------------------ REGISTRO CONTENEDOR -->
             {% if user.is_authenticated and perms.aapp.add_inventariocontenedores %}
@@ -106,8 +98,20 @@
               <a class="nav-link " href="/emple/">empleados</a>
             </li>
             {% else %}
-            
+            <li class="nav-item">
+              <a class="nav-link " href="/emple/" style="visibility: hidden;">empleados</a>
+            </li>
             {% endif %}
+
+             <!-- -------------------------- LI COMPRADOR -->
+
+             {% if user.is_authenticated and perms.aapp.view_comprador %}
+             
+           {% else %}
+             <li class="nav-item" >
+               <a class="nav-link " href="/comprador"  >Registrar Comprador</a>
+             </li>
+           {% endif %}
 
 
 

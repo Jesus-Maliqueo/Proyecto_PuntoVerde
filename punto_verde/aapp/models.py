@@ -294,7 +294,7 @@ class Factura(models.Model):
 
 
 class Horarios(models.Model):
-    id_horario = models.IntegerField(primary_key=True)
+    id_horario = models.AutoField(primary_key=True)
     hora_inicio = models.DateTimeField()
     hora_termino = models.DateTimeField()
     empleado_rut_empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE, db_column='empleado_rut_empleado')
@@ -326,7 +326,7 @@ class Informe(models.Model):
  
 
 class IngresoMaterial(models.Model):
-    id_material = models.IntegerField(primary_key=True)
+    id_material = models.AutoField(primary_key=True)
     tipo_producto = models.CharField(max_length=1)
     fecha = models.DateTimeField(auto_now_add=True)
     pesos_material = models.IntegerField()
@@ -347,7 +347,7 @@ class IngresoMaterial(models.Model):
 
 
 class InventarioContenedores(models.Model):
-    id_contenedor = models.IntegerField(primary_key=True)
+    id_contenedor = models.AutoField(primary_key=True)
     tipo_contenedor = models.CharField(max_length=1)
     peso = models.IntegerField()
     id_llenado = models.IntegerField()

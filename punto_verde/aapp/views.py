@@ -84,11 +84,11 @@ def registro(request):
 def contnue(request):
  
    if request.method == 'POST':
-      id_material = request.POST["ID"]
       pesos_material = request.POST['peso']
       tipo_producto = request.POST['material']
-      regis= IngresoMaterial.objects.create(id_material=id_material,pesos_material=pesos_material,tipo_producto=tipo_producto)
+      regis= IngresoMaterial.objects.create(pesos_material=pesos_material,tipo_producto=tipo_producto,estado='S')
       regis.save()
+      return redirect('/mostrar/#tab3')
 
 
    return render(request, 'app/contnue.html')
@@ -97,13 +97,12 @@ def contnue(request):
 def registerInv(request):
  
    if request.method == 'POST':
-      id_contenedo = request.POST["id_contenedor"]
       tipo_contenedor = request.POST['tipo_contenedor']
       pesos = request.POST['peso']
       id_llenado = request.POST['id_llenado']
-      regis= InventarioContenedores.objects.create(id_contenedor=id_contenedo,tipo_contenedor=tipo_contenedor,peso=pesos,id_llenado=id_llenado)
+      regis= InventarioContenedores.objects.create(tipo_contenedor=tipo_contenedor,peso=pesos,id_llenado=id_llenado)
       regis.save()
-
+      return redirect('/mostrar/#tab1')
 
    return render(request, 'app/registrocont.html')
 
@@ -115,21 +114,22 @@ def comprador(request):
    if request.method == 'POST':
       id = request.POST["id_comprador"]
       nombre = request.POST['nombre']
-      contraseña = request.POST['contraseña']
+      contra = request.POST['contraseña']
       direccion = request.POST['direccion']
       telefono = request.POST['telefono']
-      correo = request.POST['correo']
-      regis= Comprador.objects.create(id_comprador=id,nombre=nombre,password=contraseña,direccion=direccion,telefono=telefono,correo=correo)
+      corr = request.POST['correo']
+      regis= Comprador.objects.create(id_comprador=id,nombre=nombre,password=contra,direccion=direccion,telefono=telefono,correo=corr)
       regis.save()
       com=Comprador.objects.get(id_comprador=id)
       user = User.objects.create_user(com.id_comprador, com.correo)
-      user.last_name = com.nombre  
+      user.first_name = com.nombre  
       user.is_staff=False
       user.set_password(com.password)
       user.groups.add('1')
       # permisos jesus 1
       # permisos mati 4
       user.save()
+      return redirect(home)
 
 
    return render(request, 'app/comprador.html')
@@ -359,11 +359,11 @@ def horpart1(request,id):
 def horpart2(request,id):
    empl=Empleado.objects.get(rut_empleado=id)
    if request.method == 'POST':
-      id = request.POST["horario"]
+      
       inicio = request.POST['inicio']
       termino = request.POST['termino']
       
-      crear=Horarios.objects.create(id_horario=id,hora_inicio=inicio ,hora_termino=termino,empleado_rut_empleado=empl)
+      crear=Horarios.objects.create(hora_inicio=inicio ,hora_termino=termino,empleado_rut_empleado=empl)
       return redirect(emple)
    else:
       ...

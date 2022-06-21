@@ -35,6 +35,7 @@
               <th> Tipo Contenedor </th>
               <th> Fecha </th>
               <th> Peso Material </th>
+              <th> uso</th>
               
               <th>Acciones</th>
           </tr>
@@ -46,6 +47,7 @@
               <td> {{ IngresoMaterial.tipo_producto  }} </td>
               <td> {{ IngresoMaterial.fecha  }} </td>
               <td> {{ IngresoMaterial.pesos_material  }} </td>
+              <td> {{IngresoMaterial.estado}}</td>
               
               <td> <a name="" id="" class="btn btn-success" href="{% url 'asigParteUno' IngresoMaterial.id_material IngresoMaterial.pesos_material %}"> asignar  </a>
                 <a class="btn btn-danger" href="{% url 'eliminar2' IngresoMaterial.id_material %}" role="button"> Eliminar </a> 

@@ -31,25 +31,28 @@
                 <p><span class="fa fa-mobile"></span> +1(585) 902-8665</p>
             </section>
         </section>
+        {% if user.is_authenticated %}
+            <form action="#" class="form_contact" method="POST">
+                <h2>DATOS</h2>
+                <div class="user_info">
+                    <label for="names">comprador</label>
+                    <input type="text" id="names" value="{{ user.get_username }}" readonly>
 
-        <form action="#" class="form_contact" action="/compra/" method="POST"> {% csrf_token %}
-            <h2>DATOS</h2>
-            <div class="user_info">
-                <label for="names">comprador</label>
-                <input type="text" id="names" value="{{reserva.id_reserva}}"  readonly>
+                    <label for="phone">Telefono / Celular</label>{{ user.get_email }}
+                    <input type="text" id="phone" value="{{ user.email }}" readonly>
 
-                <label for="phone">Telefono / Celular</label>
-                <input type="text" id="phone" readonly>
+                    <label for="email">Correo electronico *</label>{{ user.get_email }}
+                    <input type="text" id="email" value="{{ user.email }}" readonly >
 
-                <label for="email">Correo electronico *</label>
-              <input type="text" id="email"  >    <!--   readonly SIRVE PARA IMPDERI INGRESO DATOS -->
+                    <label for="contenedor">Contenedor</label>
+                    <input type="text" id="contenedor" value="{{reserva.contenedor_lleno_id_lleno}}" readonly >
 
-                <label for="contenedor">Contenedor</label>
-                <input type="text" id="contenedor" value="{{reserva.contenedor_lleno_id_lleno}}" readonly >
+                    <h2>RANGO DE RESERVA</h2>
+                    <label for="contenedor">fecha inicio</label>
+                    <input type="text" id="contenedor" value="{{reserva.fecha}}" readonly> 
 
-                <h2>RANGO DE RESERVA</h2>
-                <label for="contenedor">fecha inicio</label>
-                <input type="text" id="contenedor" value="{{reserva.fecha}}" readonly> 
+                    <label for="contenedor">fecha experacion</label>
+                    <input type="text" id="contenedor" value="{{reserva.fecha_limite}}" readonly>
 
                 <label for="contenedor">fecha experacion</label>
                 <input type="text" id="contenedor" value="{{reserva.fecha_limite}}" readonly>
@@ -58,6 +61,7 @@
             </div>
         </form>
 
+        {% endif %}
     </section>
 
 </body>
