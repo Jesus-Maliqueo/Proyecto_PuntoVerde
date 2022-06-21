@@ -140,7 +140,8 @@ def comprador(request):
 
 def reservar(request,id,us):
       count= ContenedorLleno.objects.all().count()
-      count= int(count)+3
+      count= int(count)+5
+
       usuario=Comprador.objects.get(id_comprador=us)
       fk=ContenedorLleno.objects.get(id_lleno=id)
       cont=int(id)
@@ -161,7 +162,7 @@ def reservar(request,id,us):
 
 def retiro(request,id):
    ver=Reserva.objects.get(id_reserva=id)
-   fk=ver.id_reserva
+   
    if request.method == 'POST':
       id_r = request.POST["id_retiro"]
       primer_nombre = request.POST['primer_nombre']
@@ -171,24 +172,23 @@ def retiro(request,id):
       fecha_retiro = request.POST['fecha_retiro']
       contacto = request.POST['contacto']
       regis= Retiro.objects.create(id_retiro=id_r,primer_nombre=primer_nombre,segundo_nombre=segundo_nombre,primer_apellido=primer_apellido,segundo_apellido=segundo_apellido,fecha_retiro=fecha_retiro,contacto=contacto)
-      
-      return redirect(compra)
+     
    else:
       ...
-   return render(request, 'app/retiro.html',{'fk':fk,'id_r':id_r})
+   return render(request, 'app/retiro.html',{'vera':ver})
  
 
 # ------------------------------ Registro Compra -------------------------------------
-def compra(request,id,fk):
-   ver=Reserva.objects.get(id_reserva=id)
-   re=Retiro.objects.get(id_retiro=fk)
+def compra(request,a): #fk
+   ver=Reserva.objects.get(id_reserva=a)
+   # re=Retiro.objects.get(id_retiro=fk)
    if request.method == 'POST':
       id_venta = request.POST["id_venta"]
       monto = request.POST['monto']
       forma_pago = request.POST['forma_pago']
       fecha_venta = request.POST['fecha_venta']
       emitido_en = request.POST['emitido_en']
-      regis= Compra.objects.create(id_venta=id_venta,monto=monto,forma_pago=forma_pago,fecha_venta=fecha_venta,emitido_en=emitido_en,reserva_id_reserva=ver,retiro_id_retiro=re)
+      regis= Compra.objects.create(id_venta=id_venta,monto=monto,forma_pago=forma_pago,fecha_venta=fecha_venta,emitido_en=emitido_en,reserva_id_reserva=ver) #retiro_id_retiro=re
       return redirect(lleno1)
 
    return render(request, 'app/compra.html')
