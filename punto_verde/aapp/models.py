@@ -153,7 +153,7 @@ class Compra(models.Model):
     forma_pago = models.CharField(max_length=10)
     fecha_venta = models.DateField()
     reserva_id_reserva = models.OneToOneField('Reserva', models.DO_NOTHING, db_column='reserva_id_reserva')
-    retiro_id_retiro = models.ForeignKey('Retiro', models.DO_NOTHING, db_column='retiro_id_retiro')
+    retiro_id_retiro = models.ForeignKey('Retiro', models.DO_NOTHING, db_column='retiro_id_retiro',blank=True, null=True)
     emitido_en = models.CharField(max_length=30)
 
     def __str__(self):

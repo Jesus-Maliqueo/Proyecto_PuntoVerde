@@ -183,12 +183,12 @@ def compra(request,a): #fk
    ver=Reserva.objects.get(id_reserva=a)
    # re=Retiro.objects.get(id_retiro=fk)
    if request.method == 'POST':
-      id_venta = request.POST["id_venta"]
+      iventa = request.POST["id_venta"]
       monto = request.POST['monto']
       forma_pago = request.POST['forma_pago']
       fecha_venta = request.POST['fecha_venta']
       emitido_en = request.POST['emitido_en']
-      regis= Compra.objects.create(id_venta=id_venta,monto=monto,forma_pago=forma_pago,fecha_venta=fecha_venta,emitido_en=emitido_en,reserva_id_reserva=ver) #retiro_id_retiro=re
+      regis= Compra.objects.create(id_venta=iventa,monto=monto,forma_pago=forma_pago,fecha_venta=fecha_venta,emitido_en=emitido_en,reserva_id_reserva=ver) #retiro_id_retiro=re
       return redirect(lleno1)
 
    return render(request, 'app/compra.html')
