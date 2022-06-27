@@ -51,9 +51,18 @@
 
     
     
-    <input type="submit"  class="botones btn btn-success" value="Enviar" > 
-    
-    <a href="/aapp/templates/app/compra.html"> Continuar al pago</a>
+    <input type="submit"  class="botones btn btn-success" value="Enviar"  >
+
+    <script> 
+        function cont(){
+        var resultado = window.confirm('Estas seguro que desea crear Retiro ?');
+        if (resultado === true) {
+        window.alert('Retiro creado');
+        } else { 
+            window.location = "#";
+        }
+            }
+        </script>
 
     
 

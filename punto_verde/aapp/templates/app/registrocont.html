@@ -28,7 +28,18 @@
 
 
 
-    <input type="submit"  class="botones btn btn-success" value="Enviar" > 
+    <input type="submit"  class="botones btn btn-success" value="Enviar" onclick="cont()">
+    
+    <script> 
+      function cont(){
+      var resultado = window.confirm('Estas seguro que desea crear Contenedor ?');
+      if (resultado === true) {
+      window.alert('Contenedor creado');
+      } else { 
+          window.location = "http://127.0.0.1:8000/registerInv";
+      }
+          }
+      </script>
     
     
 

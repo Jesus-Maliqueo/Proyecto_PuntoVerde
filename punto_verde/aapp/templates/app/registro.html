@@ -11,7 +11,7 @@
 
     <div class="form-group" id="g_rut"> 
         <label for="apellido" class="control-label">Ingrese Rut</label>
-        <input type="text" class="form-control" id="1" name="rut" placeholder="Ingrese su Rut">
+        <input type="text" class="form-control" id="1" name="rut"  placeholder="Ingrese su Rut">
 
     </div>  
 
@@ -56,7 +56,7 @@
 
     <div class="form-group" id="g_num"> 
         <label for="numero" class="control-label">Numero</label>
-        <input type="number" class="form-control" id="city_id" name="telefono" placeholder="Ingrese su numero">
+        <input type="number" class="form-control" id="city_id" name="telefono" placeholder="Ingrese su numero" pattern="[0-9]+">
     
     </div>     
 
@@ -74,15 +74,37 @@
 
 
 
+    
+
+    
+   
 
 
-    <input type="submit"  class="botones btn btn-success" value="Enviar" > 
+
+    <input type="submit"  class="botones btn btn-success"  value="Enviar" id="btnvalida" onclick="opci()"  > 
+
+
+   
+
+    <script> 
+    function opci(){
+    var resultado = window.confirm('Estas seguro que desea crear empleado ?');
+    if (resultado === true) {
+    window.alert('Empleado creado');
+    } else { 
+        window.location = "http://127.0.0.1:8000/registro/";
+    }
+        }
+    </script>
+
+
+
+
 
 
   </form>
 
 </div> 
-
 
 
 

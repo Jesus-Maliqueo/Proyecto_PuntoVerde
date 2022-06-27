@@ -8,14 +8,16 @@ const expresiones = {
 	password: /^.{4,12}$/, // 4 a 12 caracteres.
 	correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
 	telefono: /^\d{7,14}$/, // 7 a 14 numeros.
-    rut: /^.{9,12}$/, // 9 a 12 caracteres.
+    rut: /^[0-9]{7,8}[-|‐]{1}[0-9kK]{1}$/, // Validalor estructura rut / 7 a 8 numeros / - exije / un digito mas entre 0y9 o k o K
     direccion: /^.{5,30}$/, // 5 a 30 caracteres.
     tipocont: /^[a-zA-Z]{1}$/,
     peso: /^\d{2,7}$/
+    
 }
 
 
 const campos = {
+    // Otorga valores falsos a todos los atributos
     rut: false,
     nombre:false,
     direccion :false,
@@ -30,7 +32,7 @@ const campos = {
 const validarFormu = (e) =>{
     switch (e.target.name){ //Le dice que seleccione el nombre del html input
         case "rut" : //Si en nombre es rut
-            validarcampo( expresiones.rut, e.target, 'g_rut' );
+            validarcampo( expresiones.rut, e.target, 'g_rut' ); //ejecuta funcion Validarcampo solicitando  expresion(restricciones arriba)y cual expresion, envia a quien pertenece (id) y envia grupo (id del div)
             break; //termina el ciclo
         case "primer_nombre" :
             validarcampo(expresiones.nombre, e.target, 'g_pnomb')
@@ -67,11 +69,15 @@ const validarFormu = (e) =>{
 }
 
 
+
+
+
+
 const validarcampo = (expresion, input, campo) => {
     if(expresion.test(input.value)){
         document.getElementById(`${campo}`).classList.remove('form-group-incorrecto'); // elimina nombre de clase
         document.getElementById(`${campo}`).classList.add('form-group-correcto'); // agrega nombre de clase
-        campos[campo] = true;
+        campos[campo] = true; // Ootrga valores true a const campos
     } else {
         document.getElementById(`${campo}`).classList.add('form-group-incorrecto');
         document.getElementById(`${campo}`).classList.remove('form-group-correcto');
@@ -87,7 +93,7 @@ inputs.forEach((input)=> {
     input.addEventListener('blur', validarFormu); //al clikear fuera del input hace algo
 });
 
- formu.addEventListener('submit',(e) => {
+ formu.addEventListener('submit',(e) => { //si todos los campos son verdaderos llenos realiza sumbit
     
      if(campos.rut && campos.nombre && campos.direccion && campos.telefono && campos.tipocont && campos.peso && campos.pass && campos.email ){
         formu.reset();

@@ -40,7 +40,18 @@
     </div>                          
 
 
-    <input type="submit"  class="botones btn btn-success" value="Enviar" > 
+    <input type="submit"  class="botones btn btn-success" value="Enviar" onclick="comp()" > 
+
+    <script> 
+        function comp(){
+        var resultado = window.confirm('Estas seguro que desea crear Comprador ?');
+        if (resultado === true) {
+        window.alert('Comprador creado');
+        } else { 
+            window.location = "http://127.0.0.1:8000/comprador";
+        }
+            }
+        </script>
     
     
 
