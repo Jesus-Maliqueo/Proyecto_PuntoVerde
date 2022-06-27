@@ -1,24 +1,14 @@
-{%extends 'app/base.html'%}
-
-{% block contenido %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Formulario de contacto</title>
-
+    <title>Document</title>
     <link rel="stylesheet" href="/aapp/static/app/css/estilos.css">
     <link rel="stylesheet" href="/aapp/static/app/css/font-awesome.css">
-<!-- 
-    <script src="../../static/app/js/jquery-3.2.1.js"></script>
-    <script src="../../static/app/js/script.js"></script> -->
-    {% load static %}
 </head>
 <body>
-
     <section class="form_wrap" style="height: 700px;">
 
         <section class="cantact_info">
@@ -31,39 +21,33 @@
                 <p><span class="fa fa-mobile"></span> +1(585) 902-8665</p>
             </section>
         </section>
-        {% if user.is_authenticated %}
-            <form action="/enviar/" class="form_contact" method="POST">
-                {% csrf_token %}
+            <form  class="form_contact" method="POST">
+
                 <h2>DATOS</h2>
                 <div class="user_info">
                     <label for="names">comprador</label>
-                    <input type="text" id="names" name="comprador" value="{{ user.get_username }}" readonly>
+                    <input type="text" id="names" name="comprador" value="{{ usuario }}" readonly>
 
                     <label for="phone">Telefono / Celular</label>
-                    <input type="text" id="phone" name="telefono" value="{{ usuario.telefono }}" readonly>
+                    <input type="text" id="phone" name="telefono" value="{{ telefono }}" readonly>
 
                     <label for="email">Correo electronico *</label>
-                    <input type="text" id="email" name ="email" value="{{ user.email }}" readonly >
+                    <input type="text" id="email" name ="email" value="{{ email }}" readonly >
 
                     <label for="contenedor">Contenedor</label>
-                    <input type="text" id="contenedor" name="contenedor" value="{{reserva.contenedor_lleno_id_lleno}}" readonly >
+                    <input type="text" id="contenedor" name="contenedor" value="{{ conte }}" readonly >
 
                     <h2>RANGO DE RESERVA</h2>
                     <label for="contenedor">fecha inicio</label>
-                    <input type="text" id="contenedor" name="inicio" value="{{reserva.fecha}}" readonly> 
+                    <input type="text" id="contenedor" name="inicio" value="{{ inicio }}" readonly> 
 
                     <label for="contenedor">fecha experacion</label>
-                    <input type="text" id="contenedor" name="fin" value="{{reserva.fecha_limite}}" readonly>
+                    <input type="text" id="contenedor" name="fin" value="{{ fin }}" readonly>
 
                 
             </div>
-
-                <input type="submit"  class="botones btn btn-success" value="aceptar" > 
             </form>
-
-        {% endif %}
     </section>
 
 </body>
 </html>
-{% endblock %}

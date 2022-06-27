@@ -6,6 +6,8 @@ from MySQLdb import Date
 from django import forms
 from django.forms.forms import Form
 from django.shortcuts import render,redirect
+from django.views import View
+from pymysql import NULL
 from .models import *
 from .forms import *
 from django.contrib.auth import authenticate, login
@@ -16,7 +18,12 @@ from django.db import connection
 from .models import LlenadoContenedores , IngresoMaterial,InventarioContenedores,Empleado
 from django.core.mail import send_mail  
 from django.db.models import Count
-
+import stripe
+from django.conf import Settings
+from django.urls import reverse
+from django.template.loader import get_template
+from django.core.mail import EmailMultiAlternatives
+from django.conf import settings
 # Create your views here.
 
 
@@ -137,24 +144,21 @@ def comprador(request):
 
   
 #--------------------------------Formulario RESERVA---------------
-
+cont=0
 def reservar(request,id,us):
-      count= ContenedorLleno.objects.all().count()
-      count= int(count)+5
-
       usuario=Comprador.objects.get(id_comprador=us)
       fk=ContenedorLleno.objects.get(id_lleno=id)
-      cont=int(id)
+      cont=int(id)+1
       fechahoy=date.today()
       limite=fechahoy+ timedelta(30)
       print(fechahoy)
       print(limite)
-      resev=Reserva.objects.create(id_reserva=count,fecha=fechahoy,fecha_limite=limite,contenedor_lleno_id_lleno=fk,comprador_id_comprador=usuario)
+      resev=Reserva.objects.create(id_reserva=cont,fecha=fechahoy,fecha_limite=limite,contenedor_lleno_id_lleno=fk,comprador_id_comprador=usuario)
       aso=ContenedorLleno.objects.filter(id_lleno=id).update(reservado='S',reserva_id_reserva=resev)
-      ver=Reserva.objects.get(id_reserva=count)
+      ver=Reserva.objects.get(id_reserva=cont)
       datos ={
-       'reserva':ver,
-       'usuario':usuario
+      'reserva':ver,
+      'usuario':usuario
       }
       return render(request,'app/reserva.html',datos)
 
@@ -383,3 +387,32 @@ def eliEmple(request,id):
    usuario.delete()
 
    return redirect(emple)
+
+
+    
+def post(request):
+   usuario = request.POST.get('comprador')
+   email = request.POST.get('email')
+   telefono = request.POST.get('telefono')
+   conte = request.POST.get('contenedor')
+   inicio = request.POST.get('inicio')
+   fin = request.POST.get('fin')
+   print(email)
+
+   template = get_template('app/envio.html')
+
+   # Se renderiza el template y se envias parametros
+   content = template.render({'usuario':usuario,'telefono':telefono,'email': email,'conte':conte,'inicio':inicio,'fin':fin})
+
+   # Se crea el correo (titulo, mensaje, emisor, destinatario)
+   msg = EmailMultiAlternatives(
+         'Gracias por tu reserva',
+         'Hola, te enviamos un correo con tu factura',
+         settings.EMAIL_HOST_USER,
+         [email]
+   )
+
+   msg.attach_alternative(content, 'text/html')
+   msg.send()
+
+   return render(request, 'app/reserva.html')
