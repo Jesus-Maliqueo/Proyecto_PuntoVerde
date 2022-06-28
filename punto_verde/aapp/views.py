@@ -7,7 +7,6 @@ from django import forms
 from django.forms.forms import Form
 from django.shortcuts import render,redirect
 from django.views import View
-from pymysql import NULL
 from .models import *
 from .forms import *
 from django.contrib.auth import authenticate, login

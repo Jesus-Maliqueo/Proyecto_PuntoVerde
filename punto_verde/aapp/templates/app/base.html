@@ -31,6 +31,22 @@
            <li class="nav-item">
               <a class="nav-link" href=" http://127.0.0.1:8000/">Inicio</a>
             </li>
+
+            
+            <div class="dropdown">
+              <button class="dropbtn nav-link" >Registros
+                <i class="bi bi-caret-down-fill"></i>
+              </button>
+              <div class="dropdown-content" >
+                <a class="nav-link" href="/registro/">Registro Empleado</a>
+                <a class="nav-link " href="/registerInv">Registro Contenedor</a>
+                <a class="nav-link " href="/comprador"  >Registrar Comprador</a>
+              </div>
+            </div>
+
+        
+
+
             <li class="nav-item">
               <a class="nav-link " href="/recicla/">Como reciclar</a>
             </li>
@@ -41,6 +57,11 @@
             {% else %}
               
             {% endif %}
+
+
+      
+            
+
 
             <!-- -------------Registro empleado  -->
             {% if user.is_authenticated and perms.aapp.add_empleado %}
@@ -144,10 +165,6 @@
 
 
 
-    
-
-
-
 
 
 
@@ -201,6 +218,7 @@
       {% endif %}
   </ul>
   <p class="copyright">Punto Verde</p>
+
 </footer>
 </div>
 

@@ -1,84 +1,84 @@
 /* ------------------------------ */
 body{
-  background-color: #fff4eb ;
+ background-color: #fff4eb ; /*  DA COLOR AL FONDO DEL SITIO WEB */
   
 }
 .titulo{
-  text-align: center;
-  margin: 10px;
-  margin-top: 10px;
+  text-align: center;   /* ALINIA EL TECTO AL CENTRO */
+  margin: 10px; /* LE OTORGA UN MARGEN DE 10 PIXELES */
+  margin-top: 10px; /* LE OTORGA MARGEN HACIA ARRIBA DE 10 PIXELES */
 }
 
 .textin{
-width: 50%;
-color: black;
-padding-left: 10px;
+width: 50%; /* LE OTORGA UN TAMAÑO DEL 50% DE LA PANTALLA TOTAL */
+color: black; /* LE OTORGA COLOR A AL TEXTO */
+padding-left: 10px; /* LE OTORGA MARGEN INTERIOR HACIA LA IZQUIERDA */
 }
 
 /* ------------------------HOME----------------------------- */
 
 .slide {
-  position: relative;
-  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.64);
-  margin-top: 26px;
-  margin-left: 5%;
-  margin-right: 5%;
+  position: relative; /*  LE DICE QUE LA POCICION ES RELATIVA*/
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.64); /* LE OTORGA SOMBRA (L/A/A COLOR SOMBRA) */
+  margin-top: 26px; 
+  margin-left: 5%; /* LE OROTGA MARGEN DEL 5% TOTAL DE LA PANTALLA HACIA LA IZQUIERDA */
+  margin-right: 5%; /* LE OROTGA MARGEN DEL 5% TOTAL DE LA PANTALLA HACIA LA DERECHA */
 }
 
 .slide-inner {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: auto;
+  position: relative; 
+  overflow: hidden; 
+  width: 100%; /* TAMAÑO DEL 100% TOTAL ANCHO */
+  height: auto; /* TAÑO AUTOMATICO ALTO */
 }
 
 .slide-open:checked + .slide-item {
-  position: static;
-  opacity: 100;
+  position: static; /* POSICION ESTATICA */
+  opacity: 100; /* OPACIDAD  */
 }
 
 .slide-item {
-  position: absolute;
-  opacity: 0;
-  -webkit-transition: opacity 0.6s ease-out;
-  transition: opacity 0.6s ease-out;
+  position: absolute; 
+  opacity: 0; 
+  -webkit-transition: opacity 0.6s ease-out; /* TRANSICION  OPACIDAD*/
+  transition: opacity 0.6s ease-out; /* TRANCICION OPACIDAD */
 
 }
 
 .slide-item img {
-  width: 100%;
-  height: 800px;
+  width: 100%; /* TAMAÑO 100% DE LA IMAGEN */
+  height: 800px; /*  ALTO DE 800PX DE LA IAMGEN*/
 }
 
-.slide-control {
-  background: rgba(0, 0, 0, 0.28);
-  border-radius: 50%;
-  color: #fff;
-  cursor: pointer;
-  display: none;
-  font-size: 40px;
-  height: 40px;
-  line-height: 35px;
-  position: absolute;
-  top: 50%;
+.slide-control { /* FECHAS CARRUSEL */
+  background: rgba(0, 0, 0, 0.28); /*  COLOR DE FONDO */
+  border-radius: 50%; /* RADIO DE 50% */
+  color: #fff; /* COLOR TEXTO  */
+  cursor: pointer; /* SELECCIONADO POR EL CURSOR */
+  display: none; 
+  font-size: 40px; /* TAMAÑO DEL TEXTO */
+  height: 40px; /* ALTURA 40PX */
+  line-height: 35px;  
+  position: absolute; /* POSICION ABSOLUTA */
+  top: 50%; /* POCICION AL MEDIO DE  LA IMAGEN */
   -webkit-transform: translate(0, -50%);
-  cursor: pointer;
-  -ms-transform: translate(0, -50%);
-  transform: translate(0, -50%);
-  text-align: center;
-  width: 40px;
-  z-index: 10;
+  cursor: pointer; /* SELECCIONAR EL CURSOR */
+  -ms-transform: translate(0, -50%); /* TRANSFORMA TRASLADA*/
+  transform: translate(0, -50%); /* ARRIBA */
+  text-align: center; /* TECTO ALINEADO EN EL CENTRO */
+  width: 40px; /* TAMAÑO ANCHO  */
+  z-index: 10; 
 }
 
 .slide-control.prev {
-  left: 2%;
+  left: 2%; /* BOTON DE CARRUSEL POSISICION */
 }
 
 .slide-control.next {
-  right: 2%;
+  right: 2%;/* BOTON DE CARRUSEL POSISICION */
 }
 
-.slide-control:hover {
+.slide-control:hover { /*  COLOR DE BOTON Y FONDO*/
   background: rgba(0, 0, 0, 0.8);
   color: #aaaaaa;
 }
@@ -86,13 +86,13 @@ padding-left: 10px;
 #slide-1:checked ~ .control-1,
 #slide-2:checked ~ .control-2,
 #slide-3:checked ~ .control-3 {
-  display: block;
+  display: block; 
 }
 
 .slide-indicador {
   list-style: none;
-  margin: 0;
-  padding: 0;
+  margin: 0; /* MARGEN INTERNO DE 0  */
+  padding: 0; /* PADDING DE 0  */
   position: absolute;
   bottom: 2%;
   left: 0;
@@ -107,10 +107,10 @@ padding-left: 10px;
 }
 
 .slide-circulo {
-  color: #828282;
-  cursor: pointer;
+  color: #828282; /* COLOR */
+  cursor: pointer; /* SELECCIONAR PUNTERO */
   display: block;
-  font-size: 35px;
+  font-size: 35px; /* TAMAÑO TEXTO */
 }
 
 .slide-circulo:hover {
@@ -127,13 +127,13 @@ padding-left: 10px;
 }
 
 #titulo {
-  width: 100%;
-  position: absolute;
-  padding: 0px;
-  margin: 0px auto;
-  text-align: center;
-  font-size: 27px;
-  color: rgba(255, 255, 255, 1);
+  width: 100%; /* TAMAÑO 100%  */
+  position: absolute; 
+  padding: 0px; 
+  margin: 0px auto;  /* MARGIN 0PX AUTOMATICO */
+  text-align: center; /* TEXTO CENTRO */
+  font-size: 27px;  /*  TAMAÑO TEXTO */
+  color: rgba(255, 255, 255, 1); /* COLOR TEXTO */ 
   font-family: 'Open Sans', sans-serif;
   z-index: 9999;
   text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.33), 
@@ -157,11 +157,11 @@ padding-left: 10px;
 /* -------------------- NAV DIV ------------------------ */
 
 .navess{
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.199);
-  margin-bottom: 20px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.199); /*  SOMBRA */
+  margin-bottom: 20px;/* MARGEN BOTON */
 }
 
-.logina{
+.logina{ 
   color: rgb(255, 255, 255);
 }
 
@@ -169,6 +169,58 @@ padding-left: 10px;
   color: rgb(255, 255, 255);
 }
 
+
+/* Boton botondown */
+.dropdown {
+  float: left; /* POSICION */
+  overflow: hidden; /* OCULTO */
+}
+
+/* Dropdown boton conf.basica */
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: rgb(0, 0, 0);
+  background-color: inherit; /*toma color del fondo */
+  margin: 0; 
+}
+
+
+/* Agrega un color de fondo al pasar puntero por encima */
+.dropdown:hover .dropbtn {
+  background-color: red ; 
+}
+
+/* Contendido boton (oculto por defecto) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #b5ffa6;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* a dentro del boton */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Agrega color al fondo al poner puntero ariba de opcion */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* muestra como se mostrararn(orden)(caida) */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
 /* ----------------------------------------------------- */
 
@@ -185,14 +237,14 @@ padding-left: 10px;
   margin-left: 22.5%;
   margin-top: 55px;
   margin-bottom: 55px;
-  border: 1px solid rgb(141, 255, 141);
-  padding: 15px;
-  box-shadow: 2px 2px 2px 4px rgba(0, 0, 0, 0.2);
-  background-color: #b5ffa6 ;
+  border: 1px solid rgb(141, 255, 141); /* BORDE TAMAÑO Y COLOR */
+  padding: 15px; /* PADDING 15 PIXELES */
+  box-shadow: 2px 2px 2px 4px rgba(0, 0, 0, 0.2); /* SOMBRA */
+  background-color: #b5ffa6 ; /*  COLOR FONDO */
 }
 
 .formu h2{
-    margin-left: 43%;
+    margin-left: 43%; /* MARGEN 43% DEL TOTAL  */
     padding-top: 30px;
     padding-bottom: 10px;
 }
@@ -206,7 +258,7 @@ padding-left: 10px;
 }
 
 .botones{
-    margin-left: 45%;
+    margin-left: 45%; /* MARGEN DEL 45% DEL TOTAL  */ 
     margin-bottom: 20px;
     height: 60px;
     width: 90px;
