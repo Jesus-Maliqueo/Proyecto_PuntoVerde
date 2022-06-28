@@ -24,7 +24,7 @@
           <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="navbar-brand" href="#">
-                    <img src="{% static 'app/img/logo.png' %}" alt="" width="30" height="24">
+                    <img src="{% static 'app/img/logo.png' %}" alt="" width="40" height="35">
                   </a>
               <a class="navbar-brand" id="inicio" href="http://127.0.0.1:8000/ ">Punto Verde</a>
             </li>
@@ -32,7 +32,9 @@
               <a class="nav-link" href=" http://127.0.0.1:8000/">Inicio</a>
             </li>
 
-            
+
+
+            {% if user.is_authenticated and perms.aapp.add_empleado %}
             <div class="dropdown">
               <button class="dropbtn nav-link" >Registros
                 <i class="bi bi-caret-down-fill"></i>
@@ -43,13 +45,37 @@
                 <a class="nav-link " href="/comprador"  >Registrar Comprador</a>
               </div>
             </div>
+            {% else %}
+              
+            {% endif %}
 
-        
+            {% if user.is_authenticated and perms.aapp.view_empleados %}
+            <div class="dropdown">
+              <button class="dropbtn nav-link" > Administracion
+                <i class="bi bi-caret-down-fill"></i>
+              </button>
+              <div class="dropdown-content" >
+                <a class="nav-link " href="/lleno1/">Contendores Llenos</a>
+                <a class="nav-link " href="/estado/">Estado container</a>
+                <a class="nav-link " href="/mostrar/#tab1">ingreso material</a>
+                {% if user.is_authenticated and perms.aapp.view_empleados %}
+                <li class="nav-item">
+                  <a class="nav-link " href="/emple/">empleados</a>
+                </li>
+                {% else %}
+                {% endif %}
+              </div>
+            </div>
+            {% else %}
+              
+            {% endif %}
 
 
             <li class="nav-item">
               <a class="nav-link " href="/recicla/">Como reciclar</a>
             </li>
+
+
             {% if user.is_authenticated and perms.aapp.view_contenedorlleno %}
               <li class="nav-item">
                 <a class="nav-link " href="/lleno1/">Contendores Llenos</a>
@@ -58,50 +84,8 @@
               
             {% endif %}
 
+     
 
-      
-            
-
-
-            <!-- -------------Registro empleado  -->
-            {% if user.is_authenticated and perms.aapp.add_empleado %}
-            <li class="nav-item">
-              <a class="nav-link" href="/registro/">Registro Empleado</a>
-            </li>
-            {% else %}
-              
-            {% endif %}
-
-            <!-- --------Estado contenedor -->
-            {% if user.is_authenticated and perms.aapp.view_llenadocontenedores %}
-
-            <li class="nav-item">
-              <a class="nav-link " href="/estado/">Estado container</a>
-            </li>
-            {% else %}
-
-            {% endif %}
-             <!------------------ LI INGRESO -->
-
-            {% if user.is_authenticated and perms.aapp.view_llenadocontenedores or perms.aapp.view_ingresomaterial or perms.aapp.view_inventariocontendores %}
-            <li class="nav-item">
-              <a class="nav-link " href="/mostrar/#tab1">ingreso material</a>
-            </li>
-            {% else %}
-
-            {% endif %}
-          
-
-            <!------------------ REGISTRO CONTENEDOR -->
-            {% if user.is_authenticated and perms.aapp.add_inventariocontenedores %}
-            <li class="nav-item">
-              <a class="nav-link " href="/registerInv">Registro Contenedor</a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-              <a href="/registerInv" style="visibility: hidden;">Registro Contenedor</a>
-            </li>
-            {% endif %}
              <!------------------ REGISTRO Retiro -->
              {% if user.is_authenticated and perms.aapp.add_inventariocontenedores %}
              <li class="nav-item">
@@ -113,26 +97,17 @@
              </li>
              {% endif %}
 
-            <!------empleados------>
-            {% if user.is_authenticated and perms.aapp.view_empleados %}
-            <li class="nav-item">
-              <a class="nav-link " href="/emple/">empleados</a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link " href="/emple/" style="visibility: hidden;">empleados</a>
-            </li>
-            {% endif %}
+
 
              <!-- -------------------------- LI COMPRADOR -->
 
-             {% if user.is_authenticated and perms.aapp.view_comprador %}
+            {% if user.is_authenticated and perms.aapp.view_comprador %}
              
-           {% else %}
+            {% else %}
              <li class="nav-item" >
                <a class="nav-link " href="/comprador"  >Registrar Comprador</a>
              </li>
-           {% endif %}
+            {% endif %}
 
 
 
@@ -190,17 +165,8 @@
   <ul class="list-inline">
 
       <li class="list-inline-item"><a href="#inicio">Inicio</a></li>
-<!-- REGISTRO EMPELADO -->
-      {% if user.is_authenticated and perms.aapp.add_empleado %}
-      <li class="list-inline-item"><a href="/registro/">Registro</a></li>
-      {% else %}
-      {% endif %}
+
       <li class="list-inline-item"><a href="/recicla/">Como Reciclar</a></li>
-      <!-- REGISTRO CONTENDOR -->
-      {% if user.is_authenticated and perms.aapp.add_inventariocontenedores %}
-      <li class="list-inline-item"><a href="/registerInv">Registro Contenedor</a></li>
-      {% else %}
-      {% endif %}
       <!-- ESTADO CONTENEDOR -->
       {% if user.is_authenticated and perms.aapp.view_llenadocontenedores %}
       <li class="list-inline-item"><a href="/estado/">Estado container</a></li>

@@ -141,15 +141,6 @@ padding-left: 10px; /* LE OTORGA MARGEN INTERIOR HACIA LA IZQUIERDA */
 }
 
 
-
-
-
-
-
-
-
-
-
 /* ----------------------------------------------------- */
 
 
@@ -158,7 +149,6 @@ padding-left: 10px; /* LE OTORGA MARGEN INTERIOR HACIA LA IZQUIERDA */
 
 .navess{
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.199); /*  SOMBRA */
-  margin-bottom: 20px;/* MARGEN BOTON */
 }
 
 .logina{ 
@@ -169,6 +159,20 @@ padding-left: 10px; /* LE OTORGA MARGEN INTERIOR HACIA LA IZQUIERDA */
   color: rgb(255, 255, 255);
 }
 
+
+.navbar a {
+  margin-top: 5px;
+  float: left;
+  font-size: 16px;
+  text-align: center;
+  padding: 14px 16px;
+}
+
+.navbar button{
+  font-size: 16px;
+  text-align: center;
+  padding-top: 18px;
+}
 
 /* Boton botondown */
 .dropdown {
@@ -189,13 +193,13 @@ padding-left: 10px; /* LE OTORGA MARGEN INTERIOR HACIA LA IZQUIERDA */
 
 /* Agrega un color de fondo al pasar puntero por encima */
 .dropdown:hover .dropbtn {
-  background-color: red ; 
+  background-color: #587e51; 
 }
 
 /* Contendido boton (oculto por defecto) */
 .dropdown-content {
+  position: fixed;
   display: none;
-  position: absolute;
   background-color: #b5ffa6;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -214,7 +218,7 @@ padding-left: 10px; /* LE OTORGA MARGEN INTERIOR HACIA LA IZQUIERDA */
 
 /* Agrega color al fondo al poner puntero ariba de opcion */
 .dropdown-content a:hover {
-  background-color: #ddd;
+  background-color: #587e51;
 }
 
 /* muestra como se mostrararn(orden)(caida) */
