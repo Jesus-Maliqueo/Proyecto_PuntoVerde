@@ -5,49 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/aapp/static/app/css/estilos.css">
-    <link rel="stylesheet" href="/aapp/static/app/css/font-awesome.css">
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+    </style>
 </head>
 <body>
-    <section class="form_wrap" style="height: 700px;">
+    <h2>Hola, te enviamos un correo con los detalles de tu reserva</h2>
 
-        <section class="cantact_info">
-            <section class="info_title">
-                <span class="fa fa-user-circle"></span>
-                <h2>INFORMACION<br>DE RESERVA</h2>
-            </section>
-            <section class="info_items">
-                <p><span class="fa fa-envelope"></span> info.contact@gmail.com</p>
-                <p><span class="fa fa-mobile"></span> +1(585) 902-8665</p>
-            </section>
-        </section>
-            <form  class="form_contact" method="POST">
+<table>
+  <tr>
+    <th>comprador</th>
+    <th>Telefono / Celular</th>
+    <th>Correo electronico</th>
+    <th>Contenedor</th>
 
-                <h2>DATOS</h2>
-                <div class="user_info">
-                    <label for="names">comprador</label>
-                    <input type="text" id="names" name="comprador" value="{{ usuario }}" readonly>
+    <th>fecha inicio</th>
+    <th>fecha experacion</th>
+  </tr>
+  <tr>
+    <td>{{ usuario }}</td>
+    <td>{{ telefono }}</td>
+    <td>{{ email }}</td>
+    <td>{{ conte }}</td>
 
-                    <label for="phone">Telefono / Celular</label>
-                    <input type="text" id="phone" name="telefono" value="{{ telefono }}" readonly>
-
-                    <label for="email">Correo electronico *</label>
-                    <input type="text" id="email" name ="email" value="{{ email }}" readonly >
-
-                    <label for="contenedor">Contenedor</label>
-                    <input type="text" id="contenedor" name="contenedor" value="{{ conte }}" readonly >
-
-                    <h2>RANGO DE RESERVA</h2>
-                    <label for="contenedor">fecha inicio</label>
-                    <input type="text" id="contenedor" name="inicio" value="{{ inicio }}" readonly> 
-
-                    <label for="contenedor">fecha experacion</label>
-                    <input type="text" id="contenedor" name="fin" value="{{ fin }}" readonly>
-
-                
-            </div>
-            </form>
-    </section>
-
+    <td>{{ inicio }}</td>
+    <td>{{ fin }}</td>
+  </tr>
+  
+</table>
+    <h4>porfavor acuda a la sucursal de PUNTO VERDE antes de la fecha de expiracion de su recerva</h4>
 </body>
 </html>

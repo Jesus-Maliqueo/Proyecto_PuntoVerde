@@ -69,11 +69,29 @@
             {% else %}
               
             {% endif %}
+            
+            {% if user.is_authenticated and perms.aapp.view_inventariocontenedores %}
+            <div class="dropdown">
+              <button class="dropbtn nav-link" > contenedores
+                <i class="bi bi-caret-down-fill"></i>
+              </button>
+              <div class="dropdown-content" >
+                <a class="nav-link " href="/lleno1/">Contendores Llenos</a>
+                <a class="nav-link " href="/estado/">Estado container</a>
+                <a class="nav-link " href="/mostrar/#tab1">ingreso material</a>
+              </div>
+            </div>
+            {% else %}
+              
+            {% endif %}
 
-
+            {% if user.is_authenticated and perms.aapp.view_inventariocontenedores %}
+            
+            {% else %}
             <li class="nav-item">
               <a class="nav-link " href="/recicla/">Como reciclar</a>
             </li>
+            {% endif %}
 
 
             {% if user.is_authenticated and perms.aapp.view_contenedorlleno %}
