@@ -147,36 +147,65 @@ padding-left: 10px; /* LE OTORGA MARGEN INTERIOR HACIA LA IZQUIERDA */
 
 /* -------------------- NAV DIV ------------------------ */
 
-.navess{
+nav {
+  background: #b5ffa6;
+  padding: 5px 20px;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.199); /*  SOMBRA */
 }
-
-.logina{ 
-  color: rgb(255, 255, 255);
+ul {
+  list-style-type: none;
 }
-
-.logino{
-  color: rgb(255, 255, 255);
+a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
 }
-
-
-.navbar a {
-  margin-top: 5px;
-  float: left;
+a:hover {
+  text-decoration: underline;
+}
+.logo a:hover {
+  text-decoration: none;
+}
+.menu li {
   font-size: 16px;
+  padding: 15px 5px;
+  white-space: nowrap;
+}
+.logo a,
+.toggle a {
+  font-size: 20px;
+}
+.button.secondary {
+  border-bottom: 1px rgb(0, 0, 0) solid;
+}
+/* Mobile menu */
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.toggle {
+  order: 1;
+}
+.item.button {
+  order: 2;
+}
+.item {
+  width: 100%;
   text-align: center;
-  padding: 14px 16px;
+  order: 3;
+  display: none;
+  color: rgb(0, 0, 0);
+}
+.item.active {
+  display: block;
 }
 
-.navbar button{
-  font-size: 16px;
-  text-align: center;
-  padding-top: 18px;
-}
 
 /* Boton botondown */
 .dropdown {
-  float: left; /* POSICION */
+  position: center;
+  float: center; /* POSICION */
   overflow: hidden; /* OCULTO */
 }
 
@@ -648,14 +677,9 @@ background-color: #a0af6b;
 .mitad1{
 width: 90%;
 margin-left: 5%;
-
 margin-bottom: 20px;
 margin-top: 10px;
 display: flex;
-
-
-
-
 color:#fff4eb;
 
 }
@@ -667,7 +691,6 @@ color:#fff4eb;
   margin-bottom: 20px;
   margin-top: 10px;
   display: flex;
-  
   
   
 }
@@ -808,3 +831,82 @@ width: 100%;
 
 
 /* --------------------------------- RESPONSIVE */
+
+
+/* Tablet menu */
+@media all and (min-width: 600px) {
+
+  .menu {
+    justify-content: center;
+  }
+  .logo {
+    flex: 1;
+  }
+  .toggle {
+    flex: 1;
+    text-align: right;
+  }
+  .item.button {
+    width: auto;
+    order: 1;
+    display: block;
+  }
+  .toggle {
+    order: 2;
+  }
+  .button.secondary {
+    border: 0;
+  }
+  .button a {
+    padding: 7.5px 15px;
+    background: rgba(238, 255, 2, 0.267);
+    border-radius: 80px;
+    border: 1px #000000 solid;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.199); /*  SOMBRA */
+  }
+  .button.secondary a {
+    background: transparent;
+  }
+  .button a:hover {
+    text-decoration: none;
+  }
+  .button:not(.secondary) a:hover {
+    background: #006d6d;
+    border-color: #005959;
+  }
+  .button.secondary a:hover {
+    color: #ddd;
+  }
+}
+/* Desktop menu */
+@media all and (min-width: 900px) {
+  nav{
+    width: 100%;
+  }
+  .item {
+    display: block;
+    width: auto;
+  }
+  .toggle {
+    display: none;
+  }
+  .logo {
+    order: 0;
+  }
+  .item {
+    order: 1;
+  }
+  .button {
+    order: 2;
+  }
+  .menu li {
+    padding: 15px 10px;
+  }
+  .menu li.button {
+    padding-right: 0;
+  }
+}
+
+
+
+
