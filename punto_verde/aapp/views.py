@@ -348,7 +348,20 @@ def asigParteDos(request,id, pesom,pesoc):
    print(pesom)
    print(pesoc)
    aumento = pesom + pesoc
+   print(aumento)
    contenedor = LlenadoContenedores.objects.filter(id_llenado=id).update(peso=aumento)
+   actualizacion = LlenadoContenedores.objects.get(id_llenado=id)
+   if actualizacion.peso < actualizacion.precio:
+      actualizacion = LlenadoContenedores.objects.filter(id_llenado=id).update(estado_contenedor="lleno")
+      messages.info(request, 'el contenedor aun esta llenandose')
+      return redirect('/mostrar/#tab2')
+   elif actualizacion.peso == actualizacion.precio:
+      messages.success(request, 'el contenedor se lleno ')
+      return redirect('/mostrar/#tab2')
+   elif actualizacion.peso > actualizacion.precio:
+      messages.warning(request, 'ya no se puede ingresar mas material al contenedor')
+      actualizacion = LlenadoContenedores.objects.filter(id_llenado=id).update(peso=pesoc)
+      return redirect('/mostrar/#tab2')
    return redirect('/mostrar/#tab2')
 
 
@@ -415,3 +428,10 @@ def post(request):
    msg.send()
 
    return render(request, 'app/reserva.html')
+
+def admin(request):
+   inventario=InventarioContenedores.objects.all()
+   return render(request,'dashboard/index.html',{'invent':inventario})
+def tables(request):
+   contenedor = LlenadoContenedores.objects.all()
+   return render(request,'dashboard/tables.html',{'contenedor': contenedor  })

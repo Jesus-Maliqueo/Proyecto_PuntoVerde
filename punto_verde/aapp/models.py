@@ -371,7 +371,7 @@ class LlenadoContenedores(models.Model):
     estado_contenedor = models.CharField(max_length=10)
     precio = models.IntegerField()
     invt_conts_id_contenedor = models.OneToOneField(InventarioContenedores, models.DO_NOTHING, db_column='invt_conts_id_contenedor')
-    ingreso_material_id_material = models.OneToOneField(IngresoMaterial, models.DO_NOTHING, db_column='ingreso_material_id_material', blank=True, null=True)
+    ingreso_material_id_material = models.OneToOneField(IngresoMaterial,on_delete=models.CASCADE, db_column='ingreso_material_id_material', blank=True, null=True)
 
     def __str__(self):
       fila = " ID :  " + str(self.id_llenado) +"ㅤㅤ"+"   Tipo contenedor :  " + self.tipo_contenedor + "ㅤㅤ"+ "Peso : " + str(self.peso)

@@ -32,6 +32,8 @@ urlpatterns = [
     path('horpart2/<id>',horpart2, name="horpart2"),
     path('compra/<a>',compra, name="compra"),
     path('enviar/',post, name='enviar'),
+    path('adm/',admin,name="adm"),
+    path('tables/',tables,name="tables")
 
 ]
 
