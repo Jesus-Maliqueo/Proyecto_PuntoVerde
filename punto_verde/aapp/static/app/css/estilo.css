@@ -10,9 +10,12 @@ body{
 }
 
 .textin{
-width: 50%; /* LE OTORGA UN TAMAÑO DEL 50% DE LA PANTALLA TOTAL */
+  
+width: 70%; /* LE OTORGA UN TAMAÑO DEL 50% DE LA PANTALLA TOTAL */
 color: black; /* LE OTORGA COLOR A AL TEXTO */
-padding-left: 10px; /* LE OTORGA MARGEN INTERIOR HACIA LA IZQUIERDA */
+padding-bottom:20px; /* LE OTORGA MARGEN INTERIOR HACIA LA IZQUIERDA */
+margin-left: 20%;
+
 }
 
 /* ------------------------HOME----------------------------- */
@@ -136,8 +139,6 @@ padding-left: 10px; /* LE OTORGA MARGEN INTERIOR HACIA LA IZQUIERDA */
   color: rgba(255, 255, 255, 1); /* COLOR TEXTO */ 
   font-family: 'Open Sans', sans-serif;
   z-index: 9999;
-  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.33), 
-       -1px 0px 2px rgba(255, 255, 255, 0);
 }
 
 
@@ -555,6 +556,7 @@ a:hover {
 /* funcionamiento básico del sistema de pestañas */
 .tab-content {
   display: none;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.692);
 }
 
 .tab:target .tab-content, .tab:last-of-type .tab-content {
@@ -567,13 +569,13 @@ a:hover {
 
 /* parámetros para configurar las pestañas */
 :root {
-  --tabs-border-color: #ABCDEF;
+  --tabs-border-color: black;
   --tabs-border-size: 3px;
-  --tabs-text-color: white;
-  --tabs-dark-color: #012345;
-  --tabs-lite-color: #345678;
-  --tabs-width: 120px;
-  --tabs-height: 40px;
+  --tabs-text-color: black;
+  --tabs-dark-color: #41b41e;
+  --tabs-lite-color: #93ff7dfb;
+  --tabs-width: 160px;
+  --tabs-height: 50px;
 }
 
 /* aspecto básico */
@@ -590,6 +592,7 @@ a {
 } 
 .tabs * {
   box-sizing: border-box;
+  
 }
 
 /* esto es para posicionar las pestañas correctamente */
@@ -712,15 +715,30 @@ color:#fff4eb;
 }
 
 .img1{
-  width: 50%;
+  width: 60%;
   padding: 5px;
   margin: 2px;
-  
-  margin-left: 10px;
-  margin-right: 10px;
-  width: 40%;
+  margin-left: 22%;
   height: auto;
 }
+
+.img11{
+    width: 50%;
+    padding: 5px;
+    margin: 2px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 40%;
+    height: auto;
+
+}
+
+.img11 img{
+  width: 100%;
+  border-radius: 16px;
+}
+
+
 
 .img1 img{
   width: 100%;
@@ -763,7 +781,7 @@ color:#fff4eb;
 
 
 
-/* ------------------------------------- */
+/* ---------------------CARTAS HOME---------------- */
 
 
 .containerr{
@@ -789,7 +807,7 @@ color:#fff4eb;
 
 .card img{
 padding: 8px;
-height: 300px;
+height: 350px;
 width: 100%;
 }
 
@@ -908,5 +926,85 @@ width: 100%;
 }
 
 
+/* PUNTO QUIEBRE HOME */
+@media (max-width: 750px){
 
+  
+.slide-item img {
+  width: 100%; /* TAMAÑO 100% DE LA IMAGEN */
+  height: auto; /*  ALTO DE 800PX DE LA IAMGEN*/
+}
+  
+.recicla{
+  width: 90%;
+  margin-top: 55px;
+  box-shadow: 2px 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* TITULO CONTUEMARE PENDIENTE --------------------*/ 
+.titulo{
+  width: 100%;
+}
+  .titulo h1{
+    font-size: 30px;
+  }
+  .mitad1{
+    width: 100%;
+  }
+
+  .img1{
+    width: 100%;
+    padding: 5px;
+    margin: 2px;
+    margin-left: 0%;
+    height: auto;
+  }
+
+  .mitad2{
+    width: 100%;
+  }
+  .textin{
+    flex-direction: column-reverse;
+    width: 100%;
+    padding-bottom: 20px;
+    margin-left: 4%;
+  }
+  .textin a{
+    width: 100%;
+    font-size: 14px ;
+    text-align: center;
+
+  }
+
+  .containeraa{
+    width: 100%;
+  }
+
+  .containerr{
+    width: 100%;
+    background-color:#94794ba1 ;
+  }
+  
+ .card{
+  width: 60%;
+  margin-left: 20% ;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  }
+  
+  .card img{
+    padding: 8px;
+    height: auto;
+    width: 100%;
+    }
+
+    .card-body{
+      width: 100%;
+      display: block;
+    }
+ 
+
+
+
+}
 

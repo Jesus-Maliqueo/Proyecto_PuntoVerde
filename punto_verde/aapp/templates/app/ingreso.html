@@ -48,12 +48,14 @@
         <div class="tab-container">
           <div id="tab3" class="tab"> 
             <a href="#tab3"> Materiales </a>
+            
 
             
             <div class="tab-content">
               <h2>  Ingresos Material </h2>
                 <div  class="card-body">
-                    <table  class="table" >
+                    <div class="table-responsive-xl">
+                    <table  class="table table-striped table-dark" >
                         <thead>
                             <tr>
                                 <th> ID Contenedor  </th>
@@ -75,12 +77,23 @@
                                 <td> {{IngresoMaterial.estado}}</td>
                                 
                                 <td> <a name="" id="" class="btn btn-success" href="{% url 'asigParteUno' IngresoMaterial.id_material IngresoMaterial.pesos_material %}"> asignar  </a>
-                                    <a class="btn btn-danger btnEliminar" href="#"  onclick="eliminarProducto({{ IngresoMaterial.id_material }})" role="button"> Eliminar </a> 
+                                    <a class="btn btn-danger btnEliminar" href="{% url 'eliminar2' IngresoMaterial.id_material %}"  onclick="eliminarProducto()" role="button"> Eliminar </a> 
+                                    <script> 
+    
+                                        function eliminarProducto(){
+                                        var resultado = window.confirm('Estas seguro que desea Eliminar material ?');
+                                        if (resultado === true) {
+                                        window.alert('Material Eliminado');
+                                        } else { 
+                                            window.location = "http://127.0.0.1:8000/";
+                                        }
+                                            }
+                                        </script>
                                 </tr>
                             </tr>
                             {% endfor %}
                         </tbody>
-                    </table>
+                    </table> </div>
                 </div>
             </div>
           </div>
@@ -94,7 +107,8 @@
 
               <div  class="card-body">  
                 <h4>   </h4>
-                <table  class="table" >
+                <div class="table-responsive-xl">
+                <table  class="table table-striped table-dark" >
                 
                     <thead>
                         <tr>
@@ -124,7 +138,7 @@
                     </tbody>
         
                 
-                </table>
+                </table> </div>
                 
                 </div>
 
@@ -140,7 +154,8 @@
   
  
               <div  class="card-body">  
-                <table  class="table" >
+                <div class="table-responsive-xl">
+                    <table  class="table table-striped table-dark" >
                 
                     <thead>
                         <tr>
@@ -168,7 +183,7 @@
                     </tbody>
                 
                 
-                </table>
+                </table> </div>
                 
                 </div>
              
@@ -185,7 +200,8 @@
 
 
       <div  class="card-body">  
-        <table  class="table" >
+        <div class="table-responsive-xl">
+        <table  class="table table-striped table-dark" >
         
             <thead>
                 <tr>
@@ -219,7 +235,7 @@
             </tbody>
         
         
-        </table>
+        </table> </div>
         
         </div>
 

@@ -7,17 +7,17 @@
 
 
 
-<div class="recicla">
+<div class="recicla" >
 
 
 <h1>Estado container</h1>
-
 <div  class="card-body">  
 <h4>  Contenedores </h4>
-<table  class="table" >
+<div class="table-responsive-xl">
+<table  class="table table-striped table-dark" >
 
     <thead>
-        <tr>
+        <tr class="">
         
             <th>id contenedor  </th>
             <th> tipo contenedor </th>
@@ -30,13 +30,13 @@
     <tbody>
 
         {% for Contenedor in contenedor %}
-        <tr>
-            <td> {{ Contenedor.id_contenedor  }}    </td>
-            <td> {{ Contenedor.tipo_contenedor  }} </td>
-            <td> {{ Contenedor.peso  }} </td>
-            <td> {{ Contenedor.estado_contenedor  }} </td>
-            <td> {{ Contenedor.precio  }} </td>
-            <td> <a name="" id="" class="btn btn-success" href="#"> Reservar  </a>  <a class="btn btn-danger" href="{% url 'eliminar' Contenedor.id_llenado %}" role="button"> Eliminar </a> 
+        <tr >
+            <td class=""> {{ Contenedor.id_contenedor  }}    </td>
+            <td class=""> {{ Contenedor.tipo_contenedor  }} </td>
+            <td class=""> {{ Contenedor.peso  }} </td>
+            <td class=""> {{ Contenedor.estado_contenedor  }} </td>
+            <td class=""> {{ Contenedor.precio  }} </td>
+            <td class=""> <a name="" id="" class="btn btn-success" href="#"> Reservar  </a>  <a class="btn btn-danger" href="{% url 'eliminar' Contenedor.id_llenado %}" role="button"> Eliminar </a> 
             </td>
         </tr>
         {% endfor %}
@@ -45,7 +45,7 @@
     </tbody>
 
 
-</table>
+</table> </div>
 
 </div>
 
