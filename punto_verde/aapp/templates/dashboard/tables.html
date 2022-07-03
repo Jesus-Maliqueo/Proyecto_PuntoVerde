@@ -10,10 +10,33 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Tables - SB Admin</title>
+        <style>
+            .editos{
+               margin-left: 2%;
+            }
+
+            .tabla2 {
+              font-family: arial, sans-serif;
+              border-collapse: collapse;
+              width: 100%;
+            }
+            
+            .titulo, .cuerpo {
+              border: 1px solid #dddddd;
+              text-align: left;
+              padding: 8px;
+            }
+            
+            .fila:nth-child(even) {
+              background-color: #dddddd;
+            }
+        </style>
         {% load static %}
     </head>
     <body class="sb-nav-fixed">
         {% load static %}
+             
+            {% load static %}
         <div id="layoutSidenav">
             
 
@@ -35,39 +58,37 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                DataTable Example
+                                Tabla de ingresos de materiales
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
+                                    <thead >
+                                        <tr class="fila">
                                             <th>id</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>tipo</th>
+                                            <th>ingreso</th>
+                                            <th>peso</th>
+                                            <th>estado</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                        <tr class="fila">
+                                            <th>id</th>
+                                            <th>tipo</th>
+                                            <th>ingreso</th>
+                                            <th>peso</th>
+                                            <th>estado</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        {% for cont in contenedor %}
-                                            <tr>
+                                        {% for in in ingresos %}
+                                            <tr class="fila">
 
-                                                <td> {{ cont.id_llenado  }}    </td>
-                                                <td> {{ cont.tipo_contenedor  }} </td>
-                                                <td> {{ cont.peso  }} </td>
-                                                <td> {{ cont.estado_contenedor  }} </td>
-                                                <td> {{ cont.precio  }} </td>
+                                                <td class="titulo"> {{ in.id_material  }}    </td>
+                                                <td class="titulo"> {{ in.tipo_producto  }} </td>
+                                                <td class="titulo"> {{ in.fecha  }} </td>
+                                                <td class="titulo"> {{ in.pesos_material  }} </td>
+                                                <td class="titulo"> {{ in.estado }}</td>
 
                                             </tr>
                                         {% endfor %}
@@ -77,6 +98,151 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <br>
+                    <br>
+                        <div class="card  editos" >
+                            <h5 class="card-header">tabla de contenedores llenandose</h5>
+                            <div class="card-body">
+                            
+
+                                <table id="tabla2" class="tabla2">
+                                    <thead>
+                                        <tr class="fila">
+                                            <th class="titulo">comprador</th>
+                                            <th class="titulo">Telefono / Celular</th>
+                                            <th class="titulo" >Correo electronico</th>
+                                            <th class="titulo" >Contenedor</th>
+                                        
+                                            <th class="titulo" >fecha inicio</th>
+                                            <th class="titulo" >fecha experacion</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for cont in contenedor %}
+                                            <tr class="fila">
+
+                                                <td class="titulo"> {{ cont.id_llenado  }}    </td>
+                                                <td class="titulo"> {{ cont.tipo_contenedor  }} </td>
+                                                <td class="titulo"> {{ cont.peso  }} </td>
+                                                <td class="titulo"> {{ cont.estado_contenedor  }} </td>
+                                                <td class="titulo"> {{ cont.precio  }} </td>
+
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            
+                            </div>
+                      </div>
+                      <br>
+                      <br>
+                      <div class="card  editos">
+                        <h5 class="card-header">tabla de inventario de los contenedores</h5>
+                        <div class="card-body">
+                          
+
+                          <table id="tabla3" class="tabla2">
+                            <thead>
+                                <tr class="fila">
+                                    <th class="titulo">id</th>
+                                    <th class="titulo">tipo</th>
+                                    <th class="titulo" >peso</th>
+                                    <th class="titulo" >Contenedor</th>
+                                
+                                    <th class="titulo" >fecha inicio</th>
+                                    <th class="titulo" >fecha experacion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for inve in inventa %}
+                                <tr class="fila">
+                                    <td class="titulo">{{ inve.id_contenedor  }} </td>
+                                    <td class="titulo">{{ inve.tipo_contenedor  }}</td>
+                                    <td class="titulo" > {{ inve.peso  }} </td>
+                                    <td class="titulo"> </td>
+                                
+                                    <td class="titulo" > </td>
+                                    <td class="titulo" >fin </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                          
+                        </div>
+                      </div>
+                      <br>
+                      <br>
+                      <div class="card editos">
+                        <h5 class="card-header">tabla de contenedores llenos </h5>
+                        <div class="card-body">
+                          
+
+                          <table id="tabla4" class="tabla2">
+                            <thead>
+                                <tr class="fila">
+                                    <th class="titulo">id</th>
+                                    <th class="titulo">reservado</th>
+                                    <th class="titulo" >precio total</th>
+                                    <th class="titulo"> informacion </th>
+                                    <th class="titulo"> llenando</th>
+                                    <th class="titulo" >pagado</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for ll in llenos %}
+                                <tr class="fila">
+                                    <td class="titulo">{{ ll.id_lleno  }} </td>
+                                    <td class="titulo">{{ ll.reservado  }}</td>
+                                    <td class="titulo" > {{ ll.precio_total  }} </td>
+                                    <td class="titulo" > {{ ll.reserva_id_reserva}}</td>
+                                    <td class="titulo" >{{ ll.llen_conts_id_llenado}}</td>
+                                    <td class="titulo"> {{ ll.estado}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                          
+                        </div>
+                      </div>
+                      <br>
+                      <br>
+                     <div class="card  editos">
+                        <h5 class="card-header">tabla de reservas </h5>
+                        <div class="card-body">
+                        
+
+                        <table id="tabla5" class="tabla2">
+                            <thead>
+                                <tr class="fila">
+                                    <th class="titulo">comprador</th>
+                                    <th class="titulo">Telefono / Celular</th>
+                                    <th class="titulo" >Correo electronico</th>
+                                    <th class="titulo" >Contenedor</th>
+                                    <th class="titulo" >fecha inicio</th>
+                                    <th class="titulo" >fecha experacion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for re in reservas %}
+                                <tr class="fila">
+                                    <td class="titulo" > {{ re.comprador_id_comprador}}</td>
+                                    <td class="titulo">{{ re.id_reserva  }} </td>
+                                    <td class="titulo"> {{ re.comprador_id_comprador.correo}}</td>
+                                    <td class="titulo" >{{ re.contenedor_lleno_id_lleno}}</td>
+                                    <td class="titulo">{{ re.fecha  }}</td>
+                                    <td class="titulo" > {{ re.fecha_limite  }} </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        
+                        </div>
+                    </div>
+                    
+
+
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
@@ -96,6 +262,7 @@
         <script src="/aapp/static/app/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="/aapp/static/app/js/datatables-simple-demo.js"></script>
+        
     </body>
 </html>
 {% endblock %}

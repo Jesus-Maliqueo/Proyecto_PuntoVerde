@@ -434,4 +434,13 @@ def admin(request):
    return render(request,'dashboard/index.html',{'invent':inventario})
 def tables(request):
    contenedor = LlenadoContenedores.objects.all()
-   return render(request,'dashboard/tables.html',{'contenedor': contenedor  })
+   ingresoMaterial = IngresoMaterial.objects.all()
+   inventario = InventarioContenedores.objects.all()
+   llenos = ContenedorLleno.objects.all()
+   empleados= Empleado.objects.all()
+   horarios = Horarios.objects.all()
+   reservas = Reserva.objects.all()
+   retiros = Retiro.objects.all()
+
+   return render(request,'dashboard/tables.html',{'contenedor': contenedor,'ingresos':ingresoMaterial,'inventa':inventario,
+   'llenos':llenos,'empleados':empleados,'horarios':horarios,'reservas':reservas,'retiros':retiros})
