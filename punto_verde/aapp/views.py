@@ -31,6 +31,8 @@ def home(request):
 
 
 
+
+
 def registro(request):
    if request.method == 'POST':
       rut = request.POST["rut"]
@@ -198,8 +200,25 @@ def compra(request,a): #fk
 
 
 
-# -------------------------------------------------------------------
+# -----------------------------REGISTRO EMPRESA--------------------------------------
+def empresa(request):
+ 
+   if request.method == 'POST':
+      nombre = request.POST["nombre"]
+      direccion = request.POST['direccion']
+      pais = request.POST['pais']
+      region  = request.POST['region']
+      numero  = request.POST['numero']
+      correo  = request.POST['email']
+      regis= Empresa.objects.create(razon_social=nombre,direccion=direccion,pais=pais,region=region,contacto=numero,correo=correo)
+      regis.save()
 
+      return redirect(home)
+
+
+   return render(request, 'app/empresa.html')
+
+   # ------------------------------------
 
 
 

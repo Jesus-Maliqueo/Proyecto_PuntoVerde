@@ -63,8 +63,19 @@ const validarFormu = (e) =>{
             break; 
         case "email" : 
             validarcampo(expresiones.correo, e.target, 'g_coreo')
+            break;
+        case "id_comprador" : //Si en nombre es id_comprador
+            validarcampo( expresiones.rut, e.target, 'g_rut' ); //ejecuta funcion Validarcampo solicitando  expresion(restricciones arriba)y cual expresion, envia a quien pertenece (id) y envia grupo (id del div)
+            break; //termina el ciclo
+        case "nombre" : //Si en nombre es id_comprador
+            validarcampo( expresiones.nombre, e.target, 'g_pnomb' ); //ejecuta funcion Validarcampo solicitando  expresion(restricciones arriba)y cual expresion, envia a quien pertenece (id) y envia grupo (id del div)
+            break; //termina el ciclo
+        case "correo" : 
+            validarcampo(expresiones.correo, e.target, 'g_coreo')
+            break;
+        case "numero" : 
+            validarcampo(expresiones.telefono, e.target, 'g_num')
             break; 
-
     }
 }
 

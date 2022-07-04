@@ -11,52 +11,52 @@
 
     <div class="form-group" id="g_rut"> 
         <label for="apellido" class="control-label">Ingrese Rut</label>
-        <input type="text" class="form-control" id="1" name="rut"  placeholder="Ingrese su Rut">
+        <input type="text" class="form-control" id="1" name="rut"  placeholder="Ingrese su Rut" required>
 
     </div>  
 
     <div class="form-group" id="g_pnomb"> 
         <label for="nombre" class="control-label">Primer nombre</label>
-        <input type="text" class="form-control" id="2" name="primer_nombre" placeholder="Ingrese su nombre">
+        <input type="text" class="form-control" id="2" name="primer_nombre" placeholder="Ingrese su nombre" required>
 
     </div>    
 
     <div class="form-group" id="g_snomb"> 
         <label for="apellido" class="control-label">Segundo nombre</label>
-        <input type="text" class="form-control" id="3" name="segundo_nombre" placeholder="Ingrese su apellido">
+        <input type="text" class="form-control" id="3" name="segundo_nombre" placeholder="Ingrese su apellido" required>
   
     </div>  
 
     <div class="form-group" id="g_papell"> 
         <label for="apellido" class="control-label">Apellido paterno</label>
-        <input type="text" class="form-control" id="4" name="primer_apellido" placeholder="Ingrese su apellido">
+        <input type="text" class="form-control" id="4" name="primer_apellido" placeholder="Ingrese su apellido" required>
     </div>
 
     <div class="form-group" id="g_sapell"> 
         <label for="apellido" class="control-label">Apellido materno</label>
-        <input type="text" class="form-control" id="5" name="segundo_apellido" placeholder="Ingrese su apellido">
+        <input type="text" class="form-control" id="5" name="segundo_apellido" placeholder="Ingrese su apellido" required>
     </div>   
 
     <div class="form-group" id="g_contr"> 
         <label for="apellido" class="control-label">contraseña</label>
-        <input type="password" class="form-control" id="6" name="contraseña" placeholder="Ingrese contraseña">
+        <input type="password" class="form-control" id="6" name="contraseña" placeholder="Ingrese contraseña" required>
     </div>
 
     <div class="form-group" id="g_coreo"> 
         <label for="apellido" class="control-label">Email</label>
-        <input type="email" class="form-control" id="7" name="email" placeholder="Ingrese su apellido">
+        <input type="email" class="form-control" id="7" name="email" placeholder="Ingrese su apellido" required>
     </div>
     
                             
     <div class="form-group" id="g_dire"> 
         <label for="email" class="control-label">Direccion</label>
-        <input type="text" class="form-control" id="8" name="direccion" placeholder="Ingrese su email">
+        <input type="text" class="form-control" id="8" name="direccion" placeholder="Ingrese su email" required>
    
     </div>    
 
     <div class="form-group" id="g_num"> 
         <label for="numero" class="control-label">Numero</label>
-        <input type="number" class="form-control" id="city_id" name="telefono" placeholder="Ingrese su numero" pattern="[0-9]+">
+        <input type="number" class="form-control" id="city_id" name="telefono" placeholder="Ingrese su numero" pattern="[0-9]+" required>
     
     </div>     
 
@@ -87,6 +87,7 @@
    
 
     <script> 
+    
     function opci(){
     var resultado = window.confirm('Estas seguro que desea crear empleado ?');
     if (resultado === true) {
