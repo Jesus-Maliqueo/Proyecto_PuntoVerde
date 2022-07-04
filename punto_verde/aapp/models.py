@@ -1,4 +1,4 @@
-# This is an auto-generated Django model module.
+﻿# This is an auto-generated Django model module.
 # You'll have to do the following manually to clean this up:
 #   * Rearrange models' order
 #   * Make sure each model has one field with primary_key=True
@@ -132,39 +132,6 @@ class AuthUserUserPermissions(models.Model):
         unique_together = (('user', 'permission'),)
 
 
-class Boleta(models.Model):
-    id_venta = models.OneToOneField('Compra', models.DO_NOTHING, db_column='id_venta', primary_key=True)
-    nombre = models.CharField(max_length=100)
-    forma_pago = models.CharField(max_length=100)
-
-    def __str__(self):
-      fila = " ID  :  " + str(self.id_venta) + "ㅤㅤ" +"   Nombre : " + self.nombre+ "ㅤㅤ" +"   Forma de pago : " + self.forma_pago
-      return fila
-
-    class Meta:
-        managed = False
-        db_table = 'boleta'
-        ordering=['id_venta', "nombre"]
-
-
-class Compra(models.Model):
-    id_venta = models.IntegerField(primary_key=True)
-    monto = models.IntegerField()
-    forma_pago = models.CharField(max_length=10)
-    fecha_venta = models.DateField()
-    reserva_id_reserva = models.OneToOneField('Reserva', models.DO_NOTHING, db_column='reserva_id_reserva')
-    retiro_id_retiro = models.ForeignKey('Retiro', models.DO_NOTHING, db_column='retiro_id_retiro',blank=True, null=True)
-    emitido_en = models.CharField(max_length=30)
-
-    def __str__(self):
-      fila = " ID  :  " +  str(self.id_venta) + "ㅤㅤ" +"   Monto : " + str(self.monto) + "ㅤㅤ" +"   Forma de pago : " + self.forma_pago + "ㅤㅤ" + "   Fecha de venta : " + str(self.fecha_venta) + "ㅤㅤ" + "   Emitido : " + str(self.emitido_en) 
-      return fila
-
-    class Meta:
-        managed = False
-        db_table = 'compra'
-        ordering=['id_venta']
-
 
 class Comprador(models.Model):
     id_comprador = models.CharField(primary_key=True, max_length=20)
@@ -267,7 +234,7 @@ class Empleado(models.Model):
     ocupacion = models.CharField(max_length=50)
 
     def __str__(self):
-      fila = " Rut  :  " +  str(self.rut_empleado) + "ㅤㅤ" +"   Nombre  : " + self.primer_nombre+ "ㅤㅤ" +"   Apellido Paterno: " + self.primer_apellido +  "ㅤㅤ" +"   Apellido Materno : " + self.segundo_apellido 
+      fila = str(self.rut_empleado) 
       return fila
 
     class Meta:
@@ -276,22 +243,19 @@ class Empleado(models.Model):
         ordering = ["primer_nombre","ocupacion"]
 
 
-class Factura(models.Model):
-    id_venta = models.OneToOneField(Compra, models.DO_NOTHING, db_column='id_venta', primary_key=True)
-    nombre_empresa = models.CharField(max_length=100)
-    giro_industria = models.CharField(max_length=100)
-    region = models.CharField(max_length=50)
-    comuna = models.CharField(max_length=50)
 
-    def __str__(self):
-      fila = " ID  :  " +  str(self.id_venta) + "ㅤㅤ" +"   Nombre Empresa  : " + self.nombre_empresa+ "ㅤㅤ" +"   Giro industria: " + self.giro_industria +  "ㅤㅤ" +"   Region : " + self.region 
-      return fila
+class Empresa(models.Model):
+    id_empresa = models.AutoField(primary_key=True)
+    razon_social = models.CharField(max_length=50)
+    direccion = models.CharField(max_length=50)
+    pais = models.CharField(max_length=20)
+    region = models.CharField(max_length=20)
+    contacto = models.IntegerField()
+    correo = models.CharField(max_length=50)
 
     class Meta:
         managed = False
-        db_table = 'factura'
-        ordering = ["region","comuna"]
-
+        db_table = 'empresa'
 
 class Horarios(models.Model):
     id_horario = models.AutoField(primary_key=True)
@@ -370,6 +334,7 @@ class LlenadoContenedores(models.Model):
     peso = models.IntegerField()
     estado_contenedor = models.CharField(max_length=10)
     precio = models.IntegerField()
+    trasladado = models.CharField(max_length=2)
     invt_conts_id_contenedor = models.OneToOneField(InventarioContenedores, models.DO_NOTHING, db_column='invt_conts_id_contenedor')
     ingreso_material_id_material = models.OneToOneField(IngresoMaterial,on_delete=models.CASCADE, db_column='ingreso_material_id_material', blank=True, null=True)
 
@@ -401,20 +366,21 @@ class Precios(models.Model):
         ordering = ["tipo_material"]
 
 
+
 class Reserva(models.Model):
-    id_reserva = models.IntegerField(primary_key=True)
+    id_reserva = models.AutoField(primary_key=True)
     fecha = models.DateField()
     fecha_limite = models.DateField()
-    venta_id_venta = models.OneToOneField(Compra,on_delete=models.CASCADE, db_column='venta_id_venta',blank=True, null=True)
+    pago = models.CharField(max_length=2)
     comprador_id_comprador = models.ForeignKey(Comprador, on_delete=models.CASCADE, db_column='comprador_id_comprador',blank=True, null=True)
     contenedor_lleno_id_lleno = models.ForeignKey(ContenedorLleno, on_delete=models.CASCADE, db_column='contenedor_lleno_id_lleno', blank=True, null=True)
-
-    
+    retiro_id_retiro = models.ForeignKey('Retiro', on_delete=models.CASCADE, db_column='retiro_id_retiro', blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'reserva'
         ordering= ["fecha"]
+
 
 
 class Retiro(models.Model):
@@ -425,6 +391,7 @@ class Retiro(models.Model):
     segundo_apellido = models.CharField(max_length=20)
     fecha_retiro = models.DateField()
     contacto = models.IntegerField()
+    empresa_id_empresa = models.ForeignKey(Empresa, models.DO_NOTHING, db_column='empresa_id_empresa', blank=True, null=True)
 
     def __str__(self):
       fila = "Rut : " + str(self.id_retiro) + "ㅤㅤ " + "Nombre : " + self.primer_nombre +"   Apellido Paterno: " + self.primer_apellido +  "ㅤㅤ" +"   Apellido Materno : " + self.segundo_apellido +"ㅤㅤ " + "Fecha retiro : " + str(self.fecha_retiro) + "ㅤㅤ" + "Contacto : " + str(self.contacto)

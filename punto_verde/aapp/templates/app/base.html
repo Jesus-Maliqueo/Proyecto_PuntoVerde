@@ -26,7 +26,8 @@
       <li class="logo"><a href="#"><img src="{% static 'app/img/logo.png' %}" alt="" width="auto" height="60px"> Punto Verde </a></li>
       <li class="item"><a href="http://127.0.0.1:8000/">Inicio</a></li>
 
-      <li class="item">   {% if user.is_authenticated and perms.aapp.add_empleado %}
+      <li class="item">   
+        {% if user.is_authenticated and perms.aapp.add_empleado %}
         <div class="dropdown">
           <button class="dropbtn item" id="btnqlo" >Registros
             <i class="bi bi-caret-down-fill"></i>
@@ -40,6 +41,7 @@
         {% else %}
         {% endif %}</li>
       <li class="item">
+        <!-- PERMISOS DE ADMIN -->
         {% if user.is_authenticated and perms.aapp.view_empleados %}
             <div class="dropdown">
               <button class="dropbtn item" id="btnqlo" > Administracion
@@ -60,17 +62,40 @@
             {% else %}
             {% endif %}
       </li>
+
       <li class="item"><a class="item" href="/recicla/">Como reciclar</a></li>
+
       {% if user.is_authenticated and perms.aapp.view_contenedorlleno %}
-      <li class="item"> <a class="item" href="/lleno1/">Contendores Llenos</a></li>
+        <li class="item"> <a class="item" href="/mishorarios/{{  user.get_username }}">mis horarios</a></li>
       {% else %}
+
       {% endif %}
 
-      {% if user.is_authenticated and perms.aapp.view_comprador %}
-      
+      {% if user.is_authenticated and perms.aapp.view_contenedorlleno %}
+
       {% else %}
-      <li class="item"><a class="item" href="/comprador"  >Registrar Comprador</a></li>
+        <li class="item"><a class="item" href="/comprador"  >Registrar Comprador</a></li>
       {% endif %}
+
+
+      {% if user.is_authenticated and perms.aapp.view_contenedorlleno %}
+      <li class="item">
+        <!-- PERMISOS DE empleado -->
+       
+            <div class="dropdown">
+              <button class="dropbtn item" id="btnqlo" > tablas
+                <i class="bi bi-caret-down-fill"></i>
+              </button>
+              <div class="dropdown-content" >
+                <a class="item" href="/lleno1/">Contendores Llenos</a>
+                <a class="item" href="/estado/">Estado container</a>
+                <a class="item" href="/mostrar/#tab1">Ingreso material</a>
+              </div>
+            </div>
+            {% else %}
+
+            {% endif %}
+      </li>
 
 
       {% if user.is_authenticated %}

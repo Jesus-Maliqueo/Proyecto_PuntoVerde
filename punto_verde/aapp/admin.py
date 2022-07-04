@@ -21,13 +21,6 @@ class precio(admin.ModelAdmin):
     list_display = ["id_precio","tipo_material","descripcion","precio"]
     list_filter = ["tipo_material"]
 
-class bole(admin.ModelAdmin):
-    list_display = ["id_venta","nombre","forma_pago"]
-    list_filter = ["forma_pago"]
-
-class comp(admin.ModelAdmin):
-    list_display = ["id_venta","monto","forma_pago","fecha_venta","emitido_en"]
-    list_filter = ["forma_pago"]
 
 class compr(admin.ModelAdmin):
     list_display = ["id_comprador","nombre","direccion","telefono","correo"]
@@ -40,10 +33,6 @@ class contll(admin.ModelAdmin):
 class emple(admin.ModelAdmin):
     list_display = ["rut_empleado","primer_nombre","segundo_nombre","primer_apellido","segundo_apellido","direccion","telefono","ocupacion"]
     list_filter = ["primer_apellido","ocupacion"]
-
-class fac(admin.ModelAdmin):
-    list_display = ["id_venta","nombre_empresa","giro_industria","region","comuna"]
-    list_filter = ["nombre_empresa","region","comuna"]
 
 class info(admin.ModelAdmin):
     list_display = ["id_infome","fecha_informe"]
@@ -62,17 +51,20 @@ class hor(admin.ModelAdmin):
     list_display = ["id_horario","hora_inicio","hora_termino"]
     list_filter = ["hora_inicio","hora_termino"]
 
+class emp(admin.ModelAdmin):
+    list_display = ["id_empresa","razon_social","direccion","pais","region","contacto","correo"]
+    list_filter = ["razon_social","pais"]
+
 admin.site.register(Horarios,hor)
 admin.site.register(Precios,precio)
-admin.site.register(Boleta,bole)
+admin.site.register(Empresa,emp)
 admin.site.register(Comprador,compr)
 admin.site.register(LlenadoContenedores,lcontenedor)
 admin.site.register(ContenedorLleno,contll)
 admin.site.register(InventarioContenedores,ncontenedor)
 admin.site.register(Empleado,emple)
-admin.site.register(Factura,fac)
 admin.site.register(Informe,info)
 admin.site.register(IngresoMaterial,ingreso)
 admin.site.register(Reserva,reser)
 admin.site.register(Retiro,ret)
-admin.site.register(Compra,comp) 
+

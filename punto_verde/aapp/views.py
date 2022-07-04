@@ -444,3 +444,7 @@ def tables(request):
 
    return render(request,'dashboard/tables.html',{'contenedor': contenedor,'ingresos':ingresoMaterial,'inventa':inventario,
    'llenos':llenos,'empleados':empleados,'horarios':horarios,'reservas':reservas,'retiros':retiros})
+
+def mishorarios(request,id):
+   horarios= Horarios.objects.filter(empleado_rut_empleado=id)
+   return render(request,'app/misHorarios.html',{'hora':horarios})

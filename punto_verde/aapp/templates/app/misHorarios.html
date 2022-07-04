@@ -1,0 +1,53 @@
+{%extends 'app/base.html'%}
+
+{% block contenido %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+</head>
+<body>
+    <div class="recicla">
+        <div  class="card-body">  
+            <h2>mis Horarios</h2> <br>
+            <div class="table-responsive-xl">
+                <table  class="table table-striped table-dark" >
+                <thead>
+                    <tr>
+                        <th> ID horario  </th>
+                        <th> hora inicio </th>
+                        <th> hora_termino </th>
+                        
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ho in hora %}
+                    <tr>
+                        <td> {{ ho.id_horario  }}    </td>
+                        <td> {{ ho.hora_inicio  }} </td>
+                        <td> {{ ho.hora_termino  }} </td>
+                        
+                        <td> <a name="" id="" class="btn btn-success" href=""> asignar  </a>
+                            <a class="btn btn-danger btnEliminar" href=""  role="button"> Eliminar </a> 
+                            
+                        </tr>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table> </div>
+            </div>
+            
+        </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+{% endblock %}

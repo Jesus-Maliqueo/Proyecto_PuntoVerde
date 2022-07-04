@@ -33,7 +33,8 @@ urlpatterns = [
     path('compra/<a>',compra, name="compra"),
     path('enviar/',post, name='enviar'),
     path('adm/',admin,name="adm"),
-    path('tables/',tables,name="tables")
+    path('tables/',tables,name="tables"),
+    path('mishorarios/<id>',mishorarios,name="mishorarios"),
 
 ]
 
