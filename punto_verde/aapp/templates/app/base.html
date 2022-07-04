@@ -23,7 +23,7 @@
   <nav>
     <ul class="menu">
       <!------------ LOGO AL INICIO DEL NAV --------------->
-      <li class="logo"><a href="#"><img src="{% static 'app/img/logo.png' %}" alt="" width="auto" height="60px"> Punto Verde </a></li>
+      <li class="logo"><a href="#" style="font-size:28px;"><img src="{% static 'app/img/logo.png' %}" alt="" width="auto" height="60px"> Punto Verde </a></li>
       <li class="item"><a href="http://127.0.0.1:8000/">Inicio</a></li>
 
       <li class="item">   
@@ -55,7 +55,7 @@
                 
                 {% if user.is_authenticated and perms.aapp.view_empleados %}
                   <a class="item" href="/emple/">Empleados</a>
-                  <a class="item" href="/adm/">vistas admin</a>
+                  <a class="item" href="/adm/">Vistas Admin</a>
                 {% else %}
                 {% endif %}
               </div>
@@ -67,7 +67,7 @@
       <li class="item"><a class="item" href="/recicla/">Como reciclar</a></li>
 
       {% if user.is_authenticated and perms.aapp.view_contenedorlleno %}
-        <li class="item"> <a class="item" href="/mishorarios/{{  user.get_username }}">mis horarios</a></li>
+        <li class="item"> <a class="item" href="/mishorarios/{{  user.get_username }}">Mis Horarios</a></li>
       {% else %}
 
       {% endif %}
@@ -84,7 +84,7 @@
         <!-- PERMISOS DE empleado -->
        
             <div class="dropdown">
-              <button class="dropbtn item" id="btnqlo" > tablas
+              <button class="dropbtn item" id="btnqlo" > Tablas
                 <i class="bi bi-caret-down-fill"></i>
               </button>
               <div class="dropdown-content" >

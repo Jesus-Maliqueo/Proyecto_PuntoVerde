@@ -8,38 +8,38 @@
   <form class="formu" id="formu" action="/comprador" method="POST"> {% csrf_token %}
 
     <h2> Registro</h2>
-
+    <hr>
     <div class="form-group" id="g_rut"> 
         <label for="apellido" class="control-label">Ingrese rut</label>
         <input type="text" class="form-control" id="street1_id" name="id_comprador" placeholder="Ingrese ID" required>
     </div>  
-
+    <hr>
     <div class="form-group" id="g_pnomb"> 
         <label for="nombre" class="control-label">Ingrese su nombre</label>
         <input type="text" class="form-control" id="full_name_id" name="nombre" placeholder="Ingrese su nombre" required>
     </div>
-    
+    <hr>
     <div class="form-group" id="g_contr"> 
         <label for="nombre" class="control-label">Contraseña</label>
         <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña" required>
     </div>    
-
+    <hr>
     <div class="form-group" id="g_dire"> 
         <label for="apellido" class="control-label">Ingrese direccion</label>
         <input type="text" class="form-control" id="street1_id" name="direccion" placeholder="Digite su direcion" required>
     </div>  
-
+    <hr>
     <div class="form-group" id="g_num"> 
         <label for="apellido" class="control-label">Ingrese numero de telefono</label>
         <input type="number" class="form-control" id="street1_id" name="telefono" placeholder="Digite su numero de contacto" required>
     </div>  
-
+    <hr>
     <div class="form-group" id="g_coreo"> 
         <label for="apellido" class="control-label">Ingrese su correo</label>
         <input type="email" class="form-control" id="correo" name="correo" placeholder="Digite su e-mail" required>
     </div>                          
 
-
+    <hr>
     <input type="submit"  class="botones btn btn-success" value="Enviar" onclick="comp()" > 
 
     <script> 
