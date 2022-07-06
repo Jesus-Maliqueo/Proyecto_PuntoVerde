@@ -109,13 +109,13 @@
                                 <table id="tabla2" class="tabla2">
                                     <thead>
                                         <tr class="fila">
-                                            <th class="titulo">comprador</th>
-                                            <th class="titulo">Telefono / Celular</th>
-                                            <th class="titulo" >Correo electronico</th>
-                                            <th class="titulo" >Contenedor</th>
+                                            <th class="titulo">id_llenado</th>
+                                            <th class="titulo">tipo_contenedor</th>
+                                            <th class="titulo" > peso</th>
+                                            <th class="titulo" >estado</th>
                                         
-                                            <th class="titulo" >fecha inicio</th>
-                                            <th class="titulo" >fecha experacion</th>
+                                            <th class="titulo" >precio</th>
+                                            <th class="titulo" >traslalado</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -127,6 +127,7 @@
                                                 <td class="titulo"> {{ cont.peso  }} </td>
                                                 <td class="titulo"> {{ cont.estado_contenedor  }} </td>
                                                 <td class="titulo"> {{ cont.precio  }} </td>
+                                                <td class="titulo" >{{ cont.trasladado }}</td>
 
                                             </tr>
                                         {% endfor %}
@@ -240,8 +241,125 @@
                         
                         </div>
                     </div>
-                    
+                    <br>
+                      <br>
 
+                    <div class="card  editos">
+                        <h5 class="card-header">empleados</h5>
+                        <div class="card-body">
+                        
+
+                        <table id="tabla6" class="tabla2">
+                            <thead>
+                                <tr class="fila">
+                                    <th class="titulo">rut</th>
+                                    <th class="titulo">primer_nombre</th>
+                                    <th class="titulo" >seg_nombre</th>
+                                    <th class="titulo" >primer_apellido</th>
+                                    <th class="titulo" >seg_apellido</th>
+                                    <th class="titulo" >password</th>
+                                    <th class="titulo" >email</th>
+                                    <th class="titulo" >direccion</th>
+                                    <th class="titulo" >telefono</th>
+                                    <th class="titulo" >area</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for em in empleados %}
+                                <tr class="fila">
+                                    <td class="titulo" > {{ em.rut_empleado}}</td>
+                                    <td class="titulo">{{ em.primer_nombre  }} </td>
+                                    <td class="titulo"> {{ em.segundo_nombre}}</td>
+                                    <td class="titulo" >{{ em.primer_apellido}}</td>
+                                    <td class="titulo">{{ em.segundo_apellido  }}</td>
+                                    <td class="titulo" > {{ em.password  }} </td>
+                                    <td class="titulo" > {{ em.email  }} </td>
+                                    <td class="titulo" > {{ em.direccion  }} </td>
+                                    <td class="titulo" > {{ em.telefono  }} </td>
+                                    <td class="titulo" > {{ em.ocupacion  }} </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        
+                        </div>
+                    </div>
+                    <br>
+                      <br>
+                    <div class="card  editos">
+                        <h5 class="card-header">retiros</h5>
+                        <div class="card-body">
+                        
+
+                        <table id="tabla7" class="tabla2">
+                            <thead>
+                                <tr class="fila">
+                                    <th class="titulo">rut</th>
+                                    <th class="titulo">primer_nombre</th>
+                                    <th class="titulo" >segundo_nombre</th>
+                                    <th class="titulo" >primer_apellido</th>
+                                    <th class="titulo" >segundo_apellido</th>
+                                    <th class="titulo" >fecha_retiro</th>
+                                    <th class="titulo" >contacto</th>
+                                    <th class="titulo" >empresa asociada</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for re in retiros %}
+                                <tr class="fila">
+                                    <td class="titulo" > {{ re.id_retiro}}</td>
+                                    <td class="titulo">{{ re.primer_nombre  }} </td>
+                                    <td class="titulo"> {{ re.segundo_nombre}}</td>
+                                    <td class="titulo" >{{ re.primer_apellido}}</td>
+                                    <td class="titulo">{{ re.segundo_apellido  }}</td>
+                                    <td class="titulo" > {{ re.fecha_retiro  }} </td>
+                                    <td class="titulo" > {{ re.contacto  }} </td>
+                                    <td class="titulo" > {{ re.empresa_id_empresa  }} </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        
+                        </div>
+                    </div>
+                    <br>
+                      <br>
+                    <div class="card  editos">
+                        <h5 class="card-header">empresas</h5>
+                        <div class="card-body">
+                        
+
+                        <table id="tabla8" class="tabla2">
+                            <thead>
+                                <tr class="fila">
+                                    <th class="titulo">id_empresa</th>
+                                    <th class="titulo">razon_social</th>
+                                    <th class="titulo" >direccion</th>
+                                    <th class="titulo" >pais</th>
+                                    <th class="titulo" >region</th>
+                                    <th class="titulo" >contacto</th>
+                                    <th class="titulo" >correo</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for empre in empresa %}
+                                <tr class="fila">
+                                    <td class="titulo" > {{ re.id_empresa}}</td>
+                                    <td class="titulo">{{ re.razon_social  }} </td>
+                                    <td class="titulo"> {{ re.direccion}}</td>
+                                    <td class="titulo" >{{ re.pais}}</td>
+                                    <td class="titulo">{{ re.region  }}</td>
+                                    <td class="titulo" > {{ re.contacto  }} </td>
+                                    <td class="titulo" > {{ re.correo  }} </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        
+                        </div>
+                    </div>
 
                 </main>
                 <footer class="py-4 bg-light mt-auto">

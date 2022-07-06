@@ -117,6 +117,7 @@
                             <th> Peso</th>
                             <th>Peso_maximo</th>
                             <th> Estado Contenedor </th>
+                            <th> trasladado </th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -129,6 +130,7 @@
                             <td> {{ Contenedor.peso  }} </td>
                             <td> {{Contenedor.precio}}</td>
                             <td> {{ Contenedor.estado_contenedor  }} </td>
+                            <td> {{ Contenedor.trasladado }}</td>
                             <td> <a name="" id="" class="btn btn-success" href="{% url 'lleno' Contenedor.id_llenado Contenedor.tipo_contenedor Contenedor.peso %}"> Mover a Reservar  </a>  <a class="btn btn-danger" href="{% url 'eliminar' Contenedor.id_llenado %}" role="button"> Eliminar </a> 
                         </tr>
                         {% endfor %}

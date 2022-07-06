@@ -288,7 +288,7 @@ def llenado(request,idi,tipo,pes):
    inv=InventarioContenedores.objects.get(id_contenedor=idi)
    fk=InventarioContenedores.id_contenedor
    incremento=int(idi)+1
-   llenar=LlenadoContenedores.objects.create(id_llenado=incremento,tipo_contenedor=tipo,peso=0,estado_contenedor='llenando',precio=pes,invt_conts_id_contenedor=inv)
+   llenar=LlenadoContenedores.objects.create(id_llenado=incremento,tipo_contenedor=tipo,peso=0,trasladado="NO",estado_contenedor='llenando',precio=pes,invt_conts_id_contenedor=inv)
    
    return redirect('/mostrar/#tab2')
 
@@ -325,7 +325,7 @@ def lleno(request,ida,tipo,peso):
       total=p*int(peso)
 
       llenor = ContenedorLleno.objects.create(id_lleno=suma,reservado='N',precio_total=total,estado='N',llen_conts_id_llenado=lalo,precios_id_precio=fk)
-
+      lalo = LlenadoContenedores.objects.filter(id_llenado=ida).update(trasladado="SI")
 
 #   ---------- Precio Envace 
    else:
@@ -337,7 +337,7 @@ def lleno(request,ida,tipo,peso):
       print(peso)
       total=p*int(peso)
       llenor = ContenedorLleno.objects.create(id_lleno=suma,reservado='N',precio_total=total,estado='N',llen_conts_id_llenado=lalo,precios_id_precio=fk)
-
+      lalo = LlenadoContenedores.objects.filter(id_llenado=ida).update(trasladado="SI")
 
 
 
@@ -460,9 +460,10 @@ def tables(request):
    horarios = Horarios.objects.all()
    reservas = Reserva.objects.all()
    retiros = Retiro.objects.all()
+   empresas = Empresa.objects.all()
 
    return render(request,'dashboard/tables.html',{'contenedor': contenedor,'ingresos':ingresoMaterial,'inventa':inventario,
-   'llenos':llenos,'empleados':empleados,'horarios':horarios,'reservas':reservas,'retiros':retiros})
+   'llenos':llenos,'empleados':empleados,'horarios':horarios,'reservas':reservas,'retiros':retiros,'empresa':empresas})
 
 def mishorarios(request,id):
    horarios= Horarios.objects.filter(empleado_rut_empleado=id)
