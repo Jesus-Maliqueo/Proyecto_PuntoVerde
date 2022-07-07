@@ -1,6 +1,7 @@
 from ast import Return
 from datetime import date , timedelta
 import datetime
+from itertools import count
 import re
 from MySQLdb import Date
 from django import forms
@@ -107,7 +108,8 @@ def registerInv(request):
    if request.method == 'POST':
       tipo_contenedor = request.POST['tipo_contenedor']
       pesos = request.POST['peso']
-      id_llenado = request.POST['id_llenado']
+      
+      id_llenado = InventarioContenedores.objects.count()
       regis= InventarioContenedores.objects.create(tipo_contenedor=tipo_contenedor,peso=pesos,id_llenado=id_llenado)
       regis.save()
       return redirect('/mostrar/#tab1')
@@ -422,29 +424,32 @@ def eliEmple(request,id):
 
     
 def post(request):
-   usuario = request.POST.get('comprador')
-   email = request.POST.get('email')
-   telefono = request.POST.get('telefono')
-   conte = request.POST.get('contenedor')
-   inicio = request.POST.get('inicio')
-   fin = request.POST.get('fin')
-   print(email)
+   if request.method =='POST':
+      usuario = request.POST.get('comprador')
+      email = request.POST.get('email')
+      telefono = request.POST.get('telefono')
+      conte = request.POST.get('contenedor')
+      inicio = request.POST.get('inicio')
+      fin = request.POST.get('fin')
+      print(email)
+   
+      template = get_template('app/envio.html')
 
-   template = get_template('app/envio.html')
+      # Se renderiza el template y se envias parametros
+      content = template.render({'usuario':usuario,'telefono':telefono,'email': email,'conte':conte,'inicio':inicio,'fin':fin})
 
-   # Se renderiza el template y se envias parametros
-   content = template.render({'usuario':usuario,'telefono':telefono,'email': email,'conte':conte,'inicio':inicio,'fin':fin})
+      # Se crea el correo (titulo, mensaje, emisor, destinatario)
+      msg = EmailMultiAlternatives(
+            'Gracias por tu reserva',
+            'Hola, te enviamos un correo con tu factura',
+            settings.EMAIL_HOST_USER,
+            [email]
+      )
 
-   # Se crea el correo (titulo, mensaje, emisor, destinatario)
-   msg = EmailMultiAlternatives(
-         'Gracias por tu reserva',
-         'Hola, te enviamos un correo con tu factura',
-         settings.EMAIL_HOST_USER,
-         [email]
-   )
+      msg.attach_alternative(content, 'text/html')
+      msg.send()
+      return redirect(home)
 
-   msg.attach_alternative(content, 'text/html')
-   msg.send()
 
    return render(request, 'app/reserva.html')
 
